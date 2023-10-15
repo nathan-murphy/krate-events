@@ -1,1 +1,1 @@
-# krate-events
+# Krate Events
