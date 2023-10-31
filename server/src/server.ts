@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 import cors from "cors";
 import express from "express";
 import { connectToDatabase } from "./database";
+import { userRouter } from "./user.routes";
  
 // Load environment variables from the .env file, where the ATLAS_URI is configured
 dotenv.config();
@@ -27,6 +28,8 @@ connectToDatabase(MONGODB_URI, MONGODB_DBNAME)
    .then(() => {
        const app = express();
        app.use(cors());
+
+       app.use("/users", userRouter);
  
        // start the Express server
        app.listen(APP_PORT, () => {
