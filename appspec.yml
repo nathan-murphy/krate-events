@@ -1,2 +1,8 @@
 version: 0.0
 os: linux
+
+files:
+  - source: server
+    destination: /var/node/krate-events/server
+  - source: client
+    destination: /var/node/krate-events/client
