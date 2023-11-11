@@ -7,7 +7,7 @@ import { User } from './user';
  providedIn: 'root'
 })
 export class UserService {
- private url = 'http://localhost:5200';
+ private url = 'http://krate.events:5200';
  private users$: Subject<User[]> = new Subject();
  
  constructor(private httpClient: HttpClient) { }

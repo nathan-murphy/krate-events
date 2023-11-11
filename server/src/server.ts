@@ -30,6 +30,8 @@ connectToDatabase(MONGODB_URI, MONGODB_DBNAME)
        app.use(cors());
 
        app.use("/users", userRouter);
+
+       app.use(express.static('../dist'));
  
        // start the Express server
        app.listen(APP_PORT, () => {
