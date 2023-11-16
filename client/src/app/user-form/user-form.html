@@ -1,0 +1,31 @@
+<form class="user-form" autocomplete="off" [formGroup]="userForm" (ngSubmit)="submitForm()">
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" id="fName" formControlName="fName" placeholder="First Name" required>
+        <label for="fName">First Name</label>
+    </div>
+
+    <div *ngIf="fName.invalid && (fName.dirty || fName.touched)" class="alert alert-danger">
+        <div *ngIf="fName.errors?.['required']">
+            First name is required.
+        </div>
+        <div *ngIf="fName.errors?.['minlength']">
+            First name must be at least 'minlength' characters long.
+        </div>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" formControlName="lName" placeholder="Last Name" required>
+        <label for="lName">Last Name</label>
+    </div>
+
+    <div *ngIf="lName.invalid && (lName.dirty || lName.touched)" class="alert alert-danger">
+        <div *ngIf="lName.errors?.['required']">
+            Last Name is required.
+        </div>
+        <div *ngIf="lName.errors?.['minlength']">
+            Last Name must be at least 5 characters long.
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Add</button>
+</form>
