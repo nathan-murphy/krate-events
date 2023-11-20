@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,6 +47,7 @@ import { PostHomeComponent } from './posts/post-home/post-home.component';
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
+    MatExpansionModule,
     FormsModule
   ],
   providers: [],

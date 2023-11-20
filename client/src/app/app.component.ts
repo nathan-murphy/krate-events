@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
   styles: [`
     main {
       margin-top: 1rem;
+      width: 30%;
+      margin: auto;
     };
   `]
 })
