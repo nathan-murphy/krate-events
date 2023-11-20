@@ -27,5 +27,12 @@
         </div>
     </div>
 
+    <div class="form-floating">
+        <select class="custom-select custom-select-lg mb-3" formControlName="attachedToId">
+            <option selected>Open this select menu</option>
+            <option *ngFor="let user of users$ | async" value={{user._id}} [attr.disabled]="user._id === '' ? 'disabled' : null">{{user.fName}}</option>
+        </select>
+    </div>
+
     <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Add</button>
 </form>

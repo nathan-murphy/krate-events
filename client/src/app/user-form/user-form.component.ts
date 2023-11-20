@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -10,6 +11,8 @@ import { User } from '../user';
 })
 
 export class UserFormComponent implements OnInit {
+  users$: Observable<User[]> = new Observable();
+
   @Input()
   initialState: BehaviorSubject<User> = new BehaviorSubject({});
 
@@ -21,20 +24,24 @@ export class UserFormComponent implements OnInit {
 
   userForm: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private usersService: UserService) { }
 
   get fName() { return this.userForm.get('fName')!; }
   get lName() { return this.userForm.get('lName')!; }
+  get attachedToId() { return this.userForm.get('attachedToId')!; }
 
   ngOnInit() {
     this.initialState.subscribe(user => {
       this.userForm = this.fb.group({
         fName: [user.fName, [Validators.required, Validators.minLength(3)]],
-        lName: [user.lName, [Validators.required, Validators.minLength(5)]]
+        lName: [user.lName, [Validators.required, Validators.minLength(5)]],
+        attachedToId: [user.attachedTo]
       });
     });
 
     this.userForm.valueChanges.subscribe((val) => { this.formValuesChanged.emit(val); });
+
+    this.users$ = this.usersService.getUsers();
   }
 
   submitForm() {
