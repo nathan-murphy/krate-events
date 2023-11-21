@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Post } from '../post.model';
 
 @Component({
   selector: 'app-post-home',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
   `
 })
 export class PostHomeComponent {
-  storedPosts = [];
+  storedPosts: Post[] = [];
 
   onPostAdded(post) {
     this.storedPosts.push(post);
