@@ -5,8 +5,8 @@ import { Post } from '../post.model';
   selector: 'app-post-home',
   template: `
   <div>
-    <app-post-create (postCreated) = "onPostAdded($event)"></app-post-create>
-    <app-post-list [posts] = "storedPosts"></app-post-list>
+    <app-post-create></app-post-create>
+    <app-post-list></app-post-list>
   </div>`,
   styles: [`
   div {
