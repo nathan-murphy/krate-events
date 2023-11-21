@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Post } from '../post.model';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-list',
@@ -16,4 +17,8 @@ export class PostListComponent {
   @Input() posts: Post[] = [];
 
 
+  // public keyword here automatically creates a property on this class and sets the value to what was passed in from constructor
+  constructor(public postsService: PostsService) {
+    
+  }
 }
