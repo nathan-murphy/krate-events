@@ -19,7 +19,8 @@ export class PostCreateComponent {
       return;
     const post: Post = { title: form.value.title, content: form.value.content }
     // this.postCreated.emit(post)
-    this.postsService.addPost(post)
+    this.postsService.addPost(post);
+    form.resetForm();
   }
 
   constructor(public postsService: PostsService) { }
