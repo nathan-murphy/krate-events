@@ -17,6 +17,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   // ];
 
   posts: Post[] = [];
+  serviceErr = '';
   private postsSub: Subscription;
 
   // public keyword here automatically creates a property on this class and sets the value to what was passed in from constructor
@@ -25,8 +26,10 @@ export class PostListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.posts = this.postsService.getPosts();
     this.postsSub = this.postsService.getPostUpdateListener()
-      .subscribe((posts: Post[]) => {
-        this.posts = posts;
+      .subscribe({
+        next: (posts: Post[]) => { this.posts = posts; },
+        error: (err: string) => { this.serviceErr = err; },
+        complete: () => { }
       });
   }
 
