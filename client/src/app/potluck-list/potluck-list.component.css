@@ -1,0 +1,19 @@
+div {
+  display: flex;
+  flex-wrap: wrap;
+
+
+}
+
+mat-card {
+  margin: 1rem;
+  /* min-width: 500px; */
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+mat-action-row {
+  padding-top: 1rem;
+  margin-top: auto;
+}

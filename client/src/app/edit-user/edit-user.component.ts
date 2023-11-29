@@ -6,10 +6,7 @@ import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-edit-user.component.ts',
-  template: `
-   <h2 class="text-center m-5">Edit a User</h2>
-   <app-user-form [initialState]="user" (formSubmitted)="editUser($event)"></app-user-form>
- `
+  template: ""
 })
 export class EditUserComponent implements OnInit {
   user: BehaviorSubject<User> = new BehaviorSubject({});
@@ -31,16 +28,16 @@ export class EditUserComponent implements OnInit {
     });
   }
 
-  editUser(user: User) {
-    this.userService.updateUser(this.user.value._id || '', user)
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/users']);
-        },
-        error: (error) => {
-          alert('Failed to update user');
-          console.error(error);
-        }
-      })
-  }
+  // editUser(user: User) {
+  //   this.userService.updateUser(this.user.value._id || '', user)
+  //     .subscribe({
+  //       next: () => {
+  //         this.router.navigate(['/users']);
+  //       },
+  //       error: (error) => {
+  //         alert('Failed to update user');
+  //         console.error(error);
+  //       }
+  //     })
+  // }
 }

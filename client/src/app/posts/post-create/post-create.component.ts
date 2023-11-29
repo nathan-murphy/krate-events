@@ -9,7 +9,6 @@ import { PostsService } from '../posts.service';
   styleUrls: ['post-create.component.css']
 })
 export class PostCreateComponent {
-
   enteredTitle = '';
   enteredContent = '';
   // @Output() postCreated = new EventEmitter<Post>();

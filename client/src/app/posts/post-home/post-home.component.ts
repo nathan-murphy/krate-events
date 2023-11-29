@@ -14,10 +14,4 @@ import { Post } from '../post.model';
     margin: 1rem auto;
   }`]
 })
-export class PostHomeComponent {
-  storedPosts: Post[] = [];
-
-  onPostAdded(post) {
-    this.storedPosts.push(post);
-  }
-}
+export class PostHomeComponent { }

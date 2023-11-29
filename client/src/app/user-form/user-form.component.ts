@@ -35,7 +35,7 @@ export class UserFormComponent implements OnInit {
       this.userForm = this.fb.group({
         fName: [user.fName, [Validators.required, Validators.minLength(3)]],
         lName: [user.lName, [Validators.required, Validators.minLength(5)]],
-        attachedToId: [user.attachedTo]
+        // attachedToId: [user.attachedTo]
       });
     });
 
