@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { UsersListComponent } from "./users/users-list/users-list.component";
-import { AddUserComponent } from "./users/user-add/add-user.component";
-import { EditUserComponent } from "./users/user-edit/edit-user.component";
+import { UserAddComponent } from "./users/user-add/user-add.component";
+import { UserEditComponent } from "./users/user-edit/user-edit.component";
 
 import { PostHomeComponent } from "./posts/post-home/post-home.component";
 import { EventsHomeComponent } from "./events/events-home/events-home.component";
@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: "potlucks", component: PotluckListComponent },
   { path: "potlucks/new", component: PotluckAddComponent },
   { path: "users", component: UsersListComponent },
-  { path: "users/new", component: AddUserComponent },
-  { path: "users/edit/:id", component: EditUserComponent },
+  { path: "users/new", component: UserAddComponent },
+  { path: "users/edit/:id", component: UserEditComponent },
   { path: "udemyCourse", component: PostHomeComponent },
   { path: "events", component: EventsHomeComponent },
   { path: "events/new", component: AddEventComponent },

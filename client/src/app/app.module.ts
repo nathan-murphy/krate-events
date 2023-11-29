@@ -25,8 +25,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { AppRoutingModule } from "./app-routing.module";
 import { UsersListComponent } from "./users/users-list/users-list.component";
 import { UserFormComponent } from "./users/user-form/user-form.component";
-import { AddUserComponent } from "./users/user-add/add-user.component";
-import { EditUserComponent } from "./users/user-edit/edit-user.component";
+import { UserAddComponent } from "./users/user-add/user-add.component";
+import { UserEditComponent } from "./users/user-edit/user-edit.component";
 import { PostCreateComponent } from "./posts/post-create/post-create.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { PostListComponent } from "./posts/post-list/post-list.component";
@@ -45,8 +45,8 @@ import { PotlucksService } from "./potlucks/potlucks.service";
     AppComponent,
     UsersListComponent,
     UserFormComponent,
-    AddUserComponent,
-    EditUserComponent,
+    UserAddComponent,
+    UserEditComponent,
     PostCreateComponent,
     ToolbarComponent,
     PostListComponent,

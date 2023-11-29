@@ -4,13 +4,13 @@ import { User } from '../user.model';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-add-user',
+  selector: 'app-user-add',
   template: `
    <h2 class="text-center m-5">Add a New User</h2>
    <app-user-form (formSubmitted)="addUser($event)"></app-user-form>
  `
 })
-export class AddUserComponent {
+export class UserAddComponent {
   constructor(
     private router: Router,
     private userService: UserService

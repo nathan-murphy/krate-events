@@ -5,10 +5,10 @@ import { User } from '../user.model';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-edit-user.component.ts',
+  selector: 'app-user-edit.component.ts',
   template: ""
 })
-export class EditUserComponent implements OnInit {
+export class UserEditComponent implements OnInit {
   user: BehaviorSubject<User> = new BehaviorSubject({});
 
   constructor(
