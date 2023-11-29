@@ -23,10 +23,10 @@ import { FormsModule } from "@angular/forms";
 import { MatExpansionModule } from "@angular/material/expansion";
 
 import { AppRoutingModule } from "./app-routing.module";
-import { UsersListComponent } from "./users-list/users-list.component";
-import { UserFormComponent } from "./user-form/user-form.component";
-import { AddUserComponent } from "./add-user/add-user.component";
-import { EditUserComponent } from "./edit-user/edit-user.component";
+import { UsersListComponent } from "./users/users-list/users-list.component";
+import { UserFormComponent } from "./users/user-form/user-form.component";
+import { AddUserComponent } from "./users/user-add/add-user.component";
+import { EditUserComponent } from "./users/user-edit/edit-user.component";
 import { PostCreateComponent } from "./posts/post-create/post-create.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { PostListComponent } from "./posts/post-list/post-list.component";
@@ -36,9 +36,9 @@ import { AppComponent } from "./app.component";
 import { EventsHomeComponent } from "./events/events-home/events-home.component";
 import { AddEventComponent } from "./events/add-event/add-event.component";
 import { EventsService } from "./events/events.service";
-import { PotluckAddComponent } from "./events/potlucks/potluck-add/potluck-add.component";
-import { PotluckListComponent } from "./potluck-list/potluck-list.component";
-import { PotlucksService } from "./events/potlucks/potlucks.service";
+import { PotluckAddComponent } from "./potlucks/potluck-add/potluck-add.component";
+import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.component";
+import { PotlucksService } from "./potlucks/potlucks.service";
 
 @NgModule({
   declarations: [

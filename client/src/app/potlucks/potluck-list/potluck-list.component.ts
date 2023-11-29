@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 
-import { PotlucksService } from "../events/potlucks/potlucks.service";
-import { Potluck } from "../events/potlucks/potluck.model";
+import { PotlucksService } from "../potlucks.service";
+import { Potluck } from "../potluck.model";
 
 @Component({
   selector: "app-potluck-list",

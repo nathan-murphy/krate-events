@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { User } from '../user';
+import { User } from '../user.model';
 import { UserService } from '../user.service';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Potluck } from "../events/potlucks/potluck.model";
+import { Potluck } from "./potluck.model";
 
 export const samplePotlucks: Potluck[] = [
   {

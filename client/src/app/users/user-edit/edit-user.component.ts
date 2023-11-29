@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../user';
+import { User } from '../user.model';
 import { UserService } from '../user.service';
 
 @Component({
