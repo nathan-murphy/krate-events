@@ -1,3 +1,6 @@
+import { User } from "../users/user.model";
+import { PotluckRSVP } from "../potluck-rsvp/potluck-rsvp.model";
+
 export interface Potluck {
   _id?: number;
   dateAndTime: {
@@ -9,4 +12,6 @@ export interface Potluck {
     theme: string;
     description: string;
   };
+  hosts?: [User];
+  rsvps?: [PotluckRSVP];
 }
