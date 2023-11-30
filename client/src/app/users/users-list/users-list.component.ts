@@ -5,10 +5,12 @@ import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-users-list',
-  templateUrl: 'users-list.html',
+  templateUrl: 'users-list.component.html',
+  styleUrls: ['users-list.component.css']
 })
 export class UsersListComponent implements OnInit {
-  user$: Observable<User[]> = new Observable();
+  allUsers: User[];
+  displayedColumns: string[] = ['fName', 'lName', 'email', 'action'];
 
   constructor(private usersService: UserService) { }
 
@@ -16,13 +18,7 @@ export class UsersListComponent implements OnInit {
     this.fetchUsers();
   }
 
-  deleteUser(id: string): void {
-    this.usersService.deleteUser(id).subscribe({
-      next: () => this.fetchUsers()
-    });
-  }
-
   private fetchUsers(): void {
-    this.user$ = this.usersService.getUsers();
+    this.allUsers= this.usersService.getUsers();
   }
 }

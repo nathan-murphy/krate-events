@@ -12,6 +12,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatTableModule } from "@angular/material/table"
 
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -36,6 +37,7 @@ import { AppComponent } from "./app.component";
 import { EventsHomeComponent } from "./events/events-home/events-home.component";
 import { AddEventComponent } from "./events/add-event/add-event.component";
 import { EventsService } from "./events/events.service";
+import { PotluckFormComponent } from "./potlucks/potluck-form/potluck-form.component";
 import { PotluckAddComponent } from "./potlucks/potluck-add/potluck-add.component";
 import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.component";
 import { PotlucksService } from "./potlucks/potlucks.service";
@@ -53,6 +55,7 @@ import { PotlucksService } from "./potlucks/potlucks.service";
     PostHomeComponent,
     EventsHomeComponent,
     AddEventComponent,
+    PotluckFormComponent,
     PotluckAddComponent,
     PotluckListComponent,
   ],
@@ -69,12 +72,13 @@ import { PotlucksService } from "./potlucks/potlucks.service";
     MatButtonModule,
     MatDatepickerModule,
     MatDividerModule,
-    MatNativeDateModule,
+    MatExpansionModule,
     MatMenuModule,
-    MatToolbarModule,
+    MatNativeDateModule,
     MatSelectModule,
     MatSidenavModule,
-    MatExpansionModule,
+    MatTableModule,
+    MatToolbarModule,
     FormsModule,
     MatStepperModule,
     NgxMaterialTimepickerModule,

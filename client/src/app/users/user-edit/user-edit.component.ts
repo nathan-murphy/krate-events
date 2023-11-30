@@ -6,10 +6,13 @@ import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-edit.component.ts',
-  template: ""
+  template: `
+  <app-user-form [initialUser]="user"></app-user-form>
+  `
 })
 export class UserEditComponent implements OnInit {
-  user: BehaviorSubject<User> = new BehaviorSubject({});
+  userSubject: BehaviorSubject<User> = new BehaviorSubject({});
+  user: User;
 
   constructor(
     private router: Router,
@@ -18,18 +21,20 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     if (!id) {
       alert('No id provided');
     }
 
-    this.userService.getUser(id!).subscribe((user) => {
-      this.user.next(user);
-    });
+    // this.userService.getUser(id!).subscribe((user) => {
+    //   this.userSubject.next(user);
+    // });
+
+    this.user = this.userService.getUserFromCache(id);
   }
 
   // editUser(user: User) {
-  //   this.userService.updateUser(this.user.value._id || '', user)
+  //   this.userService.updateUser(this.user.value._name || '', user)
   //     .subscribe({
   //       next: () => {
   //         this.router.navigate(['/users']);

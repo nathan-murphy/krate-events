@@ -5,7 +5,6 @@ import { samplePotlucks } from "./helpers";
 
 @Injectable({ providedIn: "root" })
 export class PotlucksService {
-;
   private allPotlucks: Potluck[] = samplePotlucks;
   private potlucksUpdated = new Subject<Potluck[]>();
 

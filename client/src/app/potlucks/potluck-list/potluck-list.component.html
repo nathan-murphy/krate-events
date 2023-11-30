@@ -2,14 +2,14 @@
     <mat-card *ngFor="let potluck of allPotlucks">
         <mat-card-header>
             <mat-card-title>
-                {{potluck.theme}}
+                {{potluck.details.theme}}
             </mat-card-title>
             <mat-card-subtitle>
-                {{potluck.startDate}}
+                {{potluck.dateAndTime.startTime}}
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <p class="mat-body-1">{{potluck.description}}</p>
+            <p class="mat-body-1">{{potluck.details.description}}</p>
         </mat-card-content>
         <mat-action-row align="end">
             <mat-divider></mat-divider>

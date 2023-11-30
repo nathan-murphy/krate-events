@@ -6,22 +6,4 @@ import { Router } from '@angular/router';
   templateUrl: 'toolbar.component.html',
   styleUrls: ['toolbar.component.css'],
 })
-export class ToolbarComponent {
-
-  constructor(public router: Router) {
-    
-  }
-
-  onNavToPotlucks() {
-    this.router.navigate(['/potlucks']);
-  }
-
-  onNewPotluck() {
-    this.router.navigate(['/potlucks/new'])
-  }
-
-  onManageUsers() {
-    this.router.navigate(['/users'])
-  }
-
-}
+export class ToolbarComponent { }

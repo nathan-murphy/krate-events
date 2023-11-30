@@ -1,50 +1,45 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { User } from '../user.model';
-import { UserService } from '../user.service';
+import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
+import { Observable, BehaviorSubject } from "rxjs";
+import { User } from "../user.model";
+import { UserService } from "../user.service";
 
 @Component({
-  selector: 'app-user-form',
-  templateUrl: 'user-form.html',
-  styleUrls: ['user-form.css']
+  selector: "app-user-form",
+  templateUrl: "user-form.html",
+  styleUrls: ["user-form.css"],
 })
-
 export class UserFormComponent implements OnInit {
-  users$: Observable<User[]> = new Observable();
-
   @Input()
-  initialState: BehaviorSubject<User> = new BehaviorSubject({});
-
-  @Output()
-  formValuesChanged = new EventEmitter<User>();
+  initialUser: User;
 
   @Output()
   formSubmitted = new EventEmitter<User>();
 
-  userForm: FormGroup = new FormGroup({});
+  userProfileForm = new FormGroup({
+    firstName: new FormControl(""),
+    lastName: new FormControl(""),
+    email: new FormControl(""),
+  });
 
-  constructor(private fb: FormBuilder, private usersService: UserService) { }
+  constructor() {}
 
-  get fName() { return this.userForm.get('fName')!; }
-  get lName() { return this.userForm.get('lName')!; }
-  get attachedToId() { return this.userForm.get('attachedToId')!; }
-
-  ngOnInit() {
-    this.initialState.subscribe(user => {
-      this.userForm = this.fb.group({
-        fName: [user.fName, [Validators.required, Validators.minLength(3)]],
-        lName: [user.lName, [Validators.required, Validators.minLength(5)]],
-        // attachedToId: [user.attachedTo]
-      });
-    });
-
-    this.userForm.valueChanges.subscribe((val) => { this.formValuesChanged.emit(val); });
-
-    this.users$ = this.usersService.getUsers();
+  ngOnInit(): void {
+    if (this.initialUser != undefined) {
+      this.updateProfileForm(this.initialUser);
+    }
   }
 
-  submitForm() {
-    this.formSubmitted.emit(this.userForm.value);
+  onSubmit() {
+    this.formSubmitted.emit(this.userProfileForm.value);
+    console.warn(this.userProfileForm.value);
+  }
+
+  updateProfileForm(newUserData: User) {
+    this.userProfileForm.patchValue({
+      firstName: newUserData.fName,
+      lastName: newUserData.lName,
+      email: newUserData.email,
+    });
   }
 }
