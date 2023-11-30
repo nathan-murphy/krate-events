@@ -1,4 +1,5 @@
 export interface Potluck {
+  _id?: number;
   dateAndTime: {
     startDate: string;
     startTime: string;

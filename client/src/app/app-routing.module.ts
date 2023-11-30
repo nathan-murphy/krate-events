@@ -10,10 +10,12 @@ import { EventsHomeComponent } from "./events/events-home/events-home.component"
 import { AddEventComponent } from "./events/add-event/add-event.component";
 import { PotluckAddComponent } from "./potlucks/potluck-add/potluck-add.component";
 import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.component";
+import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "potlucks", pathMatch: "full" },
   { path: "potlucks", component: PotluckListComponent },
+  { path: "potlucks/edit/:id", component: PotluckEditComponent },
   { path: "potlucks/new", component: PotluckAddComponent },
   { path: "users", component: UsersListComponent },
   { path: "users/new", component: UserAddComponent },

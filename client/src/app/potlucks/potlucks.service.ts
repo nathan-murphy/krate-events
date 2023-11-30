@@ -17,6 +17,10 @@ export class PotlucksService {
     this.potlucksUpdated.next([...this.allPotlucks]);
   }
 
+  getPotluckById(id: number): Potluck {
+    return this.allPotlucks.filter(p => p._id == id)[0]
+  }
+
   getPotlucksUpdateListener() {
     return this.potlucksUpdated.asObservable();
   }

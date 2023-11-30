@@ -2,6 +2,7 @@ import { Potluck } from "./potluck.model";
 
 export const samplePotlucks: Potluck[] = [
   {
+    _id: 1,
     dateAndTime: {
       startDate: "9/1/2023",
       startTime: "5:00 pm",
@@ -13,6 +14,7 @@ export const samplePotlucks: Potluck[] = [
     },
   },
   {
+    _id: 2,
     dateAndTime: {
       startDate: "10/4/2023",
       startTime: "5:00 pm",
@@ -24,6 +26,7 @@ export const samplePotlucks: Potluck[] = [
     },
   },
   {
+    _id: 3,
     dateAndTime: {
       startDate: "11/9/2023",
       startTime: "5:00 pm",
@@ -36,6 +39,7 @@ export const samplePotlucks: Potluck[] = [
     },
   },
   {
+    _id: 4,
     dateAndTime: {
       startDate: "12/17/2023",
       startTime: "5:00 pm",
@@ -47,6 +51,7 @@ export const samplePotlucks: Potluck[] = [
     },
   },
   {
+    _id: 6,
     dateAndTime: {
       startDate: "1/8/2023",
       startTime: "5:00 pm",
