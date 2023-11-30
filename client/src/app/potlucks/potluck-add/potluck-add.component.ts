@@ -1,9 +1,8 @@
 import { Component } from "@angular/core";
-import { NgForm } from '@angular/forms';
+import { Router } from "@angular/router";
 
 import { Potluck } from "../potluck.model";
 import { PotlucksService } from "../potlucks.service";
-import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-potluck-add',
@@ -16,7 +15,7 @@ export class PotluckAddComponent {
         public router: Router,
         public potlucksService: PotlucksService) { }
 
-    addPotluck(potluckToAdd) {
+    onAddPotluck(potluckToAdd: Potluck) {
         this.potlucksService.addPotluck(potluckToAdd);
         this.router.navigate(['/potlucks'])
     }

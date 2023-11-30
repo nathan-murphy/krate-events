@@ -21,7 +21,7 @@ export class PotluckFormComponent implements OnInit {
             startDate: new FormControl(''),
             startTime: new FormControl('5:00 pm'),
         }),
-        location: new FormControl('8203 Exmoor Drive'),
+        location: new FormControl('Krate House'),
         details: new FormGroup({
             theme: new FormControl(''),
             description: new FormControl(''),
