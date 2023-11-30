@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
-import { Observable, BehaviorSubject } from "rxjs";
+import { FormBuilder, Validators } from "@angular/forms";
 import { User } from "../user.model";
-import { UserService } from "../user.service";
 
 @Component({
   selector: "app-user-form",
@@ -16,13 +14,13 @@ export class UserFormComponent implements OnInit {
   @Output()
   formSubmitted = new EventEmitter<User>();
 
-  userProfileForm = new FormGroup({
-    firstName: new FormControl(""),
-    lastName: new FormControl(""),
-    email: new FormControl(""),
+  userProfileForm = this.fb.group({
+    firstName: ["", Validators.required],
+    lastName: ["", Validators.required],
+    email: ["", Validators.required],
   });
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.initialUser != undefined) {

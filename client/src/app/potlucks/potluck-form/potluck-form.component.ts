@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Potluck } from '../potluck.model';
 
 @Component({
@@ -15,18 +15,20 @@ export class PotluckFormComponent implements OnInit {
 
     @Output()
     formSubmittedEvent = new EventEmitter<Potluck>();
-    
-    potluckForm = new FormGroup({
-        dateAndTime: new FormGroup({
-            startDate: new FormControl(''),
-            startTime: new FormControl('5:00 pm'),
+
+    potluckForm = this.fb.group({
+        dateAndTime: this.fb.group({
+            startDate: ['', Validators.required],
+            startTime: ['5:00 pm', Validators.required],
         }),
-        location: new FormControl('Krate House'),
-        details: new FormGroup({
-            theme: new FormControl(''),
-            description: new FormControl(''),
-        }),
-    });
+        location: ['Krate House', Validators.required],
+        details: this.fb.group({
+            theme: ['', Validators.required],
+            description: ['', Validators.required]
+        })
+    })
+
+    constructor(private fb: FormBuilder) { }
 
     ngOnInit() {
         if(this.initialPotluck != undefined) {
