@@ -2,7 +2,9 @@
     <mat-card *ngFor="let potluck of allPotlucks">
         <mat-card-header>
             <mat-card-title>
-                {{potluck.details.theme}}
+                <a [routerLink]="[potluck._id]">
+                    {{potluck.details.theme}}
+                </a>
             </mat-card-title>
             <mat-card-subtitle>
                 {{potluck.dateAndTime.startTime}}

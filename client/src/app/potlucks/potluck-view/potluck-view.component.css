@@ -1,0 +1,10 @@
+mat-card {
+    width: 60%;
+    max-width: 800px;
+    margin: 1rem auto;
+  }
+  
+  .krate-confirmed-label {
+    width: fit-content;
+    padding-right: 1rem;
+  }

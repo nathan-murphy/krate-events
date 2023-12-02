@@ -12,7 +12,9 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatTableModule } from "@angular/material/table"
+import { MatTableModule } from "@angular/material/table";
+import { MatListModule } from "@angular/material/list";
+import { MatBadgeModule } from "@angular/material/badge";
 
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -42,6 +44,7 @@ import { PotluckAddComponent } from "./potlucks/potluck-add/potluck-add.componen
 import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.component";
 import { PotlucksService } from "./potlucks/potlucks.service";
 import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.component";
+import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.component";
 
 @NgModule({
   declarations: [
@@ -60,6 +63,7 @@ import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.compo
     PotluckAddComponent,
     PotluckListComponent,
     PotluckEditComponent,
+    PotluckViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,7 @@ import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.compo
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatBadgeModule,
     MatInputModule,
     MatIconModule,
     MatCardModule,
@@ -75,6 +80,7 @@ import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.compo
     MatDatepickerModule,
     MatDividerModule,
     MatExpansionModule,
+    MatListModule,
     MatMenuModule,
     MatNativeDateModule,
     MatSelectModule,

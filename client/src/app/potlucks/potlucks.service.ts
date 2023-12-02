@@ -1,5 +1,5 @@
-import { Potluck } from "./potluck.model";
 import { Injectable } from "@angular/core";
+import { Potluck } from "./potluck.model";
 import { Subject } from "rxjs";
 import { samplePotlucks } from "./helpers";
 
