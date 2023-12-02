@@ -45,6 +45,8 @@ import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.compo
 import { PotlucksService } from "./potlucks/potlucks.service";
 import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.component";
 import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.component";
+import { PotluckRSVPViewComponent } from "./potluck-rsvp/potluck-rsvp-view/potluck-rsvp-view.component"; 
+import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potluck-rsvp-list.component";
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.compo
     PotluckListComponent,
     PotluckEditComponent,
     PotluckViewComponent,
+    PotluckRSVPViewComponent,
+    PotluckRSVPListComponent,
   ],
   imports: [
     BrowserModule,

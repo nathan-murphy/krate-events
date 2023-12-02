@@ -11,37 +11,12 @@
         <p class="mat-body-1">
             {{potluck.details.description}}
             <mat-divider></mat-divider>
+            <button mat-button color="accent" [routerLink]="['/potlucks/edit', potluck._id]">Edit</button>
         </p>
         <h2 class="mat-h2">Responses</h2>
-        <mat-list>
-            <div class="krate-confirmed-label" mat-subheader matBadge={{confirmedModel.length}} matBadgeColor="accent">
-                Confirmed </div>
-            <mat-list-item *ngFor="let item of confirmedModel">
-                <mat-icon matListItemIcon>check</mat-icon>
-                <div matListItemTitle>{{ item.userName }}</div>
-                <div matListItemLine>{{ item.recipe }}</div>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-
-            <div mat-subheader>Pending</div>
-            <!-- <a mat-button href = {{mailLink}}>
-                Email Everyone
-            </a> -->
-            <mat-list-item *ngFor="let item of pendingModel">
-                <mat-icon matListItemIcon>hourglass_empty</mat-icon>
-                <div matListItemTitle>{{ item.userName }}</div>
-                <div matListItemLine>{{ item.email }}</div>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-
-            <div mat-subheader>Declined</div>
-            <mat-list-item *ngFor="let item of declinedModel">
-                <mat-icon matListItemIcon>cancel</mat-icon>
-                <div matListItemTitle>{{ item.userName }}</div>
-                <div matListItemLine>{{ item.recipe }}</div>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </mat-list>
+        <app-potluck-rsvp-list [rsvps]="rsvpByStatus.confirmed" [showBadge]=true [title]="'Confirmed'"></app-potluck-rsvp-list>
+        <app-potluck-rsvp-list [rsvps]="rsvpByStatus.pending" [showBadge]=true [title]="'Pending'"></app-potluck-rsvp-list>
+        <app-potluck-rsvp-list [rsvps]="rsvpByStatus.declined" [showBadge]=true [title]="'Declined'"></app-potluck-rsvp-list>
     </mat-card-content>
     <mat-card-actions>
 
