@@ -1,0 +1,22 @@
+<div class="krate-dialog">
+  <h1 mat-dialog-title>RSVP for Potluck</h1>
+  <form [formGroup]="rsvpForm">
+    <div mat-dialog-content>
+      <label id="rsvp-radio-group-label">Are you coming?</label>
+      <mat-radio-group aria-labelledby="rsvp-radio-group-label" class="rsvp-radio-group" formControlName="rsvp">
+        <mat-radio-button color="primary" class="rsvp-radio-button" value="yes">Yes</mat-radio-button>
+        <mat-radio-button color="warn" class="rsvp-radio-button" value="no">No</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field *ngIf="rsvpForm.controls['rsvp'].value == 'yes'">
+        <mat-label>What are you bringing?</mat-label>
+        <input matInput value="" type="text" name="recipe" formControlName="recipe">
+      </mat-form-field>
+      <mat-divider></mat-divider>
+      <mat-dialog-actions>
+        <button mat-button color="primary" type="submit" [disabled]="rsvpForm.invalid">
+          Submit
+        </button>
+      </mat-dialog-actions>
+    </div>
+  </form>
+</div>

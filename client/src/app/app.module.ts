@@ -15,6 +15,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTableModule } from "@angular/material/table";
 import { MatListModule } from "@angular/material/list";
 import { MatBadgeModule } from "@angular/material/badge";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatRadioModule } from "@angular/material/radio";
 
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -45,8 +47,9 @@ import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.compo
 import { PotlucksService } from "./potlucks/potlucks.service";
 import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.component";
 import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.component";
-import { PotluckRSVPViewComponent } from "./potluck-rsvp/potluck-rsvp-view/potluck-rsvp-view.component"; 
+import { PotluckRSVPViewComponent } from "./potluck-rsvp/potluck-rsvp-view/potluck-rsvp-view.component";
 import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potluck-rsvp-list.component";
+import { PotluckRSVPEditDialog } from "./potluck-rsvp/potluck-rsvp-edit/potluck-rsvp-edit.dialog";
 
 @NgModule({
   declarations: [
@@ -68,12 +71,13 @@ import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potlu
     PotluckViewComponent,
     PotluckRSVPViewComponent,
     PotluckRSVPListComponent,
+    PotluckRSVPEditDialog,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatBadgeModule,
     MatInputModule,
@@ -82,18 +86,20 @@ import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potlu
     MatCheckboxModule,
     MatButtonModule,
     MatDatepickerModule,
+    MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,
+    MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatStepperModule,
     MatTableModule,
     MatToolbarModule,
-    FormsModule,
-    MatStepperModule,
     NgxMaterialTimepickerModule,
+    ReactiveFormsModule,
   ],
   providers: [EventsService, PotlucksService],
   bootstrap: [AppComponent],

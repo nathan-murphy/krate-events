@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from "@angular/core";
 import { User } from "src/app/users/user.model";
 import { PotluckRSVP } from "../potluck-rsvp.model";
 import { UserService } from "src/app/users/user.service";
+import { PotluckRSVPService } from "../potluck-rsvp.service";
 
 @Component({
   selector: "app-potluck-rsvp-view",
@@ -15,20 +16,12 @@ export class PotluckRSVPViewComponent implements OnChanges {
   user: User;
   icon: string;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private potluckRSVPService: PotluckRSVPService) {}
 
   ngOnChanges(): void {
-    switch (this.rsvp.rsvp) {
-      case "yes":
-        this.icon = "check";
-        break;
-      case "no":
-        this.icon = "cancel";
-        break;
-      default:
-        this.icon = "hourglass_empty";
-    }
-
     this.user = this.userService.getUserFromCache(this.rsvp.userId);
+    this.icon = this.potluckRSVPService.getIconFromRSVP(this.rsvp.rsvp);
   }
 }

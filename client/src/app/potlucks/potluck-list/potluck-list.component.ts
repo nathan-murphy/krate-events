@@ -1,39 +1,31 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 
-import { PotlucksService } from "../potlucks.service";
 import { Potluck } from "../potluck.model";
+import { PotlucksService } from "../potlucks.service";
+import { PotluckRSVPEditDialog } from "src/app/potluck-rsvp/potluck-rsvp-edit/potluck-rsvp-edit.dialog";
 
 @Component({
   selector: "app-potluck-list",
   templateUrl: "potluck-list.component.html",
   styleUrls: ["potluck-list.component.css"],
 })
-export class PotluckListComponent implements OnInit, OnDestroy {
+export class PotluckListComponent implements OnInit {
   allPotlucks: Potluck[] = [];
   rsvpIcon = 'check_circle'
-  private potlucksSub: Subscription;
 
-  constructor(public potlucksService: PotlucksService) {}
+  constructor(
+    public potlucksService: PotlucksService,
+    public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.allPotlucks = this.potlucksService.getPotlucks();
-    this.potlucksSub = this.potlucksService
-      .getPotlucksUpdateListener()
-      .subscribe({
-        next: (potlucks: Potluck[]) => {
-          this.allPotlucks = potlucks;
-        },
-        error: () => {},
-        complete: () => {},
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.potlucksSub.unsubscribe();
   }
 
   onAttending() {
+      this.dialog.open(PotluckRSVPEditDialog, {
+        data: undefined,
+      });
     this.rsvpIcon = 'check_circle'
   }
 

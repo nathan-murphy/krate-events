@@ -1,11 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Potluck } from "../potluck.model";
-import { PotluckRSVP } from "src/app/potluck-rsvp/potluck-rsvp.model";
-import { User } from "src/app/users/user.model";
 import { PotlucksService } from "../potlucks.service";
 import { PotluckRSVPService } from "src/app/potluck-rsvp/potluck-rsvp.service";
-import { UserService } from "src/app/users/user.service";
 
 @Component({
   selector: "app-potluck-view",
@@ -14,7 +11,6 @@ import { UserService } from "src/app/users/user.service";
 })
 export class PotluckViewComponent implements OnInit {
   potluck: Potluck;
-  allRsvps: PotluckRSVP[];
   rsvpByStatus = { confirmed: [], pending: [], declined: [] };
   mailLink = "";
 
@@ -31,19 +27,23 @@ export class PotluckViewComponent implements OnInit {
     }
 
     this.potluck = this.potlucksService.getPotluckById(id);
-    this.allRsvps = this.potluckRSVPService.getRsvpsByPotluckId(id);
-
     this.splitRsvpsByResponse();
   }
 
   splitRsvpsByResponse() {
-    this.rsvpByStatus.confirmed = this.allRsvps.filter(
-      (rsvp) => rsvp.rsvp == "yes"
-    );
-
-    this.rsvpByStatus.declined = this.allRsvps.filter(
-      (rsvp) => rsvp.rsvp == "no"
-    );
-    this.rsvpByStatus.pending = this.allRsvps.filter((rsvp) => rsvp.rsvp == "");
+    this.potluckRSVPService
+      .getRsvpsByPotluckId(this.potluck._id)
+      .forEach((rsvp) => {
+        switch (rsvp.rsvp) {
+          case "yes":
+            this.rsvpByStatus.confirmed.push(rsvp);
+            break;
+          case "no":
+            this.rsvpByStatus.declined.push(rsvp);
+            break;
+          default:
+            this.rsvpByStatus.pending.push(rsvp);
+        }
+      });
   }
 }
