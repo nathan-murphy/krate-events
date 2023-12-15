@@ -35,8 +35,12 @@ export class PotluckFormComponent implements OnInit {
   }
 
   onSubmitPotluck() {
+    let id: number = -1
+    if(this.initialPotluck)
+      id = this.initialPotluck._id
+
     const potluckToEmit: Potluck = {
-      _id: this.initialPotluck._id,
+      _id: id,
       dateAndTime: {
         startDate: this.potluckForm.value.dateAndTime.startDate,
         startTime: this.potluckForm.value.dateAndTime.startTime,
