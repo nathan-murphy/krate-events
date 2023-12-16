@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 
 import { Potluck } from "../potluck.model";
@@ -11,7 +11,7 @@ import { Subscription } from "rxjs/internal/Subscription";
   templateUrl: "potluck-list.component.html",
   styleUrls: ["potluck-list.component.css"],
 })
-export class PotluckListComponent implements OnInit {
+export class PotluckListComponent implements OnInit, OnDestroy {
   private potluckSub: Subscription;
   allPotlucks: Potluck[] = [];
   rsvpIcon = "check_circle";
@@ -37,5 +37,9 @@ export class PotluckListComponent implements OnInit {
 
   onNotAttending() {
     this.rsvpIcon = "cancel";
+  }
+
+  ngOnDestroy(): void {
+    this.potluckSub.unsubscribe();
   }
 }

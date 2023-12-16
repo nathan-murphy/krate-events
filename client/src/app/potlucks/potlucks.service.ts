@@ -23,12 +23,9 @@ export class PotlucksService {
     this.httpClient
       .post("http://localhost:3000/api/potluck", potluckToAdd)
       .subscribe({
-        complete: () => {
-          this.allPotlucks.push(potluckToAdd);
-          this.potlucksUpdated.next([...this.allPotlucks]);
-        },
+        complete: this.getPotlucks,
       });
-  }
+  }2
 
   getPotluckById(id: number): Potluck {
     return this.allPotlucks.filter((p) => p._id == id)[0];
