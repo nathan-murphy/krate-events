@@ -35,7 +35,7 @@ connectToDatabase(MONGODB_URI, MONGODB_DBNAME)
  
        // start the Express server
        app.listen(APP_PORT, () => {
-           console.log(`Server running at http://localhost:5200...`);
+           console.log(`Server running at http://localhost:${APP_PORT}...`);
        });
  
    })
