@@ -6,6 +6,7 @@ export const collections: {
 } = {};
  
 export async function connectToDatabase(uri: string, dbName: string) {
+    if(uri == 'test' || dbName == 'test') return
    const client = new mongodb.MongoClient(uri);
    await client.connect();
  
