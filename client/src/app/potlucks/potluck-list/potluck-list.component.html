@@ -1,30 +1,32 @@
-<div *ngIf="allPotlucks.length > 0">
-    <mat-card *ngFor="let potluck of allPotlucks">
-        <mat-card-header>
-            <mat-card-title>
-                <a [routerLink]="[potluck._id]">
-                    {{potluck.details.theme}}
-                </a>
-            </mat-card-title>
-            <mat-card-subtitle>
-                {{potluck.dateAndTime.startTime}}
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="mat-body-1">{{potluck.details.description}}</p>
-        </mat-card-content>
-        <mat-action-row align="end">
-            <mat-divider></mat-divider>
-            <!-- <button mat-button color="primary">RSVP</button> -->
-            <button mat-button [matMenuTriggerFor]="rsvpMenu" color="primary">
-                <mat-icon>{{rsvpIcon}}</mat-icon>
-                RSVP
-            </button>
-            <mat-menu #rsvpMenu="matMenu">
-                <button mat-menu-item (click)="onAttending()">Attending</button>
-                <button mat-menu-item (click)="onNotAttending()">Not Attending</button>
-            </mat-menu>
-        </mat-action-row>
-    </mat-card>
-</div>
-<p class="info-text mat-body-1" *ngIf="allPotlucks.length == 0"> No potlucks added yet</p>
+<ng-container *ngIf="potlucks$ | async as potlucks">
+    <div *ngIf="potlucks.length > 0">
+        <mat-card *ngFor="let potluck of potlucks">
+            <mat-card-header>
+                <mat-card-title>
+                    <a [routerLink]="[potluck._id]">
+                        {{potluck.details.theme}}
+                    </a>
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{potluck.dateAndTime.startTime}}
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="mat-body-1">{{potluck.details.description}}</p>
+            </mat-card-content>
+            <mat-action-row align="end">
+                <mat-divider></mat-divider>
+                <!-- <button mat-button color="primary">RSVP</button> -->
+                <button mat-button [matMenuTriggerFor]="rsvpMenu" color="primary">
+                    <mat-icon>{{rsvpIcon}}</mat-icon>
+                    RSVP
+                </button>
+                <mat-menu #rsvpMenu="matMenu">
+                    <button mat-menu-item (click)="onAttending()">Attending</button>
+                    <button mat-menu-item (click)="onNotAttending()">Not Attending</button>
+                </mat-menu>
+            </mat-action-row>
+        </mat-card>
+        <p class="info-text mat-body-1" *ngIf="potlucks.length == 0"> No potlucks added yet</p>
+    </div>
+</ng-container>

@@ -17,6 +17,7 @@ export class PotlucksService {
         this.allPotlucks = data;
         this.potlucksUpdated.next([...this.allPotlucks]);
       });
+      return this.potlucksUpdated.asObservable();
   }
 
   addPotluck(potluckToAdd: Potluck) {
