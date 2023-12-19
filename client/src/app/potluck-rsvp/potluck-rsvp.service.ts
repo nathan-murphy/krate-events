@@ -1,14 +1,25 @@
 import { Injectable } from "@angular/core";
 import { PotluckRSVP } from "./potluck-rsvp.model";
-import { samplePotluckRSVPs } from "./helpers";
+import { HttpClient } from "@angular/common/http";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class PotluckRSVPService {
-  getRsvpsByPotluckId(id: number): PotluckRSVP[] {
-    return samplePotluckRSVPs.filter((rsvp) => rsvp.potluckId == id);
+  constructor(private readonly httpClient: HttpClient) {}
+
+  getRsvp(id: number, status: string = ""): Observable<PotluckRSVP[]> {
+    let rsvpUpdated = new Subject<PotluckRSVP[]>();
+    this.httpClient
+      .get<PotluckRSVP[]>(
+        `http://localhost:3000/api/potluck-rsvp/${id}/status/${status}`
+      )
+      .subscribe((data) => {
+        rsvpUpdated.next([...data]);
+      });
+    return rsvpUpdated.asObservable();
   }
 
-  getIconFromRSVP(rsvp: string): string{
+  getIconFromRSVP(rsvp: string): string {
     switch (rsvp) {
       case "yes":
         return "check";

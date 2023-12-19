@@ -4,6 +4,7 @@ import express from "express";
 import { connectToDatabase } from "./database";
 import { userRouter } from "./user.routes";
 import { potluckRouter } from "./potluck/potluck.routes";
+import { potluckRsvpRouter } from "./potluck-rsvp/potluckRsvp.routes";
 import bodyParser from "body-parser";
 
 // Load environment variables from the .env file, where the ATLAS_URI is configured
@@ -42,6 +43,8 @@ connectToDatabase(MONGODB_URI, MONGODB_DBNAME)
     app.use("/users", userRouter);
 
     app.use("/api/potluck", potluckRouter);
+
+    app.use("/api/potluck-rsvp", potluckRsvpRouter)
 
     app.use(express.static("../dist"));
 

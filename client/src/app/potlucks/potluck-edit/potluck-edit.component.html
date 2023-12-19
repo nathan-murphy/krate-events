@@ -1,1 +1,3 @@
-<app-potluck-form (formSubmittedEvent)="onPotluckEdit($event)" [initialPotluck]="initialPotluck"></app-potluck-form>
+<ng-container *ngIf="potluck$ | async as potluck">
+    <app-potluck-form (formSubmittedEvent)="onPotluckEdit($event)" [initialPotluck]="potluck"></app-potluck-form>
+</ng-container>

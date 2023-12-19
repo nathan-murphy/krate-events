@@ -1,22 +1,22 @@
-<mat-card>
+<mat-card *ngIf="vm$ | async as vm">
     <mat-card-header>
         <mat-card-subtitle>
             <!-- {{potluck.dateAndTime.startDate}} -->
         </mat-card-subtitle>
         <mat-card-title class="mat-h1">
-            {{potluck.details.theme}}
+            {{vm.potluck.details.theme}}
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <p class="mat-body-1">
-            {{potluck.details.description}}
+            {{vm.potluck.details.description}}
             <mat-divider></mat-divider>
-            <button mat-button color="accent" [routerLink]="['/potlucks/edit', potluck._id]">Edit</button>
+            <button mat-button color="accent" [routerLink]="['/potlucks/edit', vm.potluck._id]">Edit</button>
         </p>
         <h2 class="mat-h2">Responses</h2>
-        <app-potluck-rsvp-list [rsvps]="rsvpByStatus.confirmed" [showBadge]=true [title]="'Confirmed'"></app-potluck-rsvp-list>
-        <app-potluck-rsvp-list [rsvps]="rsvpByStatus.pending" [showBadge]=true [title]="'Pending'"></app-potluck-rsvp-list>
-        <app-potluck-rsvp-list [rsvps]="rsvpByStatus.declined" [showBadge]=true [title]="'Declined'"></app-potluck-rsvp-list>
+        <app-potluck-rsvp-list [rsvps]="vm.confirmed" [showBadge]=true [title]="'Confirmed'"></app-potluck-rsvp-list>
+        <app-potluck-rsvp-list [rsvps]="vm.pending" [showBadge]=true [title]="'Pending'"></app-potluck-rsvp-list>
+        <app-potluck-rsvp-list [rsvps]="vm.declined" [showBadge]=true [title]="'Declined'"></app-potluck-rsvp-list>
     </mat-card-content>
     <mat-card-actions>
 
