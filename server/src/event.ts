@@ -1,5 +1,5 @@
 import * as mongodb from "mongodb";
-import { User } from "./user"
+import { User } from "./user/user"
 
 export interface Event {
     name: string;

@@ -23,15 +23,17 @@ export class PotluckViewComponent {
       switchMap((params) => this.potluckRSVPService.getRsvp(params["id"], "no"))
     ),
     this.route.params.pipe(
-      switchMap((params) => this.potluckRSVPService.getRsvp(params["id"], "pending"))
+      switchMap((params) =>
+        this.potluckRSVPService.getRsvp(params["id"], "pending")
+      )
     ),
   ]).pipe(
-    map(([potluck, confirmed, pending, declined]) => {
+    map(([potluck, confirmed, declined, pending]) => {
       return {
         potluck,
         confirmed,
-        pending,
         declined,
+        pending,
       };
     })
   );

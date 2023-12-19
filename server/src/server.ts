@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import cors from "cors";
 import express from "express";
 import { connectToDatabase } from "./database";
-import { userRouter } from "./user.routes";
+import { userRouter } from "./user/user.routes";
 import { potluckRouter } from "./potluck/potluck.routes";
 import { potluckRsvpRouter } from "./potluck-rsvp/potluckRsvp.routes";
 import bodyParser from "body-parser";
@@ -40,7 +40,7 @@ connectToDatabase(MONGODB_URI, MONGODB_DBNAME)
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cors());
 
-    app.use("/users", userRouter);
+    app.use("/api/users", userRouter);
 
     app.use("/api/potluck", potluckRouter);
 

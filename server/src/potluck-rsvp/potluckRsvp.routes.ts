@@ -7,8 +7,10 @@ export const potluckRsvpRouter = express.Router();
 potluckRsvpRouter.use(express.json());
 
 potluckRsvpRouter.get("/:id/status/:status", (req, res) => {
-    let rsvps = samplePotluckRSVPs.filter(s => {
-        s._id.toString() == req.params.id && s.rsvp == req.params.status
-    })
-    res.status(200).send(rsvps)
+  let rsvps = samplePotluckRSVPs.filter((s) => {
+    return (
+      s.potluckId.toString() == req.params.id && s.rsvp == req.params.status
+    );
+  });
+  res.status(200).send(rsvps);
 });

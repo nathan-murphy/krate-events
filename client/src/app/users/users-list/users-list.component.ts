@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '../user.model';
+import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 
 @Component({
@@ -8,17 +6,10 @@ import { UserService } from '../user.service';
   templateUrl: 'users-list.component.html',
   styleUrls: ['users-list.component.css']
 })
-export class UsersListComponent implements OnInit {
-  allUsers: User[];
+export class UsersListComponent {
+  readonly users$ = this.usersService.getUsers();
+
   displayedColumns: string[] = ['fName', 'lName', 'email', 'action'];
 
   constructor(private usersService: UserService) { }
-
-  ngOnInit(): void {
-    this.fetchUsers();
-  }
-
-  private fetchUsers(): void {
-    this.allUsers= this.usersService.getUsers();
-  }
 }

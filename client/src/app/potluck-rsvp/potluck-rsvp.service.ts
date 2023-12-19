@@ -13,7 +13,7 @@ export class PotluckRSVPService {
       .get<PotluckRSVP[]>(
         `http://localhost:3000/api/potluck-rsvp/${id}/status/${status}`
       )
-      .subscribe((data) => {
+      .subscribe((data: PotluckRSVP[]) => {
         rsvpUpdated.next([...data]);
       });
     return rsvpUpdated.asObservable();

@@ -1,5 +1,5 @@
 <mat-list-item>
     <mat-icon matListItemIcon>{{ icon }}</mat-icon>
-    <div matListItemTitle>{{ user.fName }}</div>
+    <div matListItemTitle *ngIf="user$ | async as user">{{ user.fName }}</div>
     <div matListItemLine>{{ rsvp.recipe }}</div>
 </mat-list-item>

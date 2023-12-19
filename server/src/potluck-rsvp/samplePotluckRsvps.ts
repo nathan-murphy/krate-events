@@ -13,7 +13,6 @@ export const samplePotluckRSVPs = [
       rsvp: "no",
       recipe: "",
     },
-    
     {
       _id: 2,
       userId: 1236,
