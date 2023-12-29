@@ -1,7 +1,7 @@
 <mat-card *ngIf="vm$ | async as vm">
     <mat-card-header>
         <mat-card-subtitle>
-            <!-- {{potluck.dateAndTime.startDate}} -->
+            <!-- {{vm.potluck.dateAndTime.startDate}} -->
         </mat-card-subtitle>
         <mat-card-title class="mat-h1">
             {{vm.potluck.details.theme}}
@@ -11,7 +11,6 @@
         <p class="mat-body-1">
             {{vm.potluck.details.description}}
             <mat-divider></mat-divider>
-            <button mat-button color="accent" [routerLink]="['/potlucks/edit', vm.potluck._id]">Edit</button>
         </p>
         <h2 class="mat-h2">Responses</h2>
         <app-potluck-rsvp-list [rsvps]="vm.confirmed" [showBadge]=true [title]="'Confirmed'"></app-potluck-rsvp-list>
@@ -19,6 +18,7 @@
         <app-potluck-rsvp-list [rsvps]="vm.declined" [showBadge]=true [title]="'Declined'"></app-potluck-rsvp-list>
     </mat-card-content>
     <mat-card-actions>
-
+        <button mat-button color="accent" [routerLink]="['/potlucks/edit', vm.potluck._id]">Edit</button>
+        <button mat-button color="warn" (click)="onDelete(vm.potluck._id)">Delete</button>
     </mat-card-actions>
 </mat-card>

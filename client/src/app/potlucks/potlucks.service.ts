@@ -4,7 +4,6 @@ import { Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { Potluck } from "./potluck.model";
 
-
 @Injectable({ providedIn: "root" })
 export class PotlucksService {
   private allPotlucks: Potluck[] = [];
@@ -25,12 +24,10 @@ export class PotlucksService {
   addPotluck(potluckToAdd: Potluck) {
     this.httpClient
       .post("http://localhost:3000/api/potluck", potluckToAdd)
-      .subscribe({
-        complete: this.getPotlucks,
-      });
+      .subscribe({ complete: this.getPotlucks });
   }
 
-  getPotluck(id: number): Observable<Potluck> {
+  getPotluck(id: string): Observable<Potluck> {
     let potluckSubject = new Subject<Potluck>();
 
     this.httpClient
@@ -38,6 +35,12 @@ export class PotlucksService {
       .subscribe((data) => potluckSubject.next(data));
 
     return potluckSubject.asObservable();
+  }
+
+  deletePotluck(id: string) {
+    this.httpClient
+      .delete(`http://localhost:3000/api/potluck/${id}`)
+      .subscribe({ complete: this.getPotlucks });
   }
 
   getPotlucksUpdateListener() {

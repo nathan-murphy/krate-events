@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { map, switchMap, combineLatest } from "rxjs";
 import { PotlucksService } from "../potlucks.service";
 import { PotluckRSVPService } from "src/app/potluck-rsvp/potluck-rsvp.service";
@@ -39,8 +39,14 @@ export class PotluckViewComponent {
   );
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private potlucksService: PotlucksService,
     private potluckRSVPService: PotluckRSVPService
   ) {}
+
+  onDelete(id: string) {
+    this.potlucksService.deletePotluck(id)
+    this.router.navigate(['potlucks'])
+  }
 }

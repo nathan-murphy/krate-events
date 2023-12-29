@@ -1,11 +1,8 @@
 const express = require("express");
 const Potluck = require("../models/potluck");
-const samplePotlucks = require("./samplePotlucks");
 
 module.exports = potluckRouter = express.Router();
 potluckRouter.use(express.json());
-
-let allPotlucks = samplePotlucks;
 
 potluckRouter.get("/", (_, res) => {
   Potluck.find()
@@ -23,17 +20,19 @@ potluckRouter.get("/:id", (req, res) => {
   });
 });
 
+potluckRouter.delete("/:id", (req, res) => {
+  Potluck.deleteOne({ _id: req.params.id }).then(result => {
+    console.log(result)
+    res.status(200);
+  });
+});
+
 potluckRouter.post("/", (req, res) => {
   const potluck = new Potluck({
-    dateAndTime: {
-      startDate: req.body.dateAndTime.startDate,
-      startTime: req.body.dateAndTime.startTime,
-    },
+    dateAndTime: req.body.dateAndTime,
     address: req.body.address,
     details: req.body.details,
   });
   potluck.save();
-  console.log(potluck);
-  allPotlucks.push(req.body);
-  res.sendStatus(201);
+  res.status(201);
 });
