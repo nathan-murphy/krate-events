@@ -1,4 +1,4 @@
-export const samplePotlucks = [
+module.exports = samplePotlucks = [
   {
     _id: 1,
     dateAndTime: {

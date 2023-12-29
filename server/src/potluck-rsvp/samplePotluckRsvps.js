@@ -1,4 +1,4 @@
-export const samplePotluckRSVPs = [
+module.exports = samplePotluckRSVPs = [
     {
       _id: 0,
       userId: 1234,

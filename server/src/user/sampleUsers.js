@@ -1,4 +1,4 @@
-export const sampleUsers = [
+module.exports = sampleUsers = [
     {
       fName: "Beyonce",
       lName: "",

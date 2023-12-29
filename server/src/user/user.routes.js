@@ -1,9 +1,7 @@
-import * as express from "express";
-import * as mongodb from "mongodb";
-import { collections } from "../database";
-import { sampleUsers } from "./sampleUsers";
+const express = require("express");
+const sampleUsers = require("./sampleUsers");
 
-export const userRouter = express.Router();
+module.exports = userRouter = express.Router();
 userRouter.use(express.json());
 
 userRouter.get("/", async (_req, res) => {
@@ -22,7 +20,7 @@ userRouter.get("/:id", async (req, res) => {
     // const query = { _id: new mongodb.ObjectId(id) };
     // const user = await collections.users.findOne(query);
 
-    const user = sampleUsers.filter(u => id == u.id.toString())[0]
+    const user = sampleUsers.filter((u) => id == u.id.toString())[0];
 
     if (user) {
       res.status(200).send(user);

@@ -35,7 +35,7 @@ export class PotluckFormComponent implements OnInit {
   }
 
   onSubmitPotluck() {
-    let id: number = -1
+    let id: string = ''
     if(this.initialPotluck)
       id = this.initialPotluck._id
 

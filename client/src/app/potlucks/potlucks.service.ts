@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
+import { map } from "rxjs/operators";
 import { Potluck } from "./potluck.model";
+
 
 @Injectable({ providedIn: "root" })
 export class PotlucksService {

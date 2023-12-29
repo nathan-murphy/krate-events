@@ -1,11 +1,11 @@
-import * as dotenv from "dotenv";
-import cors from "cors";
-import express from "express";
-import { connectToDatabase } from "./database";
-import { userRouter } from "./user/user.routes";
-import { potluckRouter } from "./potluck/potluck.routes";
-import { potluckRsvpRouter } from "./potluck-rsvp/potluckRsvp.routes";
-import bodyParser from "body-parser";
+const dotenv = require("dotenv");
+const mongoose = require ("mongoose");
+const cors = require("cors");
+const express = require("express");
+const userRouter = require("./user/user.routes");
+const potluckRouter = require("./potluck/potluck.routes");
+const potluckRsvpRouter = require("./potluck-rsvp/potluckRsvp.routes");
+const bodyParser = require("body-parser");
 
 // Load environment variables from the .env file, where the ATLAS_URI is configured
 dotenv.config();
@@ -33,24 +33,20 @@ if (!APP_PORT) {
   process.exit(1);
 }
 
-connectToDatabase(MONGODB_URI, MONGODB_DBNAME)
+mongoose.connect(`${MONGODB_URI}/${MONGODB_DBNAME}`)
   .then(() => {
     const app = express();
+    app.use(cors());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(cors());
 
     app.use("/api/users", userRouter);
-
     app.use("/api/potluck", potluckRouter);
-
-    app.use("/api/potluck-rsvp", potluckRsvpRouter)
-
-    app.use(express.static("../dist"));
+    app.use("/api/potluck-rsvp", potluckRsvpRouter);
 
     // start the Express server
     app.listen(APP_PORT, () => {
       console.log(`Server running at http://localhost:${APP_PORT}...`);
     });
   })
-  .catch((error) => console.error(error));
+  .catch(error => console.log(error))

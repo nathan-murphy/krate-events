@@ -1,9 +1,7 @@
-import * as express from "express";
-import * as mongodb from "mongodb";
+const express = require("express");
+const samplePotluckRSVPs = require("./samplePotluckRsvps");
 
-import { samplePotluckRSVPs } from "./samplePotluckRsvps";
-
-export const potluckRsvpRouter = express.Router();
+module.exports = potluckRsvpRouter = express.Router();
 potluckRsvpRouter.use(express.json());
 
 potluckRsvpRouter.get("/:id/status/:status", (req, res) => {
