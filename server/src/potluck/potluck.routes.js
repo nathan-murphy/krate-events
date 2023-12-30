@@ -16,6 +16,15 @@ potluckRouter.get("/:id", (req, res) => {
   });
 });
 
+potluckRouter.put("/:id", (req, res) => {
+  const id = req.params.id;
+  const potluck = req.body;
+
+  Potluck.updateOne({ _id: id }, potluck)
+    .then((potluck) => res.status(200).send(potluck))
+    .catch((err) => res.status(400).send(err));
+});
+
 potluckRouter.delete("/:id", (req, res) => {
   Potluck.deleteOne({ _id: req.params.id }).then((result) => {
     console.log(result);

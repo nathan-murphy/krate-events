@@ -21,8 +21,8 @@ export class PotluckEditComponent {
   ) {}
 
   onPotluckEdit(potluckToEdit: Potluck) {
-    alert('edit receieved with id: ' + potluckToEdit._id)
-    // this.potlucksService.patchPotluck(potluckToEdit);
+    // alert('edit receieved with id: ' + potluckToEdit._id)
+    this.potlucksService.updatePotluck(potluckToEdit);
     this.router.navigate(["/potlucks", potluckToEdit._id]);
   }
 }

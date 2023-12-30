@@ -35,7 +35,6 @@ userRouter.put("/:id", (req, res) => {
 });
 
 userRouter.delete("/:id", (req, res) => {
-  console.log(`deleting: ${req.params.id}`);
   User.deleteOne({ _id: req.params.id })
     .then(() => User.find().then((docs) => res.status(202).send(docs)))
     .catch((err) => res.status(400).send(err));

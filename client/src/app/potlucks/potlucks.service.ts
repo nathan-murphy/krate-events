@@ -11,9 +11,11 @@ export class PotlucksService {
 
   constructor(private httpClient: HttpClient) {}
 
+  readonly url: string = "http://localhost:3000/api/potluck";
+
   getPotlucks(): Observable<Potluck[]> {
     this.httpClient
-      .get<Potluck[]>("http://localhost:3000/api/potluck")
+      .get<Potluck[]>(this.url)
       .subscribe((data) => {
         this.allPotlucks = data;
         this.potlucksUpdated.next([...this.allPotlucks]);
@@ -23,7 +25,7 @@ export class PotlucksService {
 
   addPotluck(potluckToAdd: Potluck) {
     this.httpClient
-      .post("http://localhost:3000/api/potluck", potluckToAdd)
+      .post(this.url, potluckToAdd)
       .subscribe({ complete: this.getPotlucks });
   }
 
@@ -31,7 +33,7 @@ export class PotlucksService {
     let potluckSubject = new Subject<Potluck>();
 
     this.httpClient
-      .get<Potluck>(`http://localhost:3000/api/potluck/${id}`)
+      .get<Potluck>(`${this.url}/${id}`)
       .subscribe((data) => potluckSubject.next(data));
 
     return potluckSubject.asObservable();
@@ -39,8 +41,16 @@ export class PotlucksService {
 
   deletePotluck(id: string) {
     this.httpClient
-      .delete(`http://localhost:3000/api/potluck/${id}`)
+      .delete(`${this.url}/${id}`)
       .subscribe({ complete: this.getPotlucks });
+  }
+
+  updatePotluck(potluck: Potluck): Observable<Potluck> {
+    let potluckSubject = new Subject<Potluck>();
+    this.httpClient
+      .put<Potluck>(`${this.url}/${potluck._id}`, potluck,)
+      .subscribe((potluck) => potluckSubject.next(potluck));
+    return potluckSubject.asObservable();
   }
 
   getPotlucksUpdateListener() {
