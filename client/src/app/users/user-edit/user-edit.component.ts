@@ -6,12 +6,7 @@ import { UserService } from "../user.service";
 
 @Component({
   selector: "app-user-edit.component.ts",
-  template: `
-    <app-user-form
-      *ngIf="user$ | async as user"
-      [initialUser]="user"
-    ></app-user-form>
-  `,
+  templateUrl: "user-edit.component.html",
 })
 export class UserEditComponent {
   readonly user$: Observable<User> = this.route.params.pipe(
@@ -24,16 +19,18 @@ export class UserEditComponent {
     private userService: UserService
   ) {}
 
-  // editUser(user: User) {
-  //   this.userService.updateUser(this.user.value._name || '', user)
-  //     .subscribe({
-  //       next: () => {
-  //         this.router.navigate(['/users']);
-  //       },
-  //       error: (error) => {
-  //         alert('Failed to update user');
-  //         console.error(error);
-  //       }
-  //     })
-  // }
+  onUserEdit(user: User) {
+    this.userService.updateUser(user).subscribe({
+      next: () => {
+        this.router.navigate(["/users"]);
+      },
+      complete: () => {
+        this.router.navigate(["/users"]);
+      },
+      error: (error) => {
+        alert("Failed to update user");
+        console.error(error);
+      },
+    });
+  }
 }

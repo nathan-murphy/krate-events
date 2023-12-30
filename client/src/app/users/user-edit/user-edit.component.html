@@ -1,0 +1,1 @@
+<app-user-form *ngIf="user$ | async as user" [initialUser]="user" (formSubmitted)="onUserEdit($event)"></app-user-form>

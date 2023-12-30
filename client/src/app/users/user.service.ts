@@ -35,10 +35,12 @@ export class UserService {
     return userSubject.asObservable();
   }
 
-  updateUser(id: string, user: User): Observable<string> {
-    return this.httpClient.put(`${this.url}/${id}`, user, {
-      responseType: "text",
-    });
+  updateUser(user: User): Observable<User> {
+    let userSubject = new Subject<User>();
+    this.httpClient
+      .put(`${this.url}/${user._id}`, user,)
+      .subscribe((user) => userSubject.next(user));
+    return userSubject.asObservable();
   }
 
   deleteUser(id: string): Observable<User[]> {

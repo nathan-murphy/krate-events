@@ -25,24 +25,13 @@ userRouter.post("/", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-userRouter.put("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const user = req.body;
-    const query = { _id: new mongodb.ObjectId(id) };
-    const result = await collections.users.updateOne(query, { $set: user });
+userRouter.put("/:id", (req, res) => {
+  const id = req.params.id;
+  const user = req.body;
 
-    if (result && result.matchedCount) {
-      res.status(200).send(`Updated an user: ID ${id}.`);
-    } else if (!result.matchedCount) {
-      res.status(404).send(`Failed to find an user: ID ${id}`);
-    } else {
-      res.status(304).send(`Failed to update an user: ID ${id}`);
-    }
-  } catch (error) {
-    console.error(error.message);
-    res.status(400).send(error.message);
-  }
+  User.updateOne({ _id: id }, user)
+    .then((user) => res.status(200).send(user))
+    .catch((err) => res.status(400).send(err));
 });
 
 userRouter.delete("/:id", (req, res) => {

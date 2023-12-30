@@ -20,16 +20,21 @@ export class UserFormComponent implements OnInit {
     email: ["", Validators.required],
   });
 
+  id: string = undefined;
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.initialUser != undefined) {
       this.updateProfileForm(this.initialUser);
+      this.id = this.initialUser._id;
     }
   }
 
   onSubmit() {
-    this.formSubmitted.emit(this.userProfileForm.value);
+    const eventData = this.userProfileForm.value;
+    eventData["_id"] = this.id;
+    this.formSubmitted.emit(eventData);
   }
 
   updateProfileForm(newUserData: User) {
