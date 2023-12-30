@@ -1,21 +1,21 @@
 module.exports = sampleUsers = [
     {
+      _id: 1234,
       fName: "Beyonce",
       lName: "",
       email: "bey@yahoo.com",
-      id: 1234,
     },
     {
+      _id: 1235,
       fName: "Santa",
       lName: "Claus",
       email: "jollyoldsaint@nick.com",
-      id: 1235,
     },
     {
+      _id: 1236,
       fName: "Dwayne",
       lName: "Johnson",
       email: "doyousmellwh@therockiscookin.com",
-      id: 1236,
     },
   ];
   

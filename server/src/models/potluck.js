@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const potluckSchema = mongoose.Schema({
   dateAndTime: {
     type: {
-      startDate: { type: String },
+      startDate: { type: Date },
       startTime: { type: String },
     },
   },

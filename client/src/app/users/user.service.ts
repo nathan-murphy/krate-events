@@ -7,43 +7,45 @@ import { User } from "./user.model";
   providedIn: "root",
 })
 export class UserService {
-  private url = "http://localhost:3000/api";
+  private url = "http://localhost:3000/api/users";
 
   constructor(private httpClient: HttpClient) {}
 
   getUsers(): Observable<User[]> {
     let usersSubject = new Subject<User[]>();
     this.httpClient
-      .get<User[]>(`${this.url}/users`)
-      .subscribe((users: User[]) => {
-        usersSubject.next(users);
-      });
+      .get<User[]>(`${this.url}`)
+      .subscribe((users: User[]) => usersSubject.next([...users]));
     return usersSubject.asObservable();
   }
 
   getUser(id: number): Observable<User> {
     let userSubject = new Subject<User>();
     this.httpClient
-      .get<User>(`${this.url}/users/${id}`)
+      .get<User>(`${this.url}/${id}`)
       .subscribe((user) => userSubject.next(user));
     return userSubject.asObservable();
   }
 
-  createUser(user: User): Observable<string> {
-    return this.httpClient.post(`${this.url}/users`, user, {
-      responseType: "text",
-    });
+  addUser(user: User) {
+    let userSubject = new Subject<User>();
+    this.httpClient
+      .post(`${this.url}`, user)
+      .subscribe((user) => userSubject.next(user));
+    return userSubject.asObservable();
   }
 
   updateUser(id: string, user: User): Observable<string> {
-    return this.httpClient.put(`${this.url}/users/${id}`, user, {
+    return this.httpClient.put(`${this.url}/${id}`, user, {
       responseType: "text",
     });
   }
 
-  deleteUser(id: string): Observable<string> {
-    return this.httpClient.delete(`${this.url}/users/${id}`, {
-      responseType: "text",
-    });
+  deleteUser(id: string): Observable<User[]> {
+    let usersSubject = new Subject<User[]>();
+    this.httpClient
+      .delete<User[]>(`${this.url}/${id}`)
+      .subscribe((users) => usersSubject.next([...users]));
+    return usersSubject.asObservable();
   }
 }

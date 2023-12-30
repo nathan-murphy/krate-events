@@ -30,13 +30,12 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     this.formSubmitted.emit(this.userProfileForm.value);
-    console.warn(this.userProfileForm.value);
   }
 
   updateProfileForm(newUserData: User) {
     this.userProfileForm.patchValue({
-      firstName: newUserData.fName,
-      lastName: newUserData.lName,
+      firstName: newUserData.firstName,
+      lastName: newUserData.lastName,
       email: newUserData.email,
     });
   }

@@ -6,12 +6,8 @@ potluckRouter.use(express.json());
 
 potluckRouter.get("/", (_, res) => {
   Potluck.find()
-    .then((documents) => {
-      res.status(200).send(documents);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    .then((docs) => res.status(200).send(docs))
+    .catch((err) => console.log(err));
 });
 
 potluckRouter.get("/:id", (req, res) => {
@@ -21,8 +17,8 @@ potluckRouter.get("/:id", (req, res) => {
 });
 
 potluckRouter.delete("/:id", (req, res) => {
-  Potluck.deleteOne({ _id: req.params.id }).then(result => {
-    console.log(result)
+  Potluck.deleteOne({ _id: req.params.id }).then((result) => {
+    console.log(result);
     res.status(200);
   });
 });

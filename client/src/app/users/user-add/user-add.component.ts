@@ -10,15 +10,9 @@ import { UserService } from "../user.service";
 export class UserAddComponent {
   constructor(private router: Router, private userService: UserService) {}
 
-  addUser(user: User) {
-    this.userService.createUser(user).subscribe({
-      next: () => {
-        this.router.navigate(["/users"]);
-      },
-      error: (error) => {
-        alert("Failed to create user");
-        console.error(error);
-      },
-    });
+  onAddUser(user: User) {
+    this.userService.addUser(user)
+
+    this.router.navigate(["/users"]);
   }
 }
