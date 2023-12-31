@@ -3,10 +3,10 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #mainMenu="matMenu">
-    <button mat-menu-item [routerLink]="['/potlucks']">Potlucks</button>
+    <button mat-menu-item routerLink="/potlucks">Potlucks</button>
     <mat-divider></mat-divider>
-    <button mat-menu-item [routerLink]="['/potlucks/new']">New Potluck</button>
-    <button mat-menu-item [routerLink]="['/users']">Manage Users</button>
+    <button mat-menu-item routerLink="/potlucks/new">New Potluck</button>
+    <button mat-menu-item routerLink="/users">Manage Users</button>
   </mat-menu>
   <a mat-button routerLink="/">KRATE.EVENTS</a>
   <span class="example-spacer"></span>

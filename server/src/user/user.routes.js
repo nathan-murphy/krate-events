@@ -1,5 +1,4 @@
 const express = require("express");
-const sampleUsers = require("./sampleUsers");
 const User = require("../models/user");
 
 module.exports = userRouter = express.Router();
@@ -27,7 +26,7 @@ userRouter.post("/", (req, res) => {
 
 userRouter.put("/:id", (req, res) => {
   const id = req.params.id;
-  const user = req.body;
+  const user = new User(req.body);
 
   User.updateOne({ _id: id }, user)
     .then((user) => res.status(200).send(user))

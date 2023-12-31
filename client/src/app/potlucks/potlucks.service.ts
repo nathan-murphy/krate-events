@@ -6,7 +6,6 @@ import { Potluck } from "./potluck.model";
 
 @Injectable({ providedIn: "root" })
 export class PotlucksService {
-  private allPotlucks: Potluck[] = [];
   private potlucksUpdated = new Subject<Potluck[]>();
 
   constructor(private httpClient: HttpClient) {}
@@ -17,8 +16,7 @@ export class PotlucksService {
     this.httpClient
       .get<Potluck[]>(this.url)
       .subscribe((data) => {
-        this.allPotlucks = data;
-        this.potlucksUpdated.next([...this.allPotlucks]);
+        this.potlucksUpdated.next([...data]);
       });
     return this.potlucksUpdated.asObservable();
   }
