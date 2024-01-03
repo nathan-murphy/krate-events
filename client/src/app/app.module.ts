@@ -51,10 +51,12 @@ import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.compo
 import { PotluckRSVPViewComponent } from "./potluck-rsvp/potluck-rsvp-view/potluck-rsvp-view.component";
 import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potluck-rsvp-list.component";
 import { PotluckRSVPEditDialog } from "./potluck-rsvp/potluck-rsvp-edit/potluck-rsvp-edit.dialog";
+import { LoginComponent } from "./users/login/login.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     UsersListComponent,
     UserFormComponent,
     UserAddComponent,

@@ -13,6 +13,7 @@ import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.compo
 import { PotluckAddComponent } from "./potlucks/potluck-add/potluck-add.component";
 import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.component";
 import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.component";
+import { LoginComponent } from "./users/login/login.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "potlucks", pathMatch: "full" },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: "udemyCourse", component: PostHomeComponent },
   { path: "events", component: EventsHomeComponent },
   { path: "events/new", component: AddEventComponent },
+  { path: "login", component: LoginComponent },
 ];
 
 @NgModule({
