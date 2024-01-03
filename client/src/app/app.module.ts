@@ -11,6 +11,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTableModule } from "@angular/material/table";
 import { MatListModule } from "@angular/material/list";
@@ -92,6 +93,7 @@ import { PotluckRSVPEditDialog } from "./potluck-rsvp/potluck-rsvp-edit/potluck-
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
