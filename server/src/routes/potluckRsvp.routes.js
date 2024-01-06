@@ -1,5 +1,5 @@
 const express = require("express");
-const samplePotluckRSVPs = require("./samplePotluckRsvps");
+const samplePotluckRSVPs = require("../potluck-rsvp/samplePotluckRsvps");
 
 module.exports = potluckRsvpRouter = express.Router();
 potluckRsvpRouter.use(express.json());

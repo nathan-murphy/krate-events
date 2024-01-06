@@ -2,9 +2,10 @@ const dotenv = require("dotenv");
 const mongoose = require ("mongoose");
 const cors = require("cors");
 const express = require("express");
-const userRouter = require("./user/user.routes");
-const potluckRouter = require("./potluck/potluck.routes");
-const potluckRsvpRouter = require("./potluck-rsvp/potluckRsvp.routes");
+const authRouter = require("./routes/auth.routes");
+const userRouter = require("./routes/user.routes");
+const potluckRouter = require("./routes/potluck.routes");
+const potluckRsvpRouter = require("./routes/potluckRsvp.routes");
 const bodyParser = require("body-parser");
 const checkAuth = require("./middleware/check-auth");
 
@@ -41,6 +42,9 @@ mongoose.connect(`${MONGODB_URI}/${MONGODB_DBNAME}`)
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
 
+    app.use("/api/auth", authRouter);
+    
+    app.use(checkAuth);
     app.use("/api/users", userRouter);
     app.use("/api/potluck", potluckRouter);
     app.use("/api/potluck-rsvp", potluckRsvpRouter);

@@ -20,3 +20,7 @@ a {
   text-decoration: none;
   color: black;
 }
+
+mat-spinner {
+  margin: 2rem auto;
+}

@@ -33,32 +33,6 @@ userRouter.post("/", (req, res) => {
   });
 });
 
-userRouter.post("/login", (req, res) => {
-  let fetchedUser;
-  User.findOne({ email: req.body.email })
-    .then((user) => {
-      if (!user) {
-        return res.status(401).json({ message: "auth failed" });
-      }
-      fetchedUser = user;
-      return bcrypt.compare(req.body.password, user.password);
-    })
-    .then((result) => {
-      if (!result) {
-        return res.status(402).json({ message: "auth failed" });
-      }
-      const token = jwt.sign(
-        { email: fetchedUser.email, id: fetchedUser._id },
-        process.env.JWT_TOKEN,
-        { expiresIn: "1h" }
-      );
-      res.status(200).json({ token: token });
-    })
-    .catch((err) => {
-      return res.status(400).send(err);
-    });
-});
-
 userRouter.put("/:id", (req, res) => {
   const id = req.params.id;
   const user = new User(req.body);
