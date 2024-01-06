@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 module.exports = userRouter = express.Router();
@@ -12,16 +13,22 @@ userRouter.get("/", (_, res) => {
 
 userRouter.get("/:id", (req, res) => {
   User.findOne({ _id: req.params.id })
-    .then((doc) => res.status(200).send(doc))
+    .then((doc) => {
+      console.log("sending data");
+      res.status(200).send(doc);
+    })
     .catch((err) => res.status(500).send(err));
 });
 
 userRouter.post("/", (req, res) => {
-  const user = new User(req.body);
-  user
-    .save()
-    .then(() => res.status(201))
-    .catch((err) => res.status(500).send(err));
+  bcrypt.hash(req.body.password, 13).then((hash) => {
+    const user = new User(req.body);
+    user.password = hash;
+    user
+      .save()
+      .then(() => res.status(201).send(user))
+      .catch((err) => res.status(500).send(err));
+  });
 });
 
 userRouter.put("/:id", (req, res) => {

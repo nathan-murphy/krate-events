@@ -11,8 +11,8 @@ export class UserAddComponent {
   constructor(private router: Router, private userService: UserService) {}
 
   onAddUser(user: User) {
-    this.userService.addUser(user)
-
-    this.router.navigate(["/users"]);
+    this.userService
+      .addUser(user)
+      .subscribe((_) => this.router.navigate(["/users"]));
   }
 }
