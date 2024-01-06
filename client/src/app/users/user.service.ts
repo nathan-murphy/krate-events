@@ -43,6 +43,12 @@ export class UserService {
     return userSubject.asObservable();
   }
 
+  loginUser(email: string, password: string) {
+    this.httpClient
+      .post(`${this.url}/login`, {email: email, password: password})
+      .subscribe(response => console.log(response));
+  }
+
   deleteUser(id: string): Observable<User[]> {
     let usersSubject = new Subject<User[]>();
     this.httpClient
