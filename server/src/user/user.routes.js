@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
+
 module.exports = userRouter = express.Router();
 userRouter.use(express.json());
 
@@ -14,10 +15,7 @@ userRouter.get("/", (_, res) => {
 
 userRouter.get("/:id", (req, res) => {
   User.findOne({ _id: req.params.id })
-    .then((doc) => {
-      console.log("sending data");
-      res.status(200).send(doc);
-    })
+    .then((doc) => res.status(200).send(doc))
     .catch((err) => res.status(500).send(err));
 });
 
@@ -36,7 +34,6 @@ userRouter.post("/", (req, res) => {
 });
 
 userRouter.post("/login", (req, res) => {
-  console.log(req.body)
   let fetchedUser;
   User.findOne({ email: req.body.email })
     .then((user) => {
@@ -52,7 +49,7 @@ userRouter.post("/login", (req, res) => {
       }
       const token = jwt.sign(
         { email: fetchedUser.email, id: fetchedUser._id },
-        "krate-murphington-events",
+        process.env.JWT_TOKEN,
         { expiresIn: "1h" }
       );
       res.status(200).json({ token: token });

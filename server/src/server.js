@@ -6,6 +6,7 @@ const userRouter = require("./user/user.routes");
 const potluckRouter = require("./potluck/potluck.routes");
 const potluckRsvpRouter = require("./potluck-rsvp/potluckRsvp.routes");
 const bodyParser = require("body-parser");
+const checkAuth = require("./middleware/check-auth");
 
 // Load environment variables from the .env file, where the ATLAS_URI is configured
 dotenv.config();

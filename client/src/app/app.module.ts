@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconModule } from "@angular/material/icon";
@@ -52,6 +52,7 @@ import { PotluckRSVPViewComponent } from "./potluck-rsvp/potluck-rsvp-view/potlu
 import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potluck-rsvp-list.component";
 import { PotluckRSVPEditDialog } from "./potluck-rsvp/potluck-rsvp-edit/potluck-rsvp-edit.dialog";
 import { LoginComponent } from "./users/login/login.component";
+import { UserInterceptor } from "./users/user-interceptor";
 
 @NgModule({
   declarations: [
@@ -105,7 +106,7 @@ import { LoginComponent } from "./users/login/login.component";
     NgxMaterialTimepickerModule,
     ReactiveFormsModule,
   ],
-  providers: [EventsService, PotlucksService],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

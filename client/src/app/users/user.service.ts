@@ -7,9 +7,14 @@ import { User } from "./user.model";
   providedIn: "root",
 })
 export class UserService {
+  private token: string;
   private url = "http://localhost:3000/api/users";
 
   constructor(private httpClient: HttpClient) {}
+
+  getToken(): string {
+    return this.token;
+  }
 
   getUsers(): Observable<User[]> {
     let usersSubject = new Subject<User[]>();
@@ -45,8 +50,8 @@ export class UserService {
 
   loginUser(email: string, password: string) {
     this.httpClient
-      .post(`${this.url}/login`, {email: email, password: password})
-      .subscribe(response => console.log(response));
+      .post<{token: string}>(`${this.url}/login`, {email: email, password: password})
+      .subscribe(response => this.token = response.token);
   }
 
   deleteUser(id: string): Observable<User[]> {
