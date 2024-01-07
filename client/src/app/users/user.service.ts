@@ -19,7 +19,7 @@ export class UserService {
     return usersSubject.asObservable();
   }
 
-  getUser(id: number): Observable<User> {
+  getUser(id: string): Observable<User> {
     let userSubject = new Subject<User>();
     this.httpClient
       .get<User>(`${this.url}/${id}`)

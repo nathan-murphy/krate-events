@@ -1,7 +1,6 @@
 export interface PotluckRSVP {
-  _id?: number;
-  userId: number;
-  potluckId: number;
-  rsvp: string;
-  recipe: string;
+  _id: string
+  userId: string,
+  rsvp: string,
+  recipe: string,
 }

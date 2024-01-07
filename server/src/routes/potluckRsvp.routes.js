@@ -13,12 +13,12 @@ potluckRsvpRouter.get("/:potluckId/status/:status", (req, res) => {
     } else {
       fetchedRsvps = doc.rsvps.filter((rsvp) => req.params.status == rsvp.rsvp);
     }
-    builtRsvps = [];
+    const builtRsvps = [];
     fetchedRsvps.forEach(userId => {
       builtRsvps.push({
         userId: userId,
         rsvp: req.params.status,
-        potluckId: req.params.potluckId
+        recipe: ''
       })
     });
     res.status(200).send(builtRsvps);
