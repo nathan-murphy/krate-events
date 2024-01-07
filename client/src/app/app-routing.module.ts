@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { LoginComponent } from "./users/login/login.component";
+import { LoginComponent } from "./auth/login/login.component";
 
-import { AuthGuard } from "./users/auth.guard";
+import { AuthGuard } from "./auth/auth.guard";
 import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.component";
 import { PotluckAddComponent } from "./potlucks/potluck-add/potluck-add.component";
 import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.component";

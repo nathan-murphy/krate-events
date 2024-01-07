@@ -41,18 +41,16 @@ import { PostHomeComponent } from "./posts/post-home/post-home.component";
 import { AppComponent } from "./app.component";
 import { EventsHomeComponent } from "./events/events-home/events-home.component";
 import { AddEventComponent } from "./events/add-event/add-event.component";
-import { EventsService } from "./events/events.service";
 import { PotluckFormComponent } from "./potlucks/potluck-form/potluck-form.component";
 import { PotluckAddComponent } from "./potlucks/potluck-add/potluck-add.component";
 import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.component";
-import { PotlucksService } from "./potlucks/potlucks.service";
 import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.component";
 import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.component";
 import { PotluckRSVPViewComponent } from "./potluck-rsvp/potluck-rsvp-view/potluck-rsvp-view.component";
 import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potluck-rsvp-list.component";
 import { PotluckRSVPEditDialog } from "./potluck-rsvp/potluck-rsvp-edit/potluck-rsvp-edit.dialog";
-import { LoginComponent } from "./users/login/login.component";
-import { UserInterceptor } from "./users/user-interceptor";
+import { LoginComponent } from "./auth/login/login.component";
+import { AuthInterceptor } from "./auth/auth-interceptor";
 
 @NgModule({
   declarations: [
@@ -106,7 +104,7 @@ import { UserInterceptor } from "./users/user-interceptor";
     NgxMaterialTimepickerModule,
     ReactiveFormsModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
