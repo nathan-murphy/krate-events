@@ -13,3 +13,11 @@ input {
 button {
   margin: 0 0.5rem;
 }
+
+.invite-list {
+  margin: 12px auto;
+  overflow: auto;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+}

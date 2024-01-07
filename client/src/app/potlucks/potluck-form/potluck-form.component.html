@@ -39,6 +39,16 @@
                     </mat-form-field>
                 </p>
             </div>
+
+            <mat-card-subtitle>Who's invited?</mat-card-subtitle>
+            <section class="invite-list">
+                <ng-container *ngFor="let user of users; let i = index" formArrayName="invited">
+                    <mat-checkbox formControlName={{i}}>
+                        {{user.firstName}} {{user.lastName}}
+                    </mat-checkbox>
+                </ng-container>
+            </section>
+
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-actions align="end">
@@ -52,3 +62,5 @@
         </mat-card-actions>
     </form>
 </mat-card>
+
+<pre>{{potluckForm.value | json}}</pre>

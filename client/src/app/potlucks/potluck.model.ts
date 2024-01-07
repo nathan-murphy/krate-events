@@ -12,6 +12,7 @@ export interface Potluck {
     theme: string;
     description: string;
   };
+  invited?: [string];
   hosts?: [User];
   rsvps?: [PotluckRSVP];
 }
