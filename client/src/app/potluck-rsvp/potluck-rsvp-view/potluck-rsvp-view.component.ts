@@ -19,7 +19,8 @@ export class PotluckRSVPViewComponent implements OnChanges {
 
   constructor(
     private userService: UserService,
-    private potluckRSVPService: PotluckRSVPService) {}
+    private potluckRSVPService: PotluckRSVPService
+  ) {}
 
   ngOnChanges(): void {
     this.user$ = this.userService.getUser(this.rsvp.userId);

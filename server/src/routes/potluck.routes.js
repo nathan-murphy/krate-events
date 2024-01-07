@@ -1,10 +1,8 @@
 const express = require("express");
 const Potluck = require("../models/potluck");
-const checkAuth = require("../middleware/check-auth");
 
 module.exports = potluckRouter = express.Router();
 potluckRouter.use(express.json());
-potluckRouter.use(checkAuth);
 
 potluckRouter.get("/", (_, res) => {
   Potluck.find()
@@ -36,6 +34,7 @@ potluckRouter.post("/", (req, res) => {
     dateAndTime: req.body.dateAndTime,
     address: req.body.address,
     details: req.body.details,
+    invited: req.body.invited,
   });
   potluck.save();
   res.status(201);

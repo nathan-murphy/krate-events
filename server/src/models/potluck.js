@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
 
+const potluckRsvpSchema = mongoose.Schema({
+  userId: { type: String },
+  rsvp: { type: String },
+  recipe: { type: String },
+});
+
 const potluckSchema = mongoose.Schema({
   dateAndTime: {
     type: {
@@ -14,8 +20,8 @@ const potluckSchema = mongoose.Schema({
       description: { type: String },
     },
   },
-  hosts: { type: String },
-  rsvps: { type: String },
+  invited: { type: [String] },
+  rsvps: { type: [potluckRsvpSchema] },
 });
 
 module.exports = mongoose.model("Potluck", potluckSchema);

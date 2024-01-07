@@ -1,14 +1,26 @@
 const express = require("express");
-const samplePotluckRSVPs = require("../potluck-rsvp/samplePotluckRsvps");
+const Potluck = require("../models/potluck");
 
 module.exports = potluckRsvpRouter = express.Router();
 potluckRsvpRouter.use(express.json());
 
-potluckRsvpRouter.get("/:id/status/:status", (req, res) => {
-  let rsvps = samplePotluckRSVPs.filter((s) => {
-    return (
-      s.potluckId.toString() == req.params.id && s.rsvp == req.params.status
-    );
+potluckRsvpRouter.get("/:potluckId/status/:status", (req, res) => {
+  let fetchedRsvps = [];
+
+  Potluck.findOne({ _id: req.params.potluckId }).then((doc) => {
+    if (req.params.status == "pending") {
+      fetchedRsvps = doc.invited;
+    } else {
+      fetchedRsvps = doc.rsvps.filter((rsvp) => req.params.status == rsvp.rsvp);
+    }
+    builtRsvps = [];
+    fetchedRsvps.forEach(userId => {
+      builtRsvps.push({
+        userId: userId,
+        rsvp: req.params.status,
+        potluckId: req.params.potluckId
+      })
+    });
+    res.status(200).send(builtRsvps);
   });
-  res.status(200).send(rsvps);
 });
