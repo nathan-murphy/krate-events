@@ -5,14 +5,23 @@ import { Observable, Subject } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class PotluckRSVPService {
+  url = "http://localhost:3000/api/potluck-rsvp";
   constructor(private readonly httpClient: HttpClient) {}
 
-  getRsvp(id: number, status: string = ""): Observable<PotluckRSVP[]> {
-    let rsvpUpdated = new Subject<PotluckRSVP[]>();
+  getRsvp(potluckId: string, status: string = ""): Observable<PotluckRSVP[]> {
+    const rsvpUpdated = new Subject<PotluckRSVP[]>();
     this.httpClient
-      .get<PotluckRSVP[]>(
-        `http://localhost:3000/api/potluck-rsvp/${id}/status/${status}`
-      )
+      .get<PotluckRSVP[]>(`${this.url}/${potluckId}/status/${status}`)
+      .subscribe((data: PotluckRSVP[]) => {
+        rsvpUpdated.next([...data]);
+      });
+    return rsvpUpdated.asObservable();
+  }
+
+  updateRsvp(rsvp: PotluckRSVP, potluckId: string) {
+    const rsvpUpdated = new Subject<PotluckRSVP[]>();
+    this.httpClient
+      .put<PotluckRSVP[]>(`${this.url}/${potluckId}`, rsvp)
       .subscribe((data: PotluckRSVP[]) => {
         rsvpUpdated.next([...data]);
       });

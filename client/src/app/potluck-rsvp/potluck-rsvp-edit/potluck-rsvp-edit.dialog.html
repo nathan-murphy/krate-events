@@ -1,6 +1,6 @@
 <div class="krate-dialog">
   <h1 mat-dialog-title>RSVP for Potluck</h1>
-  <form [formGroup]="rsvpForm">
+  <form [formGroup]="rsvpForm" (submit)="onSubmitRsvp()">
     <div mat-dialog-content>
       <label id="rsvp-radio-group-label">Are you coming?</label>
       <mat-radio-group aria-labelledby="rsvp-radio-group-label" class="rsvp-radio-group" formControlName="rsvp">

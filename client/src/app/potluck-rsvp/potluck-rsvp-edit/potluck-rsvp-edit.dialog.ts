@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormRecord, FormControl, Validators } from "@angular/forms";
 import { PotluckRSVP } from "../potluck-rsvp.model";
+import { PotluckRSVPService } from "../potluck-rsvp.service";
 
 @Component({
   selector: "app-potluck-rsvp-edit",
@@ -12,7 +13,21 @@ export class PotluckRSVPEditDialog implements OnInit {
   public rsvpForm: FormRecord;
   private recipeText: string = "";
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: PotluckRSVP) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public potluckId: string,
+    private potluckRsvpService: PotluckRSVPService
+  ) {}
+
+  onSubmitRsvp() {
+    // alert(JSON.stringify({... this.rsvpForm.value, potluckId: this.potluckId}));
+    const rsvp: PotluckRSVP = {
+      _id: '', // will come from db
+      userId: '', // will come from request header
+      rsvp: this.rsvpForm.value["rsvp"],
+      recipe: this.rsvpForm.value["recipe"],
+    };
+    this.potluckRsvpService.updateRsvp(rsvp, this.potluckId);
+  }
 
   ngOnInit(): void {
     this.rsvpForm = new FormRecord({});

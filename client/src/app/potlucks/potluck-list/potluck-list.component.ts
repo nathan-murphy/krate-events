@@ -19,9 +19,9 @@ export class PotluckListComponent {
     public dialog: MatDialog
   ) {}
 
-  onAttending() {
+  onAttending(potluckId: string) {
     this.dialog.open(PotluckRSVPEditDialog, {
-      data: undefined,
+      data: potluckId,
     });
     this.rsvpIcon = "check_circle";
   }
