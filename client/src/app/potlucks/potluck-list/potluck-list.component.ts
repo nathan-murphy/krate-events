@@ -3,6 +3,8 @@ import { MatDialog } from "@angular/material/dialog";
 
 import { PotlucksService } from "../potlucks.service";
 import { PotluckRSVPEditDialog } from "src/app/potluck-rsvp/potluck-rsvp-edit/potluck-rsvp-edit.dialog";
+import { PotluckRSVP } from "src/app/potluck-rsvp/potluck-rsvp.model";
+import { PotluckRSVPService } from "src/app/potluck-rsvp/potluck-rsvp.service";
 
 @Component({
   selector: "app-potluck-list",
@@ -16,6 +18,7 @@ export class PotluckListComponent {
 
   constructor(
     private readonly potlucksService: PotlucksService,
+    private potluckRsvpService: PotluckRSVPService,
     public dialog: MatDialog
   ) {}
 
@@ -26,7 +29,14 @@ export class PotluckListComponent {
     this.rsvpIcon = "check_circle";
   }
 
-  onNotAttending() {
+  onNotAttending(potluckId: string) {
+    const rsvp: PotluckRSVP = {
+      _id: '', // will come from db
+      userId: '', // will come from request header
+      rsvp: 'no',
+      recipe: '',
+    };
+    this.potluckRsvpService.updateRsvp(rsvp, potluckId)
     this.rsvpIcon = "cancel";
   }
 }

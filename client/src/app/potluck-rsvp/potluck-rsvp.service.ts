@@ -19,11 +19,11 @@ export class PotluckRSVPService {
   }
 
   updateRsvp(rsvp: PotluckRSVP, potluckId: string) {
-    const rsvpUpdated = new Subject<PotluckRSVP[]>();
+    const rsvpUpdated = new Subject<PotluckRSVP>();
     this.httpClient
-      .put<PotluckRSVP[]>(`${this.url}/${potluckId}`, rsvp)
-      .subscribe((data: PotluckRSVP[]) => {
-        rsvpUpdated.next([...data]);
+      .put<PotluckRSVP>(`${this.url}/${potluckId}`, rsvp)
+      .subscribe((data: PotluckRSVP) => {
+        rsvpUpdated.next(data);
       });
     return rsvpUpdated.asObservable();
   }

@@ -8,11 +8,7 @@ potluckRouter.use(express.json());
 
 potluckRouter.get("/", (req, res) => {
   Potluck.find(getVisiblePotluckQuery(req.userData.userId))
-    .then((docs) => {
-      console.log(getVisiblePotluckQuery(req.userData.userId));
-      console.log(docs);
-      res.status(200).send(docs);
-    })
+    .then((docs) => res.status(200).send(docs))
     .catch((err) => console.log(err));
 });
 
@@ -38,12 +34,20 @@ potluckRouter.delete("/:id", (req, res) => {
     hosts: req.userData.userId,
   };
   Potluck.deleteOne(query).then((result) => {
-    if (result.deletedCount > 0) res.status(200).send("Deleted");
+    if (result.deletedCount > 0) res.status(200).send({message: "Deleted"});
     else res.status(401).send("Not Authorized");
   });
 });
 
 potluckRouter.post("/", (req, res) => {
+  const pendingRSVPs = [];
+  req.body.invited.forEach(invitedUserId => {
+    pendingRSVPs.push({
+      userId: invitedUserId,
+      rsvp: 'pending',
+      recipe: ''
+    })
+  })
   const potluck = new Potluck({
     dateAndTime: req.body.dateAndTime,
     address: req.body.address,
@@ -51,6 +55,7 @@ potluckRouter.post("/", (req, res) => {
     createdBy: req.userData.userId,
     invited: req.body.invited,
     hosts: req.body.hosts,
+    rsvps: pendingRSVPs,
   });
   potluck.save();
   console.log(req.userData);

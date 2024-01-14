@@ -7,36 +7,30 @@ potluckRsvpRouter.use(express.json());
 potluckRsvpRouter.get("/:potluckId/status/:status", (req, res) => {
   let fetchedRsvps = [];
 
-  Potluck.findOne({ _id: req.params.potluckId }).then((doc) => {
-    if (req.params.status == "pending") {
-      fetchedRsvps = doc.invited;
-    } else {
-      fetchedRsvps = doc.rsvps.filter((rsvp) => req.params.status == rsvp.rsvp);
-    }
-    const builtRsvps = [];
-    fetchedRsvps.forEach((userId) => {
-      builtRsvps.push({
-        userId: userId,
-        rsvp: req.params.status,
-        recipe: "",
-      });
-    });
-    res.status(200).send(builtRsvps);
+  Potluck.findOne({ _id: req.params.potluckId }).then((potluck) => {
+    fetchedRsvps = potluck.rsvps.filter(
+      (rsvp) => req.params.status == rsvp.rsvp
+    );
+    res.status(200).send(fetchedRsvps);
   });
 });
 
 potluckRsvpRouter.put("/:potluckId", (req, res) => {
-  // todo: get the user ID of the person submitted this request from the Authentication header
-  const newRsvp = { userId: "", ...req.body };
+  const newRsvp = {
+    userId: req.userData.userId,
+    rsvp: req.body.rsvp,
+    recipe: req.body.recipe,
+  };
   const filter = { _id: req.params.potluckId };
 
   // todo: update the RSVP array
-  Potluck.findOne(filter).then((doc) => {
-    console.log(newRsvp)
-    doc.rsvps = [newRsvp]
-    console.log(JSON.stringify(doc))
-    Potluck.updateOne(filter, doc).catch(err => console.log(err))
+  Potluck.findOne(filter).then((potluck) => {
+    const rsvpIndex = potluck.rsvps.findIndex(
+      (rsvp) => rsvp.userId == newRsvp.userId
+    );
+    potluck.rsvps[rsvpIndex] = newRsvp;
+    Potluck.updateOne(filter, potluck)
+      .then((_) => res.status(200).send(newRsvp))
+      .catch((err) => console.log(err));
   });
-
-  res.status(200).send(newRsvp);
 });

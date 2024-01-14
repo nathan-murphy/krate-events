@@ -23,7 +23,7 @@
                 </button>
                 <mat-menu #rsvpMenu="matMenu">
                     <button mat-menu-item (click)="onAttending(potluck._id)">Attending</button>
-                    <button mat-menu-item (click)="onNotAttending()">Not Attending</button>
+                    <button mat-menu-item (click)="onNotAttending(potluck._id)">Not Attending</button>
                 </mat-menu>
             </mat-action-row>
         </mat-card>
