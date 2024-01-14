@@ -44,8 +44,8 @@ mongoose.connect(`${MONGODB_URI}/${MONGODB_DBNAME}`)
 
     app.use("/api/auth", authRouter);
     
-    app.use(checkAuth);
     app.use("/api/users", userRouter);
+    app.use(checkAuth);
     app.use("/api/potluck", potluckRouter);
     app.use("/api/potluck-rsvp", potluckRsvpRouter);
 

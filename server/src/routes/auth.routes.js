@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
-
 module.exports = authRouter = express.Router();
 authRouter.use(express.json());
 
@@ -22,11 +21,13 @@ authRouter.post("/login", (req, res) => {
         return res.status(402).json({ message: "auth failed" });
       }
       const token = jwt.sign(
-        { email: fetchedUser.email, id: fetchedUser._id },
+        { email: fetchedUser.email, userId: fetchedUser._id },
         process.env.JWT_TOKEN,
         { expiresIn: "1h" }
       );
-      res.status(200).json({ token: token, expiresIn: 3600 });
+      res
+        .status(200)
+        .json({ token: token, expiresIn: 3600, userId: fetchedUser._id });
     })
     .catch((err) => {
       return res.status(400).send(err);

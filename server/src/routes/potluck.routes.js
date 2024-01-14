@@ -1,5 +1,6 @@
 const express = require("express");
 const Potluck = require("../models/potluck");
+const User = require("../models/user");
 
 module.exports = potluckRouter = express.Router();
 potluckRouter.use(express.json());
@@ -20,13 +21,21 @@ potluckRouter.put("/:id", (req, res) => {
   const id = req.params.id;
   const potluck = new Potluck(req.body);
 
-  Potluck.updateOne({ _id: id }, potluck)
+  Potluck.updateOne({ _id: id, hosts: req.userData.userId }, potluck)
     .then((potluck) => res.status(200).send(potluck))
     .catch((err) => res.status(400).send(err));
 });
 
 potluckRouter.delete("/:id", (req, res) => {
-  Potluck.deleteOne({ _id: req.params.id }).then((_) => res.status(200));
+  const id = req.params.id;
+  const query = {
+    _id: id,
+    hosts: req.userData.userId,
+  };
+  Potluck.deleteOne(query).then((result) => {
+    if (result.deletedCount > 0) res.status(200).send('Deleted');
+    else res.status(401).send('Not Authorized');
+  });
 });
 
 potluckRouter.post("/", (req, res) => {
@@ -34,8 +43,11 @@ potluckRouter.post("/", (req, res) => {
     dateAndTime: req.body.dateAndTime,
     address: req.body.address,
     details: req.body.details,
+    createdBy: req.userData.userId,
     invited: req.body.invited,
+    hosts: req.body.hosts,
   });
   potluck.save();
+  console.log(req.userData);
   res.status(201);
 });

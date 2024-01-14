@@ -40,12 +40,21 @@
                 </p>
             </div>
 
+            <mat-card-subtitle>Who's hosting?</mat-card-subtitle>
+            <section class="hosts-list">
+                <ng-container *ngFor="let user of usersCanHost; let i = index" formArrayName="hosts">
+                    <p><mat-checkbox formControlName={{i}}>
+                            {{user.firstName}} {{user.lastName}}
+                        </mat-checkbox></p>
+                </ng-container>
+            </section>
+
             <mat-card-subtitle>Who's invited?</mat-card-subtitle>
             <section class="invite-list">
                 <ng-container *ngFor="let user of users; let i = index" formArrayName="invited">
-                    <mat-checkbox formControlName={{i}}>
-                        {{user.firstName}} {{user.lastName}}
-                    </mat-checkbox>
+                    <p><mat-checkbox formControlName={{i}}>
+                            {{user.firstName}} {{user.lastName}}
+                        </mat-checkbox></p>
                 </ng-container>
             </section>
 

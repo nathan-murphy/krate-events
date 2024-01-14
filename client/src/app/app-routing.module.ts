@@ -11,17 +11,18 @@ import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.compo
 import { UsersListComponent } from "./users/users-list/users-list.component";
 import { UserAddComponent } from "./users/user-add/user-add.component";
 import { UserEditComponent } from "./users/user-edit/user-edit.component";
+import { CanHostGuard } from "./auth/can-host.guard";
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "potlucks", component: PotluckListComponent, canActivate: [AuthGuard] },
-  { path: "potlucks/new", component: PotluckAddComponent, canActivate: [AuthGuard] },
-  { path: "potlucks/:id", component: PotluckViewComponent, canActivate: [AuthGuard] },
-  { path: "potlucks/edit/:id", component: PotluckEditComponent, canActivate: [AuthGuard] },
-  { path: "users", component: UsersListComponent, canActivate: [AuthGuard] },
-  { path: "users/new", component: UserAddComponent, canActivate: [AuthGuard] },
-  { path: "users/edit/:id", component: UserEditComponent, canActivate: [AuthGuard] },
+  { path: "potlucks/new", component: PotluckAddComponent, canActivate: [AuthGuard, CanHostGuard] },
+  { path: "potlucks/:id", component: PotluckViewComponent, canActivate: [AuthGuard, CanHostGuard] },
+  { path: "potlucks/edit/:id", component: PotluckEditComponent, canActivate: [AuthGuard, CanHostGuard] },
+  { path: "users", component: UsersListComponent, canActivate: [AuthGuard, CanHostGuard] },
+  { path: "users/new", component: UserAddComponent }, //canActivate: [AuthGuard] },
+  { path: "users/edit/:id", component: UserEditComponent, canActivate: [AuthGuard, CanHostGuard] },
 ];
 
 @NgModule({

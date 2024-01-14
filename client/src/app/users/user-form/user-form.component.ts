@@ -18,7 +18,8 @@ export class UserFormComponent implements OnInit {
     firstName: ["", Validators.required],
     lastName: ["", Validators.required],
     email: ["", [Validators.email, Validators.required]],
-    password: ["", Validators.required]
+    password: ["", Validators.required],
+    permissions: this.fb.group({ canHost: [false, Validators.required] }),
   });
 
   id: string = undefined;
@@ -33,16 +34,15 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const eventData = this.userProfileForm.value;
+    // cannot use the normal .value here because controls in formGroup permissions may be disabled.
+    // I don't know how to tell Angular Reactive Form that I will not ever disable it, so for now
+    // just get the raw value instead.
+    const eventData = this.userProfileForm.getRawValue();
     eventData["_id"] = this.id;
     this.formSubmitted.emit(eventData);
   }
 
   updateProfileForm(newUserData: User) {
-    this.userProfileForm.patchValue({
-      firstName: newUserData.firstName,
-      lastName: newUserData.lastName,
-      email: newUserData.email,
-    });
+    this.userProfileForm.patchValue(newUserData);
   }
 }

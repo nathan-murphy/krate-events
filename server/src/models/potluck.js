@@ -20,7 +20,9 @@ const potluckSchema = mongoose.Schema({
       description: { type: String },
     },
   },
-  invited: { type: [String] },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  hosts: { type: [mongoose.Schema.Types.ObjectId], ref: "User" },
+  invited: { type: [mongoose.Schema.Types.ObjectId], ref: "User" },
   rsvps: { type: [potluckRsvpSchema] },
 });
 

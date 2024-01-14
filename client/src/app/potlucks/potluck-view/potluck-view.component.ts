@@ -46,7 +46,8 @@ export class PotluckViewComponent {
   ) {}
 
   onDelete(id: string) {
-    this.potlucksService.deletePotluck(id)
-    this.router.navigate(['potlucks'])
+    this.potlucksService.deletePotluck(id).subscribe(result => {
+      this.router.navigate(['potlucks'])
+    })
   }
 }

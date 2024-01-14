@@ -12,6 +12,11 @@
             {{vm.potluck.details.description}}
             <mat-divider></mat-divider>
         </p>
+        <p>Created by: {{vm.potluck.createdByAsUser.firstName}} {{vm.potluck.createdByAsUser.lastName}}</p>
+        <p>Hosted by: </p>
+        <ul>
+            <li *ngFor="let host of vm.potluck.hostsAsUsers">{{host.firstName}}</li>
+        </ul>
         <h2 class="mat-h2">Responses</h2>
         <app-potluck-rsvp-list [rsvps]="vm.confirmed" [showBadge]=true [title]="'Confirmed'"></app-potluck-rsvp-list>
         <app-potluck-rsvp-list [rsvps]="vm.pending" [showBadge]=true [title]="'Pending'"></app-potluck-rsvp-list>
