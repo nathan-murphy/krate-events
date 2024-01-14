@@ -4,5 +4,5 @@ export interface User {
   lastName?: string;
   email?: string;
   password?: string;
-  permissions: { canHost: boolean };
+  permissions: { canHost: boolean; isAdmin: boolean };
 }

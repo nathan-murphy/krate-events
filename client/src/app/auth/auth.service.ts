@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   getPermissions() {
-    let permissions = new Subject<{ canHost: boolean }>();
+    let permissions = new Subject<{ canHost: boolean, isAdmin: boolean }>();
     this.userService
       .getUser(this.currentUserId)
       .subscribe((user) => permissions.next(user.permissions));

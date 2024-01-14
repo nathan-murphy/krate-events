@@ -19,7 +19,10 @@ export class UserFormComponent implements OnInit {
     lastName: ["", Validators.required],
     email: ["", [Validators.email, Validators.required]],
     password: ["", Validators.required],
-    permissions: this.fb.group({ canHost: [false, Validators.required] }),
+    permissions: this.fb.group({
+      canHost: [false, Validators.required],
+      isAdmin: [false, Validators.required],
+    }),
   });
 
   id: string = undefined;
