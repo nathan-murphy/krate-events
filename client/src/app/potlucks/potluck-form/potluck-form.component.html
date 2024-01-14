@@ -40,7 +40,14 @@
                 </p>
             </div>
 
-            <mat-card-subtitle>Who's hosting?</mat-card-subtitle>
+            <mat-card-subtitle>Who's hosting?
+                <button type='button' mat-button color="primary" (click)="selectAllHosting()">
+                    select all
+                </button>
+                <button type='button' mat-button color="primary" (click)="selectNoneHosting()">
+                    select none
+                </button>
+            </mat-card-subtitle>
             <section class="hosts-list">
                 <ng-container *ngFor="let user of usersCanHost; let i = index" formArrayName="hosts">
                     <p><mat-checkbox formControlName={{i}}>
@@ -49,7 +56,15 @@
                 </ng-container>
             </section>
 
-            <mat-card-subtitle>Who's invited?</mat-card-subtitle>
+            <mat-card-subtitle>Who's invited?
+                <button type='button' mat-button color="primary" (click)="selectAllInvited()">
+                    select all
+                </button>
+                <button type='button' mat-button color="primary" (click)="selectNoneInvited()">
+                    select none
+                </button>
+            </mat-card-subtitle>
+
             <section class="invite-list">
                 <ng-container *ngFor="let user of users; let i = index" formArrayName="invited">
                     <p><mat-checkbox formControlName={{i}}>

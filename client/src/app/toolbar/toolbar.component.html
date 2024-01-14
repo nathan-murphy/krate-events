@@ -8,7 +8,8 @@
     <button mat-menu-item routerLink="/potlucks/new">New Potluck</button>
     <button mat-menu-item routerLink="/users">Manage Users</button>
   </mat-menu>
-  <a mat-button [routerLink]="isAuthenticated ? 'potlucks' : '/' ">KRATE.EVENTS</a>
+  <span>Hello, {{user.firstName}}</span>
+  <!-- <a mat-button [routerLink]="isAuthenticated ? 'potlucks' : '/' ">KRATE.EVENTS</a> -->
   <span class="example-spacer"></span>
   <a mat-button routerLink="/login" *ngIf="!isAuthenticated">Login</a>
   <button mat-button (click)="onLogout()" *ngIf="isAuthenticated">Logout</button>

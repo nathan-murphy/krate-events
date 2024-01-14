@@ -95,6 +95,23 @@ export class PotluckFormComponent implements OnInit, OnDestroy {
     this.formHostsCheckboxSubscription.unsubscribe();
   }
 
+  selectAllInvited() {
+    const invitedList = <FormArray>this.potluckForm.get("invited");
+    invitedList.setValue(Array(invitedList.length).fill(true));
+  }
+  selectNoneInvited() {
+    const invitedList = <FormArray>this.potluckForm.get("invited");
+    invitedList.setValue(Array(invitedList.length).fill(false));
+  }
+  selectAllHosting() {
+    const hostingList = <FormArray>this.potluckForm.get("hosts");
+    hostingList.setValue(Array(hostingList.length).fill(true));
+  }
+  selectNoneHosting() {
+    const hostingList = <FormArray>this.potluckForm.get("hosts");
+    hostingList.setValue(Array(hostingList.length).fill(false));
+  }
+
   onSubmitPotluck() {
     let id: string = "";
     if (this.initialPotluck) id = this.initialPotluck._id;

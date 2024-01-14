@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth/auth.service";
+import { User } from "../users/user.model";
+import { UserService } from "../users/user.service";
 
 @Component({
   selector: "app-toolbar",
@@ -8,11 +10,24 @@ import { AuthService } from "../auth/auth.service";
 })
 export class ToolbarComponent implements OnInit {
   isAuthenticated: boolean = false;
-
-  constructor(private authService: AuthService) {}
+  user: User = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    permissions: {canHost: false, isAdmin: false}
+  }
+  
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.getIsAuthenticated();
+    this.userService
+      .getUser(this.authService.getCurrentUserId())
+      .subscribe((user) => (this.user = user));
     this.authService
       .getAuthStatusListener()
       .subscribe((status) => (this.isAuthenticated = status));
