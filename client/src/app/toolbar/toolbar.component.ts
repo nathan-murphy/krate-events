@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth/auth.service";
-import { User } from "../users/user.model";
 import { UserService } from "../users/user.service";
+import { User } from "../users/user.model";
 
 @Component({
   selector: "app-toolbar",
@@ -11,15 +11,14 @@ import { UserService } from "../users/user.service";
 export class ToolbarComponent implements OnInit {
   isAuthenticated: boolean = false;
   private emptyUser: User = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    permissions: {canHost: false, isAdmin: false}
-  }
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    permissions: { canHost: false, isAdmin: false },
+  };
   user: User = this.emptyUser;
 
-  
   constructor(
     private authService: AuthService,
     private userService: UserService
@@ -27,19 +26,15 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.getIsAuthenticated();
-    this.userService
-      .getUser(this.authService.getCurrentUserId())
-      .subscribe((user) => (this.user = user));
-    this.authService
-      .getAuthStatusListener()
-      .subscribe((status) => {
-        this.isAuthenticated = status;
-        if(!status) {
-          this.user = this.emptyUser;
-        } else {
-          
-        }
-      });
+    this.userService.getCurrentUser().subscribe((user) => (this.user = user));
+    this.authService.getAuthStatusListener().subscribe((status) => {
+      this.isAuthenticated = status;
+      if (status)
+        this.userService
+          .getCurrentUser()
+          .subscribe((user) => (this.user = user));
+      else this.user = this.emptyUser;
+    });
   }
 
   onLogout() {

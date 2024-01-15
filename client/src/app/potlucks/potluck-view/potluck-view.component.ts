@@ -31,7 +31,7 @@ export class PotluckViewComponent {
     ),
     this.route.params.pipe(
       switchMap((params) =>
-        this.userService.getUser(this.authService.getCurrentUserId())
+        this.userService.getCurrentUser()
       )
     ),
   ]).pipe(

@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
-import { UserService } from "../users/user.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -14,11 +13,7 @@ export class AuthService {
   private authStatusListener = new Subject<boolean>();
   private tokenTimer;
 
-  constructor(
-    private httpClient: HttpClient,
-    private router: Router,
-    private userService: UserService
-  ) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   getToken(): string {
     return this.token;
@@ -30,14 +25,6 @@ export class AuthService {
 
   getCurrentUserId(): string {
     return this.currentUserId;
-  }
-
-  getPermissions() {
-    let permissions = new Subject<{ canHost: boolean, isAdmin: boolean }>();
-    this.userService
-      .getUser(this.currentUserId)
-      .subscribe((user) => permissions.next(user.permissions));
-    return permissions.asObservable();
   }
 
   getAuthStatusListener(): Observable<boolean> {
@@ -59,8 +46,8 @@ export class AuthService {
           const expiresInSeconds = response.expiresIn;
           this.setAuthTimer(expiresInSeconds);
           this.isAuthenticated = true;
-          this.authStatusListener.next(true);
           this.currentUserId = response.userId;
+          this.authStatusListener.next(true);
           const now = new Date();
           const expirationDate = new Date(
             now.getTime() + expiresInSeconds * 1000

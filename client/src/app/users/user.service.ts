@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { User } from "./user.model";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +10,10 @@ import { User } from "./user.model";
 export class UserService {
   private url = "http://localhost:3000/api/users";
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService
+  ) {}
 
   getUsers(): Observable<User[]> {
     let usersSubject = new Subject<User[]>();
@@ -25,6 +29,17 @@ export class UserService {
       .get<User>(`${this.url}/${id}`)
       .subscribe((user) => userSubject.next(user));
     return userSubject.asObservable();
+  }
+
+  getCurrentUser(): Observable<User> {
+    return this.getUser(this.authService.getCurrentUserId());
+  }
+
+  getCurrentUserPermissions(): Observable<{canHost: boolean, isAdmin: boolean}> {
+    let permissions = new Subject<{ canHost: boolean; isAdmin: boolean }>();
+    this.getCurrentUser()
+      .subscribe((user) => permissions.next(user.permissions));
+    return permissions.asObservable();
   }
 
   addUser(user: User) {

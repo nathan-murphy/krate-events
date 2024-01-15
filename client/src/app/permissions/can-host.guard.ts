@@ -7,7 +7,7 @@ import {
 } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import { inject } from "@angular/core";
-import { AuthService } from "../auth/auth.service";
+import { UserService } from "../users/user.service";
 
 export const CanHostGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
@@ -18,8 +18,8 @@ export const CanHostGuard: CanActivateFn = (
   | boolean
   | UrlTree => {
   let hasPermission = new Subject<boolean>();
-  inject(AuthService)
-    .getPermissions()
+  inject(UserService)
+    .getCurrentUserPermissions()
     .subscribe((permissions) => hasPermission.next(permissions.canHost));
   return hasPermission.asObservable();
 };
