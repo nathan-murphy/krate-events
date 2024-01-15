@@ -10,13 +10,15 @@ import { UserService } from "../users/user.service";
 })
 export class ToolbarComponent implements OnInit {
   isAuthenticated: boolean = false;
-  user: User = {
+  private emptyUser: User = {
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     permissions: {canHost: false, isAdmin: false}
   }
+  user: User = this.emptyUser;
+
   
   constructor(
     private authService: AuthService,
@@ -30,7 +32,14 @@ export class ToolbarComponent implements OnInit {
       .subscribe((user) => (this.user = user));
     this.authService
       .getAuthStatusListener()
-      .subscribe((status) => (this.isAuthenticated = status));
+      .subscribe((status) => {
+        this.isAuthenticated = status;
+        if(!status) {
+          this.user = this.emptyUser;
+        } else {
+          
+        }
+      });
   }
 
   onLogout() {

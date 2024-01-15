@@ -31,6 +31,7 @@ export class PotluckFormComponent implements OnInit, OnDestroy {
 
   users: Array<User>;
   usersCanHost: Array<User>;
+  numInvited: number = 0;
   formInvitedCheckboxSubscription: Subscription;
   formHostsCheckboxSubscription: Subscription;
 
@@ -72,6 +73,7 @@ export class PotluckFormComponent implements OnInit, OnDestroy {
             ),
             { emitEvent: false }
           );
+          this.numInvited = invitedList.value.filter(v => v).length
         }
       );
 

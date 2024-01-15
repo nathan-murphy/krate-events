@@ -56,6 +56,7 @@
                 </ng-container>
             </section>
 
+            
             <mat-card-subtitle>Who's invited?
                 <button type='button' mat-button color="primary" (click)="selectAllInvited()">
                     select all
@@ -76,6 +77,7 @@
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-actions align="end">
+            <span>Total Invited: {{numInvited}}</span>
             <button mat-raised-button color="primary" type="submit" [disabled]="potluckForm.invalid">
                 Submit
             </button>
@@ -86,5 +88,3 @@
         </mat-card-actions>
     </form>
 </mat-card>
-
-<pre>{{potluckForm.value | json}}</pre>
