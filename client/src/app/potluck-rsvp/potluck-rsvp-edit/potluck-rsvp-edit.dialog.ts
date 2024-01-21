@@ -19,7 +19,6 @@ export class PotluckRSVPEditDialog implements OnInit {
   ) {}
 
   onSubmitRsvp() {
-    // alert(JSON.stringify({... this.rsvpForm.value, potluckId: this.potluckId}));
     const rsvp: PotluckRSVP = {
       _id: '', // will come from db
       userId: '', // will come from request header

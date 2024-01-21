@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const potluckRsvpSchema = mongoose.Schema({
-  userId: { type: String },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   rsvp: { type: String },
   recipe: { type: String },
 });

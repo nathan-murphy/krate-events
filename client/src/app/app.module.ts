@@ -18,6 +18,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatRadioModule } from "@angular/material/radio";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -95,6 +96,7 @@ import { AuthInterceptor } from "./auth/auth-interceptor";
     MatMenuModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,

@@ -52,10 +52,6 @@ export class PotluckFormComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
   ngOnInit() {
-    if (this.initialPotluck != undefined) {
-      this.potluckForm.patchValue(this.initialPotluck);
-    }
-
     this.userService.getUsers().subscribe((fetchedUsers) => {
       this.users = fetchedUsers;
       this.usersCanHost = fetchedUsers.filter(
@@ -73,7 +69,7 @@ export class PotluckFormComponent implements OnInit, OnDestroy {
             ),
             { emitEvent: false }
           );
-          this.numInvited = invitedList.value.filter(v => v).length
+          this.numInvited = invitedList.value.filter((v) => v).length;
         }
       );
 
@@ -89,6 +85,18 @@ export class PotluckFormComponent implements OnInit, OnDestroy {
           );
         }
       );
+
+      if (this.initialPotluck != undefined) {
+        this.initialPotluck.invited = invitedList.value.map(
+          (_, i: number) =>
+            this.initialPotluck.invited.indexOf(this.users[i]._id) >= 0
+        );
+        this.initialPotluck.hosts = hostsList.value.map(
+          (_, i: number) =>
+            this.initialPotluck.hosts.indexOf(this.usersCanHost[i]._id) >= 0
+        );
+        this.potluckForm.patchValue(this.initialPotluck);
+      }
     });
   }
 

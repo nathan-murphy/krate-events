@@ -31,12 +31,12 @@ export class PotluckListComponent {
 
   onNotAttending(potluckId: string) {
     const rsvp: PotluckRSVP = {
-      _id: '', // will come from db
-      userId: '', // will come from request header
-      rsvp: 'no',
-      recipe: '',
+      _id: "", // will come from db
+      userId: "", // will come from request header
+      rsvp: "no",
+      recipe: "",
     };
-    this.potluckRsvpService.updateRsvp(rsvp, potluckId)
+    this.potluckRsvpService.updateRsvp(rsvp, potluckId);
     this.rsvpIcon = "cancel";
   }
 }
