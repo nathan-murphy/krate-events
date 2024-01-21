@@ -1,8 +1,10 @@
 const express = require("express");
 const Potluck = require("../models/potluck");
+const checkAuth = require("../middleware/check-auth");
 
 module.exports = potluckRsvpRouter = express.Router();
 potluckRsvpRouter.use(express.json());
+potluckRsvpRouter.use(checkAuth)
 
 potluckRsvpRouter.get("/:potluckId/status/:status", (req, res) => {
   let fetchedRsvps = [];

@@ -43,12 +43,16 @@ mongoose
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
 
+    potluckRsvpRouter.use(checkAuth);
     app.use("/api/auth", authRouter);
-
     app.use("/api/users", userRouter);
-    app.use(checkAuth);
     app.use("/api/potluck", potluckRouter);
     app.use("/api/potluck-rsvp", potluckRsvpRouter);
+
+    app.use("/", express.static(__dirname + "/angular"));
+    app.use("/*", (_, res) =>
+      res.sendFile(path.join(__dirname + "/angular"))
+    );
 
     // start the Express server
     app.listen(APP_PORT, () => {
