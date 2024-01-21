@@ -2,10 +2,11 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
+import { environment } from "../../environments/environment";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
-  private url = "http://localhost:3000/api/auth";
+  private API_URL = environment.apiUrl + "/auth";
 
   private token: string;
   private isAuthenticated: boolean = false;
@@ -34,7 +35,7 @@ export class AuthService {
   loginUser(email: string, password: string) {
     this.httpClient
       .post<{ token: string; expiresIn: number; userId: string }>(
-        `${this.url}/login`,
+        `${this.API_URL}/login`,
         {
           email: email,
           password: password,

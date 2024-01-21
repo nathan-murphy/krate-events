@@ -3,12 +3,14 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { User } from "./user.model";
 import { AuthService } from "../auth/auth.service";
+import { environment } from "../../environments/environment";
+
 
 @Injectable({
   providedIn: "root",
 })
 export class UserService {
-  private url = "http://localhost:3000/api/users";
+  private API_URL = environment.apiUrl + "/users";
 
   constructor(
     private httpClient: HttpClient,
@@ -18,7 +20,7 @@ export class UserService {
   getUsers(): Observable<User[]> {
     let usersSubject = new Subject<User[]>();
     this.httpClient
-      .get<User[]>(`${this.url}`)
+      .get<User[]>(`${this.API_URL}`)
       .subscribe((users: User[]) => usersSubject.next([...users]));
     return usersSubject.asObservable();
   }
@@ -26,7 +28,7 @@ export class UserService {
   getUser(id: string): Observable<User> {
     let userSubject = new Subject<User>();
     this.httpClient
-      .get<User>(`${this.url}/${id}`)
+      .get<User>(`${this.API_URL}/${id}`)
       .subscribe((user) => userSubject.next(user));
     return userSubject.asObservable();
   }
@@ -45,7 +47,7 @@ export class UserService {
   addUser(user: User) {
     let userSubject = new Subject<User>();
     this.httpClient
-      .post<User>(`${this.url}`, user)
+      .post<User>(`${this.API_URL}`, user)
       .subscribe((result) => userSubject.next(result));
     return userSubject.asObservable();
   }
@@ -53,7 +55,7 @@ export class UserService {
   updateUser(user: User): Observable<User> {
     let userSubject = new Subject<User>();
     this.httpClient
-      .put<User>(`${this.url}/${user._id}`, user)
+      .put<User>(`${this.API_URL}/${user._id}`, user)
       .subscribe((result) => userSubject.next(result));
     return userSubject.asObservable();
   }
@@ -61,7 +63,7 @@ export class UserService {
   deleteUser(id: string): Observable<User[]> {
     let usersSubject = new Subject<User[]>();
     this.httpClient
-      .delete<User[]>(`${this.url}/${id}`)
+      .delete<User[]>(`${this.API_URL}/${id}`)
       .subscribe((results) => usersSubject.next([...results]));
     return usersSubject.asObservable();
   }

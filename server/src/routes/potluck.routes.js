@@ -7,7 +7,6 @@ potluckRouter.use(express.json());
 potluckRouter.use(checkAuth)
 
 potluckRouter.get("/", (req, res) => {
-  console.log(req.userData)
   Potluck.find(getVisiblePotluckQuery(req.userData.userId))
     .then((docs) => res.status(200).send(docs))
     .catch((err) => console.log(err));

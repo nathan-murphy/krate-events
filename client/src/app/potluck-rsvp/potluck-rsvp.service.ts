@@ -2,16 +2,17 @@ import { Injectable } from "@angular/core";
 import { PotluckRSVP } from "./potluck-rsvp.model";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
+import { environment } from "../../environments/environment";
 
 @Injectable({ providedIn: "root" })
 export class PotluckRSVPService {
-  url = "http://localhost:3000/api/potluck-rsvp";
+  private API_URL = environment.apiUrl + "/potluck-rsvp";
   constructor(private readonly httpClient: HttpClient) {}
 
   getRsvp(potluckId: string, status: string = ""): Observable<PotluckRSVP[]> {
     const rsvpUpdated = new Subject<PotluckRSVP[]>();
     this.httpClient
-      .get<PotluckRSVP[]>(`${this.url}/${potluckId}/status/${status}`)
+      .get<PotluckRSVP[]>(`${this.API_URL}/${potluckId}/status/${status}`)
       .subscribe((data: PotluckRSVP[]) => {
         rsvpUpdated.next([...data]);
       });
@@ -21,7 +22,7 @@ export class PotluckRSVPService {
   updateRsvp(rsvp: PotluckRSVP, potluckId: string) {
     const rsvpUpdated = new Subject<PotluckRSVP>();
     this.httpClient
-      .put<PotluckRSVP>(`${this.url}/${potluckId}`, rsvp)
+      .put<PotluckRSVP>(`${this.API_URL}/${potluckId}`, rsvp)
       .subscribe((data: PotluckRSVP) => {
         rsvpUpdated.next(data);
       });
