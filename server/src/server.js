@@ -51,10 +51,9 @@ mongoose
     app.use("/api/potluck-rsvp", potluckRsvpRouter);
 
     app.use("/", express.static(__dirname + "angular"));
-    app.get("*", (req, res) => {
-      console.log(req);
-      res.sendFile(path.join(__dirname, "angular", "index.html"));
-    });
+    app.get("*", (req, res) =>
+      res.sendFile(path.join(__dirname, "angular", "index.html"))
+    );
 
     app.listen(APP_PORT, () => {
       console.log(`Server running at http://localhost:${APP_PORT}...`);
