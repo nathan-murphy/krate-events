@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { PotluckRSVP } from "./potluck-rsvp.model";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
-import { environment } from "../../environments/environment";
+import { environment } from "../../environment/environment";
 
 @Injectable({ providedIn: "root" })
 export class PotluckRSVPService {

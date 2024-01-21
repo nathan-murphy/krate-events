@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { User } from "./user.model";
 import { AuthService } from "../auth/auth.service";
-import { environment } from "../../environments/environment";
+import { environment } from "../../environment/environment";
 
 
 @Injectable({

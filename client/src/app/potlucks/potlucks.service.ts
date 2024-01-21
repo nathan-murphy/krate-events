@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { Potluck } from "./potluck.model";
 import { UserService } from "../users/user.service";
-import { environment } from "../../environments/environment";
+import { environment } from "../../environment/environment";
 
 @Injectable({ providedIn: "root" })
 export class PotlucksService {
