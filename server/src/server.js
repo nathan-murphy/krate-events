@@ -1,5 +1,5 @@
 const dotenv = require("dotenv");
-const mongoose = require ("mongoose");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const express = require("express");
 const authRouter = require("./routes/auth.routes");
@@ -35,7 +35,8 @@ if (!APP_PORT) {
   process.exit(1);
 }
 
-mongoose.connect(`${MONGODB_URI}/${MONGODB_DBNAME}`)
+mongoose
+  .connect(`${MONGODB_URI}/${MONGODB_DBNAME}`)
   .then(() => {
     const app = express();
     app.use(cors());
@@ -43,7 +44,7 @@ mongoose.connect(`${MONGODB_URI}/${MONGODB_DBNAME}`)
     app.use(bodyParser.urlencoded({ extended: false }));
 
     app.use("/api/auth", authRouter);
-    
+
     app.use("/api/users", userRouter);
     app.use(checkAuth);
     app.use("/api/potluck", potluckRouter);
@@ -54,4 +55,7 @@ mongoose.connect(`${MONGODB_URI}/${MONGODB_DBNAME}`)
       console.log(`Server running at http://localhost:${APP_PORT}...`);
     });
   })
-  .catch(error => console.log(error))
+  .catch((error) => {
+    console.log(`${MONGODB_URI}/${MONGODB_DBNAME}`);
+    console.log(error);
+  });
