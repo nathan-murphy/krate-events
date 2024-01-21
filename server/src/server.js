@@ -56,7 +56,6 @@ mongoose
       res.sendFile(path.join(__dirname, "angular", "index.html"));
     });
 
-    // start the Express server
     app.listen(APP_PORT, () => {
       console.log(`Server running at http://localhost:${APP_PORT}...`);
     });
