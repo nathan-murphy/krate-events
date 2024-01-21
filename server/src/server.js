@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const express = require("express");
+const path = require("path");
 const authRouter = require("./routes/auth.routes");
 const userRouter = require("./routes/user.routes");
 const potluckRouter = require("./routes/potluck.routes");
@@ -50,9 +51,10 @@ mongoose
     app.use("/api/potluck-rsvp", potluckRsvpRouter);
 
     app.use("/", express.static(__dirname + "/angular"));
-    app.use("/*", (_, res) =>
-      res.sendFile(path.join(__dirname + "/angular"))
-    );
+    app.use("/*", (req, res) => {
+      console.log(req);
+      res.sendFile(path.join(__dirname, "angular", "index.html"));
+    });
 
     // start the Express server
     app.listen(APP_PORT, () => {
