@@ -50,9 +50,10 @@ mongoose
     app.use("/api/potluck", potluckRouter);
     app.use("/api/potluck-rsvp", potluckRsvpRouter);
 
-    app.use("/", express.static(__dirname + "angular"));
+    var staticPath = path.join(__dirname, "angular");
+    app.use("/", express.static(staticPath));
     app.get("*", (req, res) =>
-      res.sendFile(path.join(__dirname, "angular", "index.html"))
+      res.sendFile(path.join(staticPath, "index.html"))
     );
 
     app.listen(APP_PORT, () => {
