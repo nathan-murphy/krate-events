@@ -1,2 +1,2 @@
 cd /var/node/krate-events
-ng build --configuration=production
+sudo ng build --configuration=production

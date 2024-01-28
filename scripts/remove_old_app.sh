@@ -1,1 +1,1 @@
-rm -rf /var/node/krate-events/server/src
+sudo rm -rf /var/node/krate-events/server/src
