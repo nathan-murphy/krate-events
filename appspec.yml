@@ -9,6 +9,9 @@ files:
 hooks:
   BeforeInstall:
     - location: scripts/remove_old_app.sh
+      timeout: 300
+      runas: bitnami
+  AfterInstall:
     - location: scripts/build_angular.sh
       timeout: 300
       runas: bitnami
