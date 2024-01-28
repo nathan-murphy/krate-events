@@ -6,3 +6,13 @@ files:
     destination: /var/node/krate-events/server
   - source: client
     destination: /var/node/krate-events/client
+hooks:
+  BeforeInstall:
+    - location: scripts/remove_old_app.sh
+    - location: scripts/build_angular.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_server.sh
+      timeout: 300
+      runas: root

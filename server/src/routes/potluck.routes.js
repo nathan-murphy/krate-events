@@ -58,7 +58,6 @@ potluckRouter.post("/", (req, res) => {
     rsvps: pendingRSVPs,
   });
   potluck.save();
-  console.log(req.userData);
   res.status(201);
 });
 
