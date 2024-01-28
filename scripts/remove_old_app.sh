@@ -1,2 +1,2 @@
-cd /var/node/krate-events/sevrer/src
+cd /var/node/krate-events/server/src
 rm -rf .
