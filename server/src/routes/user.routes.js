@@ -32,12 +32,17 @@ userRouter.post("/", (req, res) => {
 });
 
 userRouter.put("/:id", (req, res) => {
-  const id = req.params.id;
-  const user = new User(req.body);
-
-  User.updateOne({ _id: id }, user)
-    .then((user) => res.status(200).send(user))
-    .catch((err) => res.status(400).send(err));
+  bcrypt.hash(req.body.password, 3).then((hash) => {
+    const id = req.params.id;
+    const user = new User(req.body);
+    user.password = hash;
+    User.updateOne({_id: id}, user)
+      .then(() => {
+        user.password = null;
+        res.status(201).send(user);
+      })
+      .catch((err) => res.status(500).send(err));
+  });
 });
 
 userRouter.delete("/:id", (req, res) => {
