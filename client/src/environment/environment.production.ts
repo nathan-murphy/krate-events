@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://krate.events:3000/api'
+    apiUrl: 'http://krate.events/api'
 }
