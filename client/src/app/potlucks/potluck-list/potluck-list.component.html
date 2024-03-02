@@ -14,9 +14,9 @@
             <mat-card-content>
                 <p class="mat-body-1">{{potluck.details.description}}</p>
             </mat-card-content>
-            <mat-action-row align="end">
-                <mat-divider></mat-divider>
-                <!-- <button mat-button color="primary">RSVP</button> -->
+            <mat-divider></mat-divider>
+            <mat-card-actions align="end">
+                <a [routerLink]="[potluck._id]" mat-button><mat-icon>event</mat-icon>DETAILS</a>
                 <button mat-button [matMenuTriggerFor]="rsvpMenu" color="primary">
                     <mat-icon>{{rsvpIcon}}</mat-icon>
                     RSVP
@@ -25,10 +25,10 @@
                     <button mat-menu-item (click)="onAttending(potluck._id)">Attending</button>
                     <button mat-menu-item (click)="onNotAttending(potluck._id)">Not Attending</button>
                 </mat-menu>
-            </mat-action-row>
+            </mat-card-actions>
         </mat-card>
-        <p class="info-text mat-body-1" *ngIf="potlucks.length == 0"> No potlucks added yet</p>
     </div>
+    <p class="info-text mat-body-1" *ngIf="potlucks.length == 0">No potlucks added yet</p>
 </ng-container>
 
 <ng-template #showSpinner>
