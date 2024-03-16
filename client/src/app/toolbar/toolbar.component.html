@@ -5,8 +5,8 @@
   <mat-menu #mainMenu="matMenu">
     <button mat-menu-item routerLink="/potlucks">Potlucks</button>
     <mat-divider></mat-divider>
-    <button mat-menu-item routerLink="/potlucks/new">New Potluck</button>
-    <button mat-menu-item routerLink="/users">Manage Users</button>
+    <button *ngIf="user.permissions.canHost" mat-menu-item routerLink="/potlucks/new">New Potluck</button>
+    <button *ngIf="user.permissions.isAdmin" mat-menu-item routerLink="/users">Manage Users</button>
   </mat-menu>
   <span *ngIf="user.firstName != ''">Hello, {{user.firstName}}</span>
   <!-- <a mat-button [routerLink]="isAuthenticated ? 'potlucks' : '/' ">KRATE.EVENTS</a> -->
