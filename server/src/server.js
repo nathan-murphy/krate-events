@@ -9,11 +9,13 @@ const potluckRouter = require("./routes/potluck.routes");
 const potluckRsvpRouter = require("./routes/potluckRsvp.routes");
 const bodyParser = require("body-parser");
 const checkAuth = require("./middleware/check-auth");
+const https = require("https");
+const fs = require("fs");
 
 // Load environment variables from the .env file, where the ATLAS_URI is configured
 dotenv.config();
 
-const { MONGODB_DBNAME, MONGODB_URI, APP_PORT } = process.env;
+const { MONGODB_DBNAME, MONGODB_URI, APP_PORT, PRIVKEY, CERT } = process.env;
 
 if (!MONGODB_URI) {
   console.error(
@@ -36,6 +38,15 @@ if (!APP_PORT) {
   process.exit(1);
 }
 
+useHttps = false;
+
+if (!PRIVKEY || !CERT) {
+  console.warn("No private key found, using non-secure server");
+} else {
+  useHttps = true;
+  const options = {};
+}
+
 mongoose
   .connect(`${MONGODB_URI}/${MONGODB_DBNAME}`)
   .then(() => {
@@ -56,9 +67,23 @@ mongoose
       res.sendFile(path.join(staticPath, "index.html"))
     );
 
-    app.listen(APP_PORT, () => {
-      console.log(`Server running at http://localhost:${APP_PORT}...`);
-    });
+    if (useHttps) {
+      https
+        .createServer(
+          {
+            key: fs.readFileSync(PRIVKEY),
+            cert: fs.readFileSync(CERT),
+          },
+          app
+        )
+        .listen(443, () =>
+          console.log(`Https server running at http://localhost:443...`)
+        );
+    } else {
+      app.listen(APP_PORT, () => {
+        console.log(`Server running at http://localhost:${APP_PORT}...`);
+      });
+    }
   })
   .catch((error) => {
     console.log(`${MONGODB_URI}/${MONGODB_DBNAME}`);
