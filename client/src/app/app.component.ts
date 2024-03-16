@@ -11,7 +11,7 @@ import { AuthService } from "./auth/auth.service";
   `,
 })
 export class AppComponent implements OnInit {
-  title = "client";
+  title = "Kristen & Nate's Events";
 
   constructor(private authService: AuthService) {}
 
