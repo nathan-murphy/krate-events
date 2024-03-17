@@ -11,14 +11,14 @@ authRouter.post("/login", (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ message: "auth failed" });
+        return res.status(401).json({ message: "We don't recognize the email address given." });
       }
       fetchedUser = user;
       return bcrypt.compare(req.body.password, user.password);
     })
     .then((result) => {
       if (!result) {
-        return res.status(402).json({ message: "auth failed" });
+        return res.status(401).json({ message: "Wrong password!" });
       }
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },

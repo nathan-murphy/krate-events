@@ -12,9 +12,11 @@ export class AuthService {
   private isAuthenticated: boolean = false;
   private currentUserId: string = "";
   private authStatusListener = new Subject<boolean>();
+  private errorMessageListener = new Subject<string>();
+
   private tokenTimer;
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   getToken(): string {
     return this.token;
@@ -32,6 +34,10 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
+  getErrorMessageListener(): Observable<string> {
+    return this.errorMessageListener.asObservable();
+  }
+
   loginUser(email: string, password: string) {
     this.httpClient
       .post<{ token: string; expiresIn: number; userId: string }>(
@@ -41,22 +47,29 @@ export class AuthService {
           password: password,
         }
       )
-      .subscribe((response) => {
-        this.token = response.token;
-        if (this.token) {
-          const expiresInSeconds = response.expiresIn;
-          this.setAuthTimer(expiresInSeconds);
-          this.isAuthenticated = true;
-          this.currentUserId = response.userId;
-          this.authStatusListener.next(true);
-          const now = new Date();
-          const expirationDate = new Date(
-            now.getTime() + expiresInSeconds * 1000
-          );
-          this.saveAuthData(this.token, expirationDate, this.currentUserId);
-          this.router.navigate(["/potlucks"]);
-        }
+      .subscribe({
+        next: (response) => {
+          if (response.token) {
+            const expiresIn = response.expiresIn;
+            this.setUserToken(response.userId, response.token, expiresIn)
+            const now = new Date();
+            const expirationDate = new Date(
+              now.getTime() + expiresIn * 1000
+            );
+            this.saveAuthData(this.token, expirationDate, this.currentUserId);
+            this.router.navigate(["/potlucks"]);
+          }
+        },
+        error: (error) => this.errorMessageListener.next(error.error.message)
       });
+  }
+
+  private setUserToken(userId: string, token: string, tokenExpirationInSeconds: number) {
+    this.token = token;
+    this.currentUserId = userId;
+    this.setAuthTimer(tokenExpirationInSeconds);
+    this.isAuthenticated = true;
+    this.authStatusListener.next(true);
   }
 
   autoAuthUser() {
@@ -64,13 +77,8 @@ export class AuthService {
     if (authInformation == null) return;
     const now = new Date();
     const expiresIn = authInformation.expiration.getTime() - now.getTime();
-    if (expiresIn > 0) {
-      this.token = authInformation.token;
-      this.currentUserId = authInformation.currentUserId;
-      this.setAuthTimer(expiresIn / 1000);
-      this.isAuthenticated = true;
-      this.authStatusListener.next(true);
-    }
+    if (expiresIn > 0)
+      this.setUserToken(authInformation.currentUserId, authInformation.token, (expiresIn / 1000))
   }
 
   logout() {

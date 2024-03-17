@@ -8,6 +8,9 @@ import { AuthService } from "src/app/auth/auth.service";
   styleUrls: ["login.component.css"],
 })
 export class LoginComponent {
+
+  readonly errors$ = this.authService.getErrorMessageListener();
+
   loginForm = this.fb.group({
     email: ["", [Validators.required, Validators.email]],
     password: ["", Validators.required],

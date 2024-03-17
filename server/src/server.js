@@ -38,13 +38,11 @@ if (!APP_PORT) {
   process.exit(1);
 }
 
-useHttps = false;
-
+var useHttps = false;
 if (!PRIVKEY || !CERT) {
   console.warn("No private key found, using non-secure server");
 } else {
   useHttps = true;
-  const options = {};
 }
 
 mongoose
@@ -81,7 +79,7 @@ mongoose
         );
     } else {
       app.listen(APP_PORT, () => {
-        console.log(`Server running at http://localhost:${APP_PORT}...`);
+        console.log(`Http server running at http://localhost:${APP_PORT}...`);
       });
     }
   })
