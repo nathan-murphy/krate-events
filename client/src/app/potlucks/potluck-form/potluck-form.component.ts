@@ -16,6 +16,7 @@ import { Potluck } from "../potluck.model";
 import { UserService } from "src/app/users/user.service";
 import { User } from "src/app/users/user.model";
 import { Subscription } from "rxjs";
+import { PotluckRSVP } from "src/app/potluck-rsvp/potluck-rsvp.model";
 
 @Component({
   selector: "app-potluck-form",
@@ -124,7 +125,12 @@ export class PotluckFormComponent implements OnInit, OnDestroy {
 
   onSubmitPotluck() {
     let id: string = "";
-    if (this.initialPotluck) id = this.initialPotluck._id;
+    let rsvps: [PotluckRSVP];
+
+    if (this.initialPotluck) {
+      id = this.initialPotluck._id;
+      rsvps = this.initialPotluck.rsvps;
+    }
 
     const invitedList = <FormArray>this.potluckForm.controls.invited;
     const hostsList = <FormArray>this.potluckForm.controls.hosts;
@@ -142,6 +148,7 @@ export class PotluckFormComponent implements OnInit, OnDestroy {
       },
       hosts: hostsList.value.filter((value: any) => Boolean(value)),
       invited: invitedList.value.filter((value: any) => Boolean(value)),
+      rsvps: rsvps
     };
 
     this.formSubmittedEvent.emit(potluckToEmit);

@@ -16,6 +16,6 @@ export interface Potluck {
   createdByAsUser?: User;
   hosts: [string];
   hostsAsUsers?: Array<User>;
-  invited?: [string];
-  rsvps?: [PotluckRSVP];
+  invited: [string];
+  rsvps: [PotluckRSVP];
 }

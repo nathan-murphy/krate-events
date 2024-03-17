@@ -22,9 +22,32 @@ potluckRouter.put("/:id", (req, res) => {
   const id = req.params.id;
   const potluck = new Potluck(req.body);
 
-  Potluck.updateOne({ _id: id, hosts: req.userData.userId }, potluck)
-    .then((potluck) => res.status(200).send(potluck))
-    .catch((err) => res.status(400).send(err));
+  Potluck.findOne({ _id: id })
+    .then((oldPotluck) => {
+      // IDs found in old, but not new, means an ID was deleted
+      // person removed from invite list, remove their RSVP also
+      // let removed = this.valsInFirstArrayOnly(oldPotluck.invited, newPotluck.invited)
+      // removed.forEach( idToRemove => {
+      //   newPotluck.rsvps.find()
+      // })
+      // TODO - unlikely that we'd uninvite someone
+
+
+      // ID found in new, but not old, means an ID was added
+      // person added to invite list, add a new pending RSVP
+      let added = valsInFirstArrayOnly(potluck.invited, oldPotluck.invited)
+      added.forEach((addedUserId) => {
+        potluck.rsvps.push({
+          userId: addedUserId,
+          rsvp: "pending",
+          recipe: "",
+        });
+      });
+
+      Potluck.replaceOne({ _id: id, hosts: req.userData.userId }, potluck)
+        .then((potluck) => res.status(200).send(potluck))
+        .catch((err) => res.status(400).send(err));
+    });
 });
 
 potluckRouter.delete("/:id", (req, res) => {
@@ -65,4 +88,11 @@ function getVisiblePotluckQuery(userId) {
   return {
     $or: [{ createdBy: userId }, { hosts: userId }, { invited: userId }],
   };
+}
+
+
+function valsInFirstArrayOnly(a, b) {
+  return [
+    ...a.filter(x => !b.includes(x))
+  ];
 }
