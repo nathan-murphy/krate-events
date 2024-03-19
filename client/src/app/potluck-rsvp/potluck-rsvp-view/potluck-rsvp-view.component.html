@@ -1,5 +1,5 @@
-<mat-list-item>
+<mat-list-item lines="3">
     <mat-icon matListItemIcon>{{ icon }}</mat-icon>
-    <div matListItemTitle *ngIf="user$ | async as user">{{ user.firstName }} {{user.lastName}}</div>
-    <div matListItemLine>{{ rsvp.recipe }}</div>
+    <span matListItemTitle *ngIf="user$ | async as user">{{ user.firstName }} {{user.lastName}}</span>
+    <span>{{ rsvp.recipe }}</span>
 </mat-list-item>
