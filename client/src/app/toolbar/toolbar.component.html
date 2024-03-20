@@ -14,6 +14,9 @@
   <span *ngIf="user.firstName != ''">Hello, {{user.firstName}}</span>
   <!-- <a mat-button [routerLink]="isAuthenticated ? 'potlucks' : '/' ">KRATE.EVENTS</a> -->
   <span class="example-spacer"></span>
+  <a mat-icon-button [routerLink]="['/users/edit', user._id]">
+    <mat-icon>person</mat-icon>
+  </a>
   <a mat-button routerLink="/login" *ngIf="!isAuthenticated">Login</a>
   <button mat-button (click)="onLogout()" *ngIf="isAuthenticated">Logout</button>
 </mat-toolbar>

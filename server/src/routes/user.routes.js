@@ -36,7 +36,7 @@ userRouter.put("/:id", (req, res) => {
     const id = req.params.id;
     const user = new User(req.body);
     user.password = hash;
-    User.updateOne({_id: id}, user)
+    User.replaceOne({_id: id}, user)
       .then(() => {
         user.password = null;
         res.status(201).send(user);

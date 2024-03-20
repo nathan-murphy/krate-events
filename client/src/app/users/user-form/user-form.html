@@ -16,11 +16,13 @@
                 <input id="last-name" matInput placeholder="Last Name" formControlName="lastName">
             </mat-form-field>
 
-            <h4>Permissions:</h4>
-            <section formGroupName="permissions">
-                <p><mat-checkbox formControlName="canHost">Can host events?</mat-checkbox></p>
-                <p><mat-checkbox formControlName="isAdmin">Is admin?</mat-checkbox></p>
-            </section>
+            <ng-container *ngIf="initialUser != undefined && initialUser.permissions.isAdmin == true">
+                <h4>Permissions:</h4>
+                <section formGroupName="permissions">
+                    <p><mat-checkbox formControlName="canHost">Can host events?</mat-checkbox></p>
+                    <p><mat-checkbox formControlName="isAdmin">Is admin?</mat-checkbox></p>
+                </section>
+            </ng-container>
 
             <h4>Login:</h4>
             <mat-form-field>
@@ -28,9 +30,19 @@
                 <input id="email" matInput placeholder="wiley@coyote.com" formControlName="email" type="emial">
             </mat-form-field>
             <mat-form-field>
-                <mat-label for="password">Password</mat-label>
+                <mat-label for="password">{{passwordLabel}}</mat-label>
                 <input id="password" matInput formControlName="password" type="password">
             </mat-form-field>
+            <ng-container *ngIf="initialUser != undefined">
+                <mat-form-field>
+                    <mat-label for="newPassword">New Password</mat-label>
+                    <input id="newPassword" matInput formControlName="newPassword" type="password">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label for="newPassword2">Confirm New Password</mat-label>
+                    <input id="newPassword2" matInput formControlName="newPassword2" type="password">
+                </mat-form-field>
+            </ng-container>
         </mat-card-content>
 
         <mat-divider></mat-divider>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { User } from "../user.model";
 
 @Component({
@@ -19,6 +19,8 @@ export class UserFormComponent implements OnInit {
     lastName: ["", Validators.required],
     email: ["", [Validators.email, Validators.required]],
     password: ["", Validators.required],
+    newPassword: ["", Validators.required],
+    newPassword2: ["", Validators.required],
     permissions: this.fb.group({
       canHost: [false, Validators.required],
       isAdmin: [false, Validators.required],
@@ -26,13 +28,19 @@ export class UserFormComponent implements OnInit {
   });
 
   id: string = undefined;
+  passwordLabel: string = "password";
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.initialUser != undefined) {
+      this.initialUser.password = null;
       this.updateProfileForm(this.initialUser);
       this.id = this.initialUser._id;
+      this.passwordLabel = "Current Password";
+    } else {
+      this.userProfileForm.removeControl('newPassword');
+      this.userProfileForm.removeControl('newPassword2');
     }
   }
 
@@ -42,6 +50,13 @@ export class UserFormComponent implements OnInit {
     // just get the raw value instead.
     const eventData = this.userProfileForm.getRawValue();
     eventData["_id"] = this.id;
+
+    if(eventData.newPassword != '' && eventData.newPassword == eventData.newPassword2) {
+      eventData.password = eventData.newPassword;
+    }
+
+    console.log(eventData)
+
     this.formSubmitted.emit(eventData);
   }
 

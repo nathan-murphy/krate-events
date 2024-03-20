@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: "potlucks/:id", component: PotluckViewComponent, canActivate: [AuthGuard] },
   { path: "potlucks/edit/:id", component: PotluckEditComponent, canActivate: [AuthGuard, CanHostGuard] },
   { path: "users", component: UsersListComponent, canActivate: [AuthGuard, IsAdminGuard] },
-  { path: "users/new", component: UserAddComponent }, //canActivate: [AuthGuard] },
-  { path: "users/edit/:id", component: UserEditComponent, canActivate: [AuthGuard, IsAdminGuard] },
+  { path: "users/new", component: UserAddComponent, canActivate: [AuthGuard, IsAdminGuard] },
+  { path: "users/edit/:id", component: UserEditComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
