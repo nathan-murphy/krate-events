@@ -51,11 +51,9 @@ export class UserFormComponent implements OnInit {
     const eventData = this.userProfileForm.getRawValue();
     eventData["_id"] = this.id;
 
-    if(eventData.newPassword != '' && eventData.newPassword == eventData.newPassword2) {
+    if(eventData.newPassword != undefined && eventData.newPassword == eventData.newPassword2) {
       eventData.password = eventData.newPassword;
     }
-
-    console.log(eventData)
 
     this.formSubmitted.emit(eventData);
   }
