@@ -8,6 +8,7 @@ potluckRouter.use(checkAuth)
 
 potluckRouter.get("/", (req, res) => {
   Potluck.find(getVisiblePotluckQuery(req.userData.userId))
+    .sort({ dateAndTime: -1 })
     .then((docs) => res.status(200).send(docs))
     .catch((err) => console.log(err));
 });
@@ -86,7 +87,7 @@ potluckRouter.post("/", (req, res) => {
 
 function getVisiblePotluckQuery(userId) {
   return {
-    $or: [{ createdBy: userId }, { hosts: userId }, { invited: userId }],
+    $or: [{ createdBy: userId }, { hosts: userId }, { invited: userId }]
   };
 }
 
