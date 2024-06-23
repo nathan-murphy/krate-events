@@ -45,10 +45,7 @@ userRouter.put("/:id", (req, res) => {
     // do nothing
   }
   User.findByIdAndUpdate(id, updates, { new: true })
-    .then((updated) => {
-      console.log(updated);
-      res.status(201).send(updated)
-    })
+    .then(updated => { res.status(201).send(updated) })
     .catch((err) => {
       console.error(err); res.status(500).send(err);
     });
