@@ -3,7 +3,8 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const permissionsSchema = mongoose.Schema({
   canHost: { type: Boolean, required: true },
-  isAdmin: { type: Boolean, required: true }
+  isAdmin: { type: Boolean, required: true },
+  canRSVPFor: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 })
 
 const userSchema = mongoose.Schema({

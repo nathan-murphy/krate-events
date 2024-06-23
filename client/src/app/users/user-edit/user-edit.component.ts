@@ -22,10 +22,10 @@ export class UserEditComponent {
   onUserEdit(user: User) {
     this.userService.updateUser(user).subscribe({
       next: () => {
-        this.router.navigate(["/potlucks"]);
+        this.router.navigate(["/users"]);
       },
       complete: () => {
-        this.router.navigate(["/potlucks"]);
+        this.router.navigate(["/users"]);
       },
       error: (error) => {
         alert("Failed to update user");

@@ -2,6 +2,9 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
+const { ObjectId } = require('mongoose').mongo;
+
+
 module.exports = userRouter = express.Router();
 userRouter.use(express.json());
 
@@ -32,17 +35,23 @@ userRouter.post("/", (req, res) => {
 });
 
 userRouter.put("/:id", (req, res) => {
-  bcrypt.hash(req.body.password, 3).then((hash) => {
-    const id = req.params.id;
-    const user = new User(req.body);
-    user.password = hash;
-    User.replaceOne({_id: id}, user)
-      .then(() => {
-        user.password = null;
-        res.status(201).send(user);
-      })
-      .catch((err) => res.status(500).send(err));
-  });
+  const id = req.params.id;
+  let updates = req.body;
+
+  // make sure password is never updated accidentally
+  try {
+    delete updates.password;
+  } catch {
+    // do nothing
+  }
+  User.findByIdAndUpdate(id, updates, { new: true })
+    .then((updated) => {
+      console.log(updated);
+      res.status(201).send(updated)
+    })
+    .catch((err) => {
+      console.error(err); res.status(500).send(err);
+    });
 });
 
 userRouter.delete("/:id", (req, res) => {
