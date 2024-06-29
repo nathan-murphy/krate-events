@@ -1,13 +1,21 @@
 <div class="krate-dialog">
   <h1 mat-dialog-title>RSVP for Potluck</h1>
-  <form [formGroup]="rsvpForm" (submit)="onSubmitRsvp()">
+  <form [formGroup]="rsvpForm" (submit)="onSubmit()">
     <div mat-dialog-content>
 
-      <label id="rsvp-radio-group-label">Are you coming?</label>
-      <mat-radio-group aria-labelledby="rsvp-radio-group-label" class="rsvp-radio-group" formControlName="rsvp">
+      <!-- <mat-radio-group aria-labelledby="rsvp-radio-group-label" class="rsvp-radio-group" formControlName="rsvp">
         <mat-radio-button color="primary" class="rsvp-radio-button" value="yes">Yes</mat-radio-button>
         <mat-radio-button color="warn" class="rsvp-radio-button" value="no">No</mat-radio-button>
-      </mat-radio-group>
+      </mat-radio-group> -->
+      <section>
+        <h4>Are you coming?</h4>
+        <mat-button-toggle-group formControlName="rsvp" aria-label="RSVP Status">
+          <mat-button-toggle value="yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="no">No</mat-button-toggle>
+          <!-- <mat-button-toggle value="underline">Underline</mat-button-toggle> -->
+        </mat-button-toggle-group>
+        <!-- <p>Chosen value is {{fontStyleControl.value}}</p> -->
+      </section>
 
       <mat-form-field *ngIf="rsvpForm.controls['rsvp'].value == 'yes'">
         <mat-label>What are you bringing?</mat-label>
@@ -20,14 +28,16 @@
         <label id="rsvp-additional-label">
           You can also RSVP for {{this.additionalUser.firstName}}. Would you like to do that?
         </label>
-        <mat-radio-group aria-labelledby="rsvp-additional-label" class="rsvp-radio-group" formControlName="agree-to-rsvp">
+        <mat-radio-group aria-labelledby="rsvp-additional-label" class="rsvp-radio-group"
+          formControlName="agree-to-rsvp">
           <mat-radio-button color="primary" class="rsvp-radio-button" value="yes">Yes</mat-radio-button>
           <mat-radio-button color="warn" class="rsvp-radio-button" value="no">No</mat-radio-button>
         </mat-radio-group>
 
         <div *ngIf="rsvpForm.controls['agree-to-rsvp'].value == 'yes'">
           <label id="rsvp-additional-radio-group-label">Are they coming?</label>
-          <mat-radio-group aria-labelledby="rsvp-additional-radio-group-label" class="rsvp-radio-group" formControlName="rsvp-additional">
+          <mat-radio-group aria-labelledby="rsvp-additional-radio-group-label" class="rsvp-radio-group"
+            formControlName="rsvp-additional">
             <mat-radio-button color="primary" class="rsvp-radio-button" value="yes">Yes</mat-radio-button>
             <mat-radio-button color="warn" class="rsvp-radio-button" value="no">No</mat-radio-button>
           </mat-radio-group>

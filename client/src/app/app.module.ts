@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDividerModule } from "@angular/material/divider";
@@ -18,7 +19,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatRadioModule } from "@angular/material/radio";
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatToolbarModule } from "@angular/material/toolbar";

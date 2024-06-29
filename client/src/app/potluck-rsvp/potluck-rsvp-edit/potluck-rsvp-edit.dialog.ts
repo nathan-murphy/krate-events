@@ -24,7 +24,7 @@ export class PotluckRSVPEditDialog implements OnInit {
     private userService: UserService
   ) { }
 
-  onSubmitRsvp() {
+  onSubmit() {
     const rsvp: PotluckRSVP = {
       _id: '', // will come from db
       userId: '', // will come from request header
