@@ -2,9 +2,11 @@ import { Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 
 import { PotlucksService } from "../potlucks.service";
-import { PotluckRSVPEditDialog } from "src/app/potluck-rsvp/potluck-rsvp-edit/potluck-rsvp-edit.dialog";
+import { PotluckRSVPEditDialogWithDelegate } from "src/app/potluck-rsvp/potluck-rsvp-edit-with-delegate/potluck-rsvp-edit-with-delegate.dialog";
+import { PotluckRSVPEditDialogWithPlusOne } from "src/app/potluck-rsvp/potluck-rsvp-edit-with-plus-one/potluck-rsvp-edit-with-plus-one.dialog";
 import { PotluckRSVP } from "src/app/potluck-rsvp/potluck-rsvp.model";
 import { PotluckRSVPService } from "src/app/potluck-rsvp/potluck-rsvp.service";
+import { UserService } from "src/app/users/user.service";
 
 @Component({
   selector: "app-potluck-list",
@@ -18,13 +20,22 @@ export class PotluckListComponent {
 
   constructor(
     private readonly potlucksService: PotlucksService,
+    private readonly userService: UserService,
     private potluckRsvpService: PotluckRSVPService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   onAttending(potluckId: string) {
-    this.dialog.open(PotluckRSVPEditDialog, {
-      data: potluckId,
+    this.userService.getCurrentUser().subscribe((user) => {
+      if (user.permissions.canRSVPFor != user._id) {
+        this.dialog.open(PotluckRSVPEditDialogWithDelegate, {
+          data: potluckId
+        })
+      } else {
+        this.dialog.open(PotluckRSVPEditDialogWithPlusOne, {
+          data: potluckId
+        })
+      }
     });
     this.rsvpIcon = "check_circle";
   }

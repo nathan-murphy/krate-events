@@ -1,0 +1,61 @@
+<div class="krate-dialog">
+  <span mat-dialog-title>RSVP for Potluck</span>
+  <form [formGroup]="rsvpForm" (submit)="onSubmit()">
+    <div mat-dialog-content>
+      <p>Are you coming?</p>
+      <p>
+        <mat-button-toggle-group formControlName="rsvp" aria-label="RSVP Status">
+          <mat-button-toggle value="yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="no">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </p>
+      <ng-container *ngIf="rsvpForm.controls['rsvp'].value == 'yes'">
+        <p>What are you bringing?</p>
+        <p>
+          <mat-form-field>
+            <input matInput value="" type="text" name="recipe" formControlName="recipe">
+          </mat-form-field>
+        </p>
+        <mat-divider></mat-divider>
+      </ng-container>
+
+      <ng-container *ngIf="rsvpForm.controls['rsvp'].value == 'yes'">
+        <p>Are you bringing anyone with you?</p>
+        <p>
+          <mat-button-toggle-group formControlName="additional-rsvp">
+            <mat-button-toggle value="yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="no">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </p>
+
+        <ng-container *ngIf="rsvpForm.controls['additional-rsvp'].value == 'yes'">
+          <p>Excellent! We love new faces.</p>
+          <p>What's their name?</p>
+          <p>
+            <mat-form-field>
+              <input matInput value="" type="text" name="additional-user" formControlName="additional-user">
+            </mat-form-field>
+          </p>
+          <p>What are they bringing? (optional)</p>
+          <p>
+            <mat-form-field>
+              <input matInput value="" type="text" name="additional-recipe" formControlName="additional-recipe">
+            </mat-form-field>
+          </p>
+        </ng-container>
+      </ng-container>
+
+      <mat-divider></mat-divider>
+
+      <mat-dialog-actions>
+        <!-- <button mat-button mat-dialog-close color="primary" type="submit" [disabled]="rsvpForm.invalid"> -->
+        <button mat-button color="primary" type="submit" [disabled]="rsvpForm.invalid">
+          Submit
+        </button>
+      </mat-dialog-actions>
+    </div>
+  </form>
+  <pre>
+    {{ this.rsvpsToSubmit | json }}
+  </pre>
+</div>

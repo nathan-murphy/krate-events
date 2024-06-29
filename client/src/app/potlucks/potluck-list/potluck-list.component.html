@@ -1,18 +1,19 @@
 <ng-container *ngIf="potlucks$ | async as potlucks; else showSpinner">
     <div *ngIf="potlucks.length > 0">
-        <mat-card *ngFor="let potluck of potlucks">
+        <mat-card *ngFor="let potluck of potlucks" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>
-                    <a [routerLink]="[potluck._id]">
+                    <!-- <button mat-button [routerLink]="[potluck._id]"> -->
                         {{potluck.details.theme}}
-                    </a>
+                    <!-- </button> -->
                 </mat-card-title>
-                <mat-card-subtitle>
-                    {{potluck.dateAndTime.startDate | date: 'longDate'}}
-                </mat-card-subtitle>
+                <!-- <mat-card-subtitle>
+                    
+                </mat-card-subtitle> -->
             </mat-card-header>
             <mat-card-content>
-                <p class="mat-body-1">{{potluck.details.description}}</p>
+                <p>{{potluck.details.description}}</p>
+                <p>{{potluck.dateAndTime.startDate | date: 'longDate'}}</p>
             </mat-card-content>
             <mat-divider></mat-divider>
             <mat-card-actions align="end">

@@ -14,10 +14,6 @@ mat-action-row {
   padding-top: 1rem;
   margin-top: auto;
 }
-a {
-  color: black;
-}
-
 mat-spinner {
   margin: 2rem auto;
 }

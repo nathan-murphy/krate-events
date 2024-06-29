@@ -37,8 +37,8 @@ export class UserService {
     return this.getUser(this.authService.getCurrentUserId());
   }
 
-  getCurrentUserPermissions(): Observable<{canHost: boolean, isAdmin: boolean}> {
-    let permissions = new Subject<{ canHost: boolean; isAdmin: boolean }>();
+  getCurrentUserPermissions(): Observable<{canHost: boolean, isAdmin: boolean, canRSVPFor: string}> {
+    let permissions = new Subject<{ canHost: boolean; isAdmin: boolean, canRSVPFor: string }>();
     this.getCurrentUser()
       .subscribe((user) => permissions.next(user.permissions));
     return permissions.asObservable();

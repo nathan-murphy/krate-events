@@ -1,8 +1,11 @@
-.example-spacer {
+.spacer {
   flex: 1 1 auto;
 }
+mat-toolbar {
+  background-color: rgb(183,123,130);
+}
 
-.example-container {
+/* .example-container {
   width: 500px;
   height: 300px;
   border: 1px solid rgba(0, 0, 0, 0.5);
@@ -17,4 +20,4 @@
 
 .example-sidenav {
   padding: 20px;
-}
+} */

@@ -50,11 +50,13 @@ import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.compo
 import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.component";
 import { PotluckRSVPViewComponent } from "./potluck-rsvp/potluck-rsvp-view/potluck-rsvp-view.component";
 import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potluck-rsvp-list.component";
-import { PotluckRSVPEditDialog } from "./potluck-rsvp/potluck-rsvp-edit/potluck-rsvp-edit.dialog";
+import { PotluckRSVPEditDialogWithDelegate } from "./potluck-rsvp/potluck-rsvp-edit-with-delegate/potluck-rsvp-edit-with-delegate.dialog";
+import { PotluckRSVPEditDialogWithPlusOne } from "./potluck-rsvp/potluck-rsvp-edit-with-plus-one/potluck-rsvp-edit-with-plus-one.dialog";
 import { LoginComponent } from "./auth/login/login.component";
 import { AuthInterceptor } from "./auth/auth-interceptor";
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AppComponent,
         LoginComponent,
         UsersListComponent,
@@ -74,7 +76,8 @@ import { AuthInterceptor } from "./auth/auth-interceptor";
         PotluckViewComponent,
         PotluckRSVPViewComponent,
         PotluckRSVPListComponent,
-        PotluckRSVPEditDialog,
+        PotluckRSVPEditDialogWithDelegate,
+        PotluckRSVPEditDialogWithPlusOne,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
@@ -86,6 +89,7 @@ import { AuthInterceptor } from "./auth/auth-interceptor";
         MatCardModule,
         MatCheckboxModule,
         MatButtonModule,
+        MatButtonToggleModule,
         MatDatepickerModule,
         MatDialogModule,
         MatDividerModule,
@@ -102,5 +106,6 @@ import { AuthInterceptor } from "./auth/auth-interceptor";
         MatTableModule,
         MatToolbarModule,
         NgxMaterialTimepickerModule,
-        ReactiveFormsModule], providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, provideHttpClient(withInterceptorsFromDi())] })
-export class AppModule {}
+        ReactiveFormsModule], providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, provideHttpClient(withInterceptorsFromDi())]
+})
+export class AppModule { }

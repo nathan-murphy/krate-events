@@ -15,7 +15,7 @@ export class ToolbarComponent implements OnInit {
     lastName: "",
     email: "",
     password: "",
-    permissions: { canHost: false, isAdmin: false },
+    permissions: { canHost: false, isAdmin: false, canRSVPFor: "" },
   };
   user: User = this.emptyUser;
 

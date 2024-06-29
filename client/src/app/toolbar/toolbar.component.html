@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <button *ngIf="isAuthenticated" mat-icon-button [matMenuTriggerFor]="mainMenu"
     aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
@@ -13,7 +13,7 @@
   </mat-menu>
   <span *ngIf="user.firstName != ''">Hello, {{user.firstName}}</span>
   <!-- <a mat-button [routerLink]="isAuthenticated ? 'potlucks' : '/' ">KRATE.EVENTS</a> -->
-  <span class="example-spacer"></span>
+  <span class="spacer"></span>
   <a mat-icon-button [routerLink]="['/users/edit', user._id]">
     <mat-icon>person</mat-icon>
   </a>

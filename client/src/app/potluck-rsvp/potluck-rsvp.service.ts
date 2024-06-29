@@ -29,6 +29,10 @@ export class PotluckRSVPService {
     return rsvpUpdated.asObservable();
   }
 
+  updateRsvps(rsvps: PotluckRSVP[], potluckId: string) {
+    
+  }
+
   getIconFromRSVP(rsvp: string): string {
     switch (rsvp) {
       case "yes":
