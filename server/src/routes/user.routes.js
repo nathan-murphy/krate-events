@@ -19,6 +19,10 @@ userRouter.get("/:id", (req, res) => {
 
 userRouter.post("/", (req, res) => {
   bcrypt.hash(req.body.password, 3).then((hash) => {
+    
+    if(req.body.permissions.canRSVPFor == "")
+      delete req.body.permissions.canRSVPFor
+
     const user = new User(req.body);
     user.password = hash;
     user

@@ -22,7 +22,7 @@ export class UserFormComponent implements OnInit {
     firstName: ["", Validators.required],
     lastName: ["", Validators.required],
     email: ["", [Validators.email, Validators.required]],
-    // password: ["", Validators.required],
+    password: ["", Validators.required],
     // newPassword: ["", Validators.required],
     // newPassword2: ["", Validators.required],
     permissions: this.fb.group({
@@ -57,7 +57,7 @@ export class UserFormComponent implements OnInit {
         permissions: {
           canHost: false,
           isAdmin: false,
-          canRSVPFor: ''
+          canRSVPFor: undefined
         },
       }
       // this.userProfileForm.removeControl('newPassword');

@@ -30,9 +30,13 @@ export class PotluckRSVPService {
   }
 
   updateRsvps(rsvps: PotluckRSVP[], potluckId: string) {
-    rsvps.forEach((rsvp: PotluckRSVP) => {
-      this.updateRsvp(rsvp, potluckId);
-    })
+    const rsvpsUpdated = new Subject<PotluckRSVP[]>();
+    this.httpClient
+      .put<PotluckRSVP[]>(`${this.API_URL}/batch/${potluckId}`, rsvps)
+      .subscribe((data: PotluckRSVP[]) => {
+        rsvpsUpdated.next(data);
+      });
+    return rsvpsUpdated.asObservable();
   }
 
   getIconFromRSVP(rsvp: string): string {

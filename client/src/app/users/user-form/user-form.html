@@ -42,11 +42,11 @@
                     <mat-label for="email">Email Address</mat-label>
                     <input id="email" matInput placeholder="wiley@coyote.com" formControlName="email" type="emial">
                 </mat-form-field>
-                <!-- <mat-form-field>
+                <mat-form-field>
                     <mat-label for="password">{{passwordLabel}}</mat-label>
                     <input id="password" matInput formControlName="password" type="password">
                 </mat-form-field>
-                <ng-container *ngIf="initialUser._id != '0'">
+                <!-- <ng-container *ngIf="initialUser._id != '0'">
                     <mat-form-field>
                         <mat-label for="newPassword">New Password</mat-label>
                         <input id="newPassword" matInput formControlName="newPassword" type="password">
@@ -72,3 +72,7 @@
         </form>
     </mat-card>
 </ng-container>
+
+<pre>
+    {{userProfileForm.value | json}}
+</pre>

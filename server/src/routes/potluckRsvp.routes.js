@@ -17,6 +17,32 @@ potluckRsvpRouter.get("/:potluckId/status/:status", (req, res) => {
   });
 });
 
+potluckRsvpRouter.put("/batch/:potluckId", (req, res) => {
+  let rsvps = [];
+  req.body.forEach(rsvp => {
+    rsvps.push(
+      {
+        userId: rsvp.userId ? rsvp.userId : req.userData.userId,
+        rsvp: rsvp.rsvp,
+        recipe: rsvp.recipe,
+      }
+    )
+  })
+  const filter = { _id: req.params.potluckId };
+  Potluck.findOne(filter).then((potluck) => {
+    rsvps.forEach(rsvpToUpdate => {
+      const rsvpIndex = potluck.rsvps.findIndex(
+        (rsvpAsFound) => rsvpAsFound.userId == rsvpToUpdate.userId
+      );
+      potluck.rsvps[rsvpIndex] = rsvpToUpdate;
+    })
+
+    Potluck.updateOne(filter, potluck)
+      .then((_) => res.status(200).send(rsvps))
+      .catch((err) => console.log(err));
+  });
+});
+
 potluckRsvpRouter.put("/:potluckId", (req, res) => {
   const newRsvp = {
     userId: req.userData.userId,
@@ -24,8 +50,6 @@ potluckRsvpRouter.put("/:potluckId", (req, res) => {
     recipe: req.body.recipe,
   };
   const filter = { _id: req.params.potluckId };
-
-  // todo: update the RSVP array
   Potluck.findOne(filter).then((potluck) => {
     const rsvpIndex = potluck.rsvps.findIndex(
       (rsvp) => rsvp.userId == newRsvp.userId

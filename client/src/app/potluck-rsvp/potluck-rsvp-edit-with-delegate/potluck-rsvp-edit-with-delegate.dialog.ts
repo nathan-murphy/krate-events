@@ -15,9 +15,9 @@ export class PotluckRSVPEditDialogWithDelegate implements OnInit {
   public rsvpForm: FormRecord;
   public rsvpsToSubmit: PotluckRSVP[];
   public additionalUser$: Observable<User>;
-  
-  
-  private additionalUser: User;
+
+
+  public additionalUser: User;
   private recipeText: string = "";
   private additionalUserRsvp: boolean;
   private additionalRecipeText: string = "";
@@ -52,20 +52,22 @@ export class PotluckRSVPEditDialogWithDelegate implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe((user) => {
-      this.additionalUser$ = this.userService.getUser(user.permissions.canRSVPFor);
-      this.additionalUser$.subscribe(user => this.additionalUser = user)
-    });
-
     this.rsvpForm = new FormRecord({});
     this.rsvpForm.addControl(
       "rsvp",
       new FormControl("", Validators.required)
     );
-    this.rsvpForm.addControl(
-      "agree-to-rsvp",
-      new FormControl(null, Validators.required)
-    );
+
+    this.userService.getCurrentUser().subscribe((user) => {
+      if (user.permissions.canRSVPFor && user.permissions.canRSVPFor != user._id) {
+        this.additionalUser$ = this.userService.getUser(user.permissions.canRSVPFor);
+        this.additionalUser$.subscribe(user => this.additionalUser = user)
+        this.rsvpForm.addControl(
+          "agree-to-rsvp",
+          new FormControl(null, Validators.required)
+        );
+      }
+    });
 
     this.rsvpForm.valueChanges.subscribe((value) => {
       if (value["rsvp"] == "no") {
@@ -80,7 +82,8 @@ export class PotluckRSVPEditDialogWithDelegate implements OnInit {
         this.additionalRecipeText = value["additional-recipe"];
         this.rsvpForm.removeControl("additional-rsvp", { emitEvent: false });
         this.rsvpForm.removeControl("additional-recipe", { emitEvent: false });
-      } else {
+      }
+      if (value["agree-to-rsvp"] == "yes"){
         // agreeing to RSVP for delegate. add the rsvp question to the form.
         this.rsvpForm.addControl("additional-rsvp", new FormControl(this.additionalUserRsvp, Validators.required), { emitEvent: false });
         if (value["additional-rsvp"] == "no") {
