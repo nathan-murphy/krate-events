@@ -19,7 +19,7 @@ export class PotluckRSVPService {
     return rsvpUpdated.asObservable();
   }
 
-  updateRsvp(rsvp: PotluckRSVP, potluckId: string) {
+  updateRsvp(rsvp: PotluckRSVP, potluckId: string): Observable<PotluckRSVP> {
     const rsvpUpdated = new Subject<PotluckRSVP>();
     this.httpClient
       .put<PotluckRSVP>(`${this.API_URL}/${potluckId}`, rsvp)
@@ -30,7 +30,9 @@ export class PotluckRSVPService {
   }
 
   updateRsvps(rsvps: PotluckRSVP[], potluckId: string) {
-    
+    rsvps.forEach((rsvp: PotluckRSVP) => {
+      this.updateRsvp(rsvp, potluckId);
+    })
   }
 
   getIconFromRSVP(rsvp: string): string {

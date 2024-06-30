@@ -21,7 +21,7 @@
       <mat-divider></mat-divider>
 
       <ng-container>
-        <p>You can also RSVP for {{this.additionalUser.firstName}}. Would you like to do that?</p>
+        <p *ngIf="additionalUser$ | async as additionalUser">You can also RSVP for {{additionalUser.firstName}}. Would you like to do that?</p>
         <p>
           <mat-button-toggle-group formControlName="agree-to-rsvp">
             <mat-button-toggle value="yes">Yes</mat-button-toggle>

@@ -2,9 +2,6 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
-const { ObjectId } = require('mongoose').mongo;
-
-
 module.exports = userRouter = express.Router();
 userRouter.use(express.json());
 

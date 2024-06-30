@@ -5,6 +5,7 @@ import { PotluckRSVP } from "../potluck-rsvp.model";
 import { PotluckRSVPService } from "../potluck-rsvp.service";
 import { UserService } from "src/app/users/user.service";
 import { User } from "src/app/users/user.model";
+import { Observable } from "rxjs/internal/Observable";
 
 @Component({
   selector: "app-potluck-rsvp-edit-with-delegate",
@@ -13,8 +14,10 @@ import { User } from "src/app/users/user.model";
 export class PotluckRSVPEditDialogWithDelegate implements OnInit {
   public rsvpForm: FormRecord;
   public rsvpsToSubmit: PotluckRSVP[];
-  public additionalUser: User;
-
+  public additionalUser$: Observable<User>;
+  
+  
+  private additionalUser: User;
   private recipeText: string = "";
   private additionalUserRsvp: boolean;
   private additionalRecipeText: string = "";
@@ -50,7 +53,8 @@ export class PotluckRSVPEditDialogWithDelegate implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe((user) => {
-      this.userService.getUser(user.permissions.canRSVPFor).subscribe(user => this.additionalUser = user)
+      this.additionalUser$ = this.userService.getUser(user.permissions.canRSVPFor);
+      this.additionalUser$.subscribe(user => this.additionalUser = user)
     });
 
     this.rsvpForm = new FormRecord({});

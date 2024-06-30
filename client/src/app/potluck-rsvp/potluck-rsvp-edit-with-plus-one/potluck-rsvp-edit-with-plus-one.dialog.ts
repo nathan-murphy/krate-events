@@ -72,28 +72,28 @@ export class PotluckRSVPEditDialogWithPlusOne implements OnInit {
           new FormControl(this.recipeText, Validators.required),
           { emitEvent: false }
         );
-        this.rsvpForm.addControl(
-          "additional-rsvp",
-          new FormControl(this.additionalRSVP, Validators.required),
-          { emitEvent: false }
-        );
-        if (value["additional-rsvp"] == "no") {
-          this.additionalUserName = value["additional-user"];
-          this.additionalRecipeText = value["additional-recipe"];
-          this.rsvpForm.removeControl("additional-user", { emitEvent: false });
-          this.rsvpForm.removeControl("additional-recipe", { emitEvent: false });
-        } else {
-          this.rsvpForm.addControl(
-            "additional-user",
-            new FormControl(this.additionalUserName, Validators.required),
-            { emitEvent: false }
-          );         
-          this.rsvpForm.addControl(
-            "additional-recipe",
-            new FormControl(this.additionalRecipeText),
-            { emitEvent: false }
-          );
-        }
+        // this.rsvpForm.addControl(
+        //   "additional-rsvp",
+        //   new FormControl(this.additionalRSVP, Validators.required),
+        //   { emitEvent: false }
+        // );
+        // if (value["additional-rsvp"] == "no") {
+        //   this.additionalUserName = value["additional-user"];
+        //   this.additionalRecipeText = value["additional-recipe"];
+        //   this.rsvpForm.removeControl("additional-user", { emitEvent: false });
+        //   this.rsvpForm.removeControl("additional-recipe", { emitEvent: false });
+        // } else {
+        //   this.rsvpForm.addControl(
+        //     "additional-user",
+        //     new FormControl(this.additionalUserName, Validators.required),
+        //     { emitEvent: false }
+        //   );         
+        //   this.rsvpForm.addControl(
+        //     "additional-recipe",
+        //     new FormControl(this.additionalRecipeText),
+        //     { emitEvent: false }
+        //   );
+        // }
       }
     });
   }
