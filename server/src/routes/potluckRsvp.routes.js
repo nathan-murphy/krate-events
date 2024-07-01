@@ -45,7 +45,7 @@ potluckRsvpRouter.put("/batch/:potluckId", (req, res) => {
 
 potluckRsvpRouter.put("/:potluckId", (req, res) => {
   const newRsvp = {
-    userId: req.userData.userId,
+    userId: req.body.userId ? req.body.userId : req.userData.userId,
     rsvp: req.body.rsvp,
     recipe: req.body.recipe,
   };

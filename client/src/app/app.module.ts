@@ -52,6 +52,7 @@ import { PotluckRSVPViewComponent } from "./potluck-rsvp/potluck-rsvp-view/potlu
 import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potluck-rsvp-list.component";
 import { PotluckRSVPEditDialogWithDelegate } from "./potluck-rsvp/potluck-rsvp-edit-with-delegate/potluck-rsvp-edit-with-delegate.dialog";
 import { PotluckRSVPEditDialogWithPlusOne } from "./potluck-rsvp/potluck-rsvp-edit-with-plus-one/potluck-rsvp-edit-with-plus-one.dialog";
+import { PotluckRSVPEditAdminDialog } from "./potluck-rsvp/potluck-rsvp-edit-admin/potluck-rsvp-edit-admin.dialog";
 import { LoginComponent } from "./auth/login/login.component";
 import { AuthInterceptor } from "./auth/auth-interceptor";
 
@@ -76,6 +77,7 @@ import { AuthInterceptor } from "./auth/auth-interceptor";
         PotluckViewComponent,
         PotluckRSVPViewComponent,
         PotluckRSVPListComponent,
+        PotluckRSVPEditAdminDialog,
         PotluckRSVPEditDialogWithDelegate,
         PotluckRSVPEditDialogWithPlusOne,
     ],

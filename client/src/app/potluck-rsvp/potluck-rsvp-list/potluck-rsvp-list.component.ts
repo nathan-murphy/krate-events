@@ -7,12 +7,8 @@ import { PotluckRSVP } from "../potluck-rsvp.model";
   styleUrls: ["potluck-rsvp-list.component.css"],
 })
 export class PotluckRSVPListComponent {
-    @Input()
-    rsvps: PotluckRSVP[];
-
-    @Input()
-    showBadge: boolean = false;
-
-    @Input()
-    title: string = 'temp'
+  @Input({ required: true }) potluckId: string;
+  @Input() showBadge: boolean = false;
+  @Input() rsvps: PotluckRSVP[];
+  @Input() title: string = 'temp';
 }

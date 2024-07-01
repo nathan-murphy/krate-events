@@ -1,7 +1,7 @@
 <mat-card *ngIf="vm$ | async as vm">
     <mat-card-header>
         <mat-card-title>
-            Potluck: {{vm.potluck.details.theme}}
+            {{vm.potluck.details.theme}}
         </mat-card-title>
     </mat-card-header>
 
@@ -15,9 +15,9 @@
 
         <mat-divider></mat-divider>
 
-        <app-potluck-rsvp-list [rsvps]="vm.confirmed" [showBadge]=true [title]="'Confirmed'"></app-potluck-rsvp-list>
-        <app-potluck-rsvp-list [rsvps]="vm.pending" [showBadge]=true [title]="'Pending'"></app-potluck-rsvp-list>
-        <app-potluck-rsvp-list [rsvps]="vm.declined" [showBadge]=true [title]="'Declined'"></app-potluck-rsvp-list>
+        <app-potluck-rsvp-list [potluckId]="vm.potluck._id" [rsvps]="vm.confirmed" [showBadge]=true [title]="'Confirmed'"></app-potluck-rsvp-list>
+        <app-potluck-rsvp-list [potluckId]="vm.potluck._id" [rsvps]="vm.pending" [showBadge]=true [title]="'Pending'"></app-potluck-rsvp-list>
+        <app-potluck-rsvp-list [potluckId]="vm.potluck._id" [rsvps]="vm.declined" [showBadge]=true [title]="'Declined'"></app-potluck-rsvp-list>
     </mat-card-content>
 
     <mat-divider></mat-divider>
@@ -29,7 +29,7 @@
             <button mat-button color="warn" (click)="onDelete(vm.potluck._id)">Delete</button>
         </ng-container>
     </mat-card-actions>
-    
+
     <mat-card-footer>
         <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
     </mat-card-footer>

@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { map, switchMap, combineLatest } from "rxjs";
 import { PotlucksService } from "../potlucks.service";
 import { PotluckRSVPService } from "src/app/potluck-rsvp/potluck-rsvp.service";
-import { AuthService } from "src/app/auth/auth.service";
 import { UserService } from "src/app/users/user.service";
 import { MatDialog } from "@angular/material/dialog";
 import { PotluckRSVPEditDialogWithDelegate } from "src/app/potluck-rsvp/potluck-rsvp-edit-with-delegate/potluck-rsvp-edit-with-delegate.dialog";

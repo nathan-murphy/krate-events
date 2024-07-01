@@ -2,6 +2,5 @@
     <div *ngIf=showBadge mat-subheader class="krate-confirmed-label" matBadge={{rsvps.length}} matBadgeColor="primary">{{title}}</div>
     <div *ngIf=!showBadge mat-subheader>{{title}}</div>
 
-    <app-potluck-rsvp-view *ngFor="let rsvp of rsvps" [rsvp]=rsvp> </app-potluck-rsvp-view>
-    <!-- <mat-divider></mat-divider> -->
+    <app-potluck-rsvp-view *ngFor="let rsvp of rsvps" [potluckId]="this.potluckId" [rsvp]="rsvp"> </app-potluck-rsvp-view>
 </mat-list>

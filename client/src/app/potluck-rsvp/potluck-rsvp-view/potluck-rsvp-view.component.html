@@ -1,5 +1,30 @@
-<mat-list-item lines="3">
-    <mat-icon matListItemIcon>{{ icon }}</mat-icon>
-    <span matListItemTitle *ngIf="user$ | async as user">{{ user.firstName }} {{user.lastName}}</span>
-    <span>{{ rsvp.recipe }}</span>
-</mat-list-item>
+<div>
+    <mat-list-item lines="3">
+        <span matListItemTitle *ngIf="user$ | async as user">{{ user.firstName }} {{user.lastName}}</span>
+        <mat-icon matListItemIcon>{{ icon }}</mat-icon>
+        <!-- <button *ngIf="activeUser$ | async as activeUser" mat-button color="primary" (click)="onAdminEditRSVP()">
+            <mat-icon matListItemIcon>
+                edit
+            </mat-icon>
+        </button> -->
+        {{ rsvp.recipe }}
+    </mat-list-item>
+    <ng-container *ngIf="activeUser$ | async as activeUser">
+
+        <button mat-icon-button [matMenuTriggerFor]="adminMenu" *ngIf="activeUser.permissions.isAdmin">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #adminMenu="matMenu">
+            <button mat-menu-item (click)="onAdminEditRSVP()">
+                <mat-icon>edit</mat-icon>
+                <span>Modify</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>email</mat-icon>
+                <span>Send Email</span>
+            </button>
+        </mat-menu>
+
+    </ng-container>
+
+</div>
