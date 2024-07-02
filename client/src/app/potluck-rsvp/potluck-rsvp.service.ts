@@ -7,12 +7,22 @@ import { environment } from "../../environment/environment";
 @Injectable({ providedIn: "root" })
 export class PotluckRSVPService {
   private API_URL = environment.apiUrl + "/potluck-rsvp";
-  constructor(private readonly httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) { }
 
   getRsvp(potluckId: string, status: string = ""): Observable<PotluckRSVP[]> {
     const rsvpUpdated = new Subject<PotluckRSVP[]>();
     this.httpClient
       .get<PotluckRSVP[]>(`${this.API_URL}/${potluckId}/status/${status}`)
+      .subscribe((data: PotluckRSVP[]) => {
+        rsvpUpdated.next([...data]);
+      });
+    return rsvpUpdated.asObservable();
+  }
+
+  getRsvpNotDeclined(potluckId: string): Observable<PotluckRSVP[]> {
+    const rsvpUpdated = new Subject<PotluckRSVP[]>();
+    this.httpClient
+      .get<PotluckRSVP[]>(`${this.API_URL}/${potluckId}/status/not-declined`)
       .subscribe((data: PotluckRSVP[]) => {
         rsvpUpdated.next([...data]);
       });

@@ -1,9 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, LOCALE_ID } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { Potluck } from "./potluck.model";
 import { UserService } from "../users/user.service";
 import { environment } from "../../environment/environment";
+import { formatDate } from "@angular/common";
 
 @Injectable({ providedIn: "root" })
 export class PotlucksService {
@@ -12,6 +13,7 @@ export class PotlucksService {
   private potlucksUpdated = new Subject<Potluck[]>();
 
   constructor(
+    @Inject(LOCALE_ID) private locale: string,
     private httpClient: HttpClient,
     private userService: UserService
   ) {}
@@ -68,5 +70,13 @@ export class PotlucksService {
 
   getPotlucksUpdateListener() {
     return this.potlucksUpdated.asObservable();
+  }
+
+  getReminderEmailBody(potluck: Potluck): string {
+    const startDate = new Date(potluck.dateAndTime.startDate);
+    const formattedStardDate = formatDate(startDate, 'MMMM d', this.locale);
+    const rsvpDate = formatDate(new Date(startDate.getTime() - 3*24*60*60*1000), 'MMMM d', this.locale);
+    const bodyEmail: string = `Hi all!\n\nHere are the details for this month's potluck, coming up on ${formattedStardDate}. Please RSVP by ${rsvpDate}!\n\nTheme: ${potluck.details.theme}\nDescription: ${potluck.details.description}\n\nYou can RSVP on our Potluck Website: https://krate.events\n\n-Kristen & Nate`
+    return encodeURIComponent(bodyEmail);
   }
 }

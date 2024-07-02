@@ -48,6 +48,7 @@ import { PotluckAddComponent } from "./potlucks/potluck-add/potluck-add.componen
 import { PotluckListComponent } from "./potlucks/potluck-list/potluck-list.component";
 import { PotluckEditComponent } from "./potlucks/potluck-edit/potluck-edit.component";
 import { PotluckViewComponent } from "./potlucks/potluck-view/potluck-view.component";
+import { PotluckDeleteDialog } from "./potlucks/potluck-delete/potluck-delete.dialog";
 import { PotluckRSVPViewComponent } from "./potluck-rsvp/potluck-rsvp-view/potluck-rsvp-view.component";
 import { PotluckRSVPListComponent } from "./potluck-rsvp/potluck-rsvp-list/potluck-rsvp-list.component";
 import { PotluckRSVPEditDialogWithDelegate } from "./potluck-rsvp/potluck-rsvp-edit-with-delegate/potluck-rsvp-edit-with-delegate.dialog";
@@ -72,6 +73,7 @@ import { AuthInterceptor } from "./auth/auth-interceptor";
         AddEventComponent,
         PotluckFormComponent,
         PotluckAddComponent,
+        PotluckDeleteDialog,
         PotluckListComponent,
         PotluckEditComponent,
         PotluckViewComponent,

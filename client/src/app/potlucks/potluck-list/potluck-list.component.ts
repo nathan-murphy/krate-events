@@ -14,8 +14,6 @@ import { UserService } from "src/app/users/user.service";
   styleUrls: ["potluck-list.component.css"],
 })
 export class PotluckListComponent {
-  rsvpIcon = "check_circle";
-
   readonly potlucks$ = this.potlucksService.getPotlucks();
 
   constructor(
@@ -37,7 +35,6 @@ export class PotluckListComponent {
         })
       }
     });
-    this.rsvpIcon = "check_circle";
   }
 
   onNotAttending(potluckId: string) {
@@ -48,6 +45,5 @@ export class PotluckListComponent {
       recipe: "",
     };
     this.potluckRsvpService.updateRsvp(rsvp, potluckId);
-    this.rsvpIcon = "cancel";
   }
 }

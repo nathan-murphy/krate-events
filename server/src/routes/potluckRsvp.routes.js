@@ -6,13 +6,20 @@ module.exports = potluckRsvpRouter = express.Router();
 potluckRsvpRouter.use(express.json());
 potluckRsvpRouter.use(checkAuth)
 
+potluckRsvpRouter.get("/:potluckId/status/not-declined", (req, res) => {
+  let fetchedRsvps = [];
+
+  Potluck.findOne({ _id: req.params.potluckId }).then((potluck) => {
+    fetchedRsvps = potluck.rsvps.filter(rsvp => rsvp.rsvp != "no");
+    res.status(200).send(fetchedRsvps);
+  });
+});
+
 potluckRsvpRouter.get("/:potluckId/status/:status", (req, res) => {
   let fetchedRsvps = [];
 
   Potluck.findOne({ _id: req.params.potluckId }).then((potluck) => {
-    fetchedRsvps = potluck.rsvps.filter(
-      (rsvp) => req.params.status == rsvp.rsvp
-    );
+    fetchedRsvps = potluck.rsvps.filter(rsvp => rsvp.rsvp == req.params.status);
     res.status(200).send(fetchedRsvps);
   });
 });
