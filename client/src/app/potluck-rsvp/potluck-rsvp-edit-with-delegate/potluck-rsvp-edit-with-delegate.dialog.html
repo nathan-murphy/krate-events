@@ -20,7 +20,7 @@
 
       <mat-divider></mat-divider>
 
-      <ng-container>
+      <ng-container *ngIf="this.additionalUser">
         <p>You can also RSVP for {{this.additionalUser.firstName}}. Would you like to do that?</p>
         <p>
           <mat-button-toggle-group formControlName="agree-to-rsvp">
