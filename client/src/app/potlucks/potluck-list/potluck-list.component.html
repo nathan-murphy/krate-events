@@ -1,22 +1,27 @@
 <ng-container *ngIf="potlucks$ | async as potlucks; else showSpinner">
     <div *ngIf="potlucks.length > 0">
         <mat-card *ngFor="let potluck of potlucks" appearance="outlined">
-            <mat-card-header>
-                <mat-card-title>
-                    <!-- <button mat-button [routerLink]="[potluck._id]"> -->
-                        {{potluck.details.theme}}
-                    <!-- </button> -->
-                </mat-card-title>
-                <!-- <mat-card-subtitle>
-                    
-                </mat-card-subtitle> -->
-            </mat-card-header>
-            <mat-card-content>
-                <p>{{potluck.details.description}}</p>
-                <p>{{potluck.dateAndTime.startDate | date: 'longDate'}}</p>
-            </mat-card-content>
+            <div matRipple class="ripple-container">
+                <a class="nostyle" [routerLink]="[potluck._id]">
+                    <mat-card-header>
+                        <mat-card-title>
+                            {{potluck.details.theme}}
+                        </mat-card-title>
+                        <!-- <mat-card-subtitle>
+                        
+                    </mat-card-subtitle> -->
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{potluck.details.description}}</p>
+                        <p>{{potluck.dateAndTime.startDate | date: 'longDate'}}</p>
+                    </mat-card-content>
+                </a>
+            </div>
             <mat-divider></mat-divider>
             <mat-card-actions align="end">
+                <!-- <span class="rsvp-badge"><mat-icon matBadge="15">{{this.confirmedIcon}}</mat-icon></span>
+                <span class="rsvp-badge"><mat-icon matBadge="15">{{this.pendingIcon}}</mat-icon></span>
+                <span class="rsvp-badge"><mat-icon matBadge="15">{{this.declinedIcon}}</mat-icon></span> -->
                 <a [routerLink]="[potluck._id]" mat-button><mat-icon>event</mat-icon>DETAILS</a>
                 <button mat-button [matMenuTriggerFor]="rsvpMenu" color="primary">
                     <mat-icon>check_circle</mat-icon>

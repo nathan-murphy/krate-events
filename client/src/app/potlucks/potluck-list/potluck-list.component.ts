@@ -16,6 +16,10 @@ import { UserService } from "src/app/users/user.service";
 export class PotluckListComponent {
   readonly potlucks$ = this.potlucksService.getPotlucks();
 
+  readonly confirmedIcon : string = this.potluckRsvpService.getIconFromRSVP('yes');
+  readonly pendingIcon : string = this.potluckRsvpService.getIconFromRSVP('no');
+  readonly declinedIcon : string = this.potluckRsvpService.getIconFromRSVP('');
+
   constructor(
     private readonly potlucksService: PotlucksService,
     private readonly userService: UserService,

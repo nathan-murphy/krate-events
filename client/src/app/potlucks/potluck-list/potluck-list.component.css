@@ -6,14 +6,37 @@ div {
 mat-card {
   margin: 1rem;
   max-width: 350px;
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   flex-grow: 1;
 }
+
+.rsvp-badge{
+  margin: 0.40rem;
+}
+
+.ripple-container {
+  cursor: pointer;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 mat-action-row {
   padding-top: 1rem;
   margin-top: auto;
 }
+
 mat-spinner {
   margin: 2rem auto;
+}
+
+a.nostyle:link,
+a.nostyle:visited {
+  text-decoration: inherit;
+  color: inherit;
 }

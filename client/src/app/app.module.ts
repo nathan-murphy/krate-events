@@ -13,6 +13,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatRippleModule } from '@angular/material/core';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTableModule } from "@angular/material/table";
 import { MatListModule } from "@angular/material/list";
@@ -104,6 +105,7 @@ import { AuthInterceptor } from "./auth/auth-interceptor";
         MatProgressSpinnerModule,
         MatProgressBarModule,
         MatRadioModule,
+        MatRippleModule,
         MatSelectModule,
         MatSidenavModule,
         MatStepperModule,

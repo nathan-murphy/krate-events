@@ -75,7 +75,7 @@ export class PotluckFormComponent implements OnInit, OnDestroy {
       );
 
       const hostsList = <FormArray>this.potluckForm.get("hosts");
-      this.usersCanHost.forEach((_) => hostsList.push(new FormControl(false)));
+      this.usersCanHost.forEach((host) => hostsList.push(new FormControl(host._id)));
       this.formHostsCheckboxSubscription = hostsList.valueChanges.subscribe(
         (_) => {
           hostsList.setValue(
